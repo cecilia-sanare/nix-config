@@ -1,0 +1,25 @@
+# this should live in ~/.gitconfig
+
+[credential]
+	helper = osxkeychain
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+[help]
+    autocorrect = 1
+[push]
+    default = simple
+[alias]
+    cp = cherry-pick
+    st = status -s
+    cl = clone
+    ci = commit
+    co = checkout
+    br = branch 
+    diff = diff --word-diff
+    dc = diff --cached
