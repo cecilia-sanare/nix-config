@@ -20,14 +20,6 @@ These are collection of my preferences when working on a Mac, feel free to check
 
 <img width="147" alt="screen shot 2016-04-01 at 7 34 12 pm" src="https://cloud.githubusercontent.com/assets/1369170/14223964/bb0b8822-f840-11e5-957c-975bdb5f2889.png">
 
-## Automatic mode (aka "fingers crossed mode")
-
-- [ ] Clone my [dotfiles](https://github.com/nick-woodward/.dotfiles)
-- [ ] run `setup`
-- [ ] maybe open a new tab
-- [ ] run `install`
-- [ ] definitely open a new tab
-
 ## Setup
 
 ### zsh, node, and other cool stuff
@@ -36,6 +28,7 @@ These are collection of my preferences when working on a Mac, feel free to check
 - [ ] `brew install zsh zsh-completion git node yarn`
 - [ ] `npm install -g bower polymer-cli`
 - [ ] `chsh -s /bin/zsh`
+- [ ] install [oh my zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 ### git
 
