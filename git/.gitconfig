@@ -1,7 +1,5 @@
 # this should live in ~/.gitconfig
 
-[credential]
-    helper = osxkeychain
 [color]
     diff = auto
     status = auto
