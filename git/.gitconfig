@@ -1,7 +1,7 @@
 # this should live in ~/.gitconfig
 
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [color]
     diff = auto
     status = auto
@@ -23,3 +23,4 @@
     br = branch 
     diff = diff --word-diff
     dc = diff --cached
+    ca = commit --amend --no-edit
