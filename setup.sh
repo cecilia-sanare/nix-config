@@ -2,6 +2,11 @@
 
 set -e
 
+if [ $UID -eq 0 ]; then
+    echo "This script should *NOT* be run as sudo!"
+    exit 1
+fi
+
 REPOS_DIR=$HOME/repos
 DOTFILES_DIR=$REPOS_DIR/dotfiles
 
@@ -14,7 +19,12 @@ if [ ! -d "$DOTFILES_DIR" ]; then
     git clone https://github.com/cecilia-sanare/dotfiles $DOTFILES_DIR > /dev/null
 else
     echo "Dotfiles detected, skipping clone"
-(cd $DOTFILES_DIR && git remote set-url origin https://github.com/cecilia-sanare/dotfiles)
+    git -C $DOTFILES_DIR remote set-url origin https://github.com/cecilia-sanare/dotfiles
+fi
+
+if [ ! -e "$DOTFILES_DIR/hardware-configuration.nix" ]; then
+    echo "Unable to locate hardware config, pulling from NixOS..."
+    sudo cp /etc/nixos/hardware-configuration.nix $DOTFILES_DIR/hardware-configuration.nix
 fi
 
 if [ -d "/etc/nixos" ]; then
