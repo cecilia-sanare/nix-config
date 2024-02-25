@@ -77,6 +77,8 @@ in {
           click-action = "minimize-or-previews";
           show-trash = false;
           show-show-apps-button = false;
+          dash-max-icon-size = 80;
+          multi-monitor = true;
       };
     };
 
