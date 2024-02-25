@@ -1,20 +1,25 @@
 { config, pkgs, ... }:
 
 let 
-  cli = with pkgs; [
-    rnix-lsp # Nix Language Server
-    vim
-    git
-  ];
-
-  gui = with pkgs; [
-    autorandr
+  # Core utilities, generally don't uninstall these
+  core = with pkgs; [
     gnome.gnome-terminal
     gnome.file-roller
     gnome.nautilus
+    gnome.gnome-system-monitor
+    vim
+    git
     gparted
-    vlc
+  ];
+
+  cli = with pkgs; [
+    rnix-lsp # Nix Language Server
+    autorandr
     gnumake
+  ];
+
+  apps = with pkgs; [
+    vlc
     firefox
     slack
     zoom-us
@@ -51,5 +56,5 @@ in
     xterm
   ];
 
-  environment.systemPackages = cli ++ gui;
+  environment.systemPackages = core ++ cli ++ apps;
 }
