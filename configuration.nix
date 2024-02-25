@@ -10,7 +10,7 @@ in
       (import "${home-manager}/nixos")
       ./hardware-configuration.nix
       # TODO: Make this more dynamic
-      ./hosts/cecis-pc
+      ./hosts/cecis-pc.nix
       ./modules
       ./users
     ];
