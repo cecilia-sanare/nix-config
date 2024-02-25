@@ -23,6 +23,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    rnix-lsp # Nix Language Server
+    autorandr
     gnome.gnome-terminal
     gnome.nautilus
     gparted

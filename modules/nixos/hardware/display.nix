@@ -1,0 +1,91 @@
+# Custom configurations:
+#  (should trigger automatically)
+# [ both primary external ]
+#
+# Default configurations:
+#  (can be used with unknown displays)
+# [ horizontal vertical common clone-largest ]
+
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  cfg = config.sys.hardware.displays;
+in {
+  options.sys.hardware.displays = mkOption {
+    description = "The config for each display";
+    type = with types; listOf ( submodule {
+      options = {
+        enable = mkOption {
+          description = "Whether this display is enabled";
+          type = bool;
+          default = true;
+        };
+        name = mkOption {
+          description = "The xrandr name for the display";
+          type = enum [
+            "DP-1"
+            "DP-2"
+            "DP-3"
+            "DP-4"
+            "eDP-1"
+            "HDMI-1"
+            "HDMI-2"
+            "HDMI-3"
+            "DP-1-4"
+            "DP-1-5"
+            "DP-1-6"
+            "eDP-1-2"
+          ];
+        };
+        fingerprint = mkOption {
+          # Can be obtained via 'nix-shell -p autorandr --command "autorandr --fingerprint"'
+          description = "The unique identifier for the display";
+          type = str;
+        };
+        primary = mkOption {
+          description = "Whether the display is the primary display";
+          type = bool;
+          default = false;
+        };
+        resolution = mkOption {
+          description = "The resolution of the display e.g. 2560x1440";
+          type = str;
+        };
+        position = mkOption {
+          description = "???";
+          type = str;
+        };
+        rate = mkOption {
+          description = "The refresh rate of the display";
+          type = str;
+        };
+      };
+    } );
+  };
+
+  config = {
+    # TODO: Figure out why nothing is respecting these settings
+    services.autorandr = {
+      enable = true;
+      profiles = {
+        home = {
+          fingerprint = builtins.listToAttrs(map( v: { name = v.name; value = v.fingerprint; }) cfg);
+          config = builtins.listToAttrs(map(v: { 
+            name = v.name; 
+            value = {
+              enable = v.enable;
+              mode = v.resolution;
+              primary = v.primary;
+              position = v.position;
+              rate = v.rate;
+            }; 
+          }) cfg );
+          # };
+        };
+      };
+    };
+  };
+}
+

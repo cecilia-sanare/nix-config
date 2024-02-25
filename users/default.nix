@@ -1,13 +1,18 @@
-{pkgs, ...}: {
+{pkgs, ...}: 
+
+let
+ ge = with pkgs; [
+  gnomeExtensions.hide-activities-button
+  gnomeExtensions.just-perfection
+  gnomeExtensions.dash-to-dock
+  gnomeExtensions.appindicator
+ ];
+in {
   imports = [
     ./ceci.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.hide-activities-button
-    gnomeExtensions.just-perfection
-    gnomeExtensions.dash-to-dock
-  ];
+  environment.systemPackages = ge;
 
   users.defaultUserShell = pkgs.zsh;
 
@@ -54,11 +59,7 @@
         clock-format = "12h";
       };
 
-      "org/gnome/shell".enabled-extensions = with pkgs; [
-        gnomeExtensions.hide-activities-button.extensionUuid
-        gnomeExtensions.just-perfection.extensionUuid
-        gnomeExtensions.dash-to-dock.extensionUuid
-      ];
+      "org/gnome/shell".enabled-extensions = map (x: x.extensionUuid) ge;
 
       "org/gnome/mutter" = {
         edge-tiling = true;
