@@ -1,9 +1,11 @@
 { lib, config, ... }: 
 
+with lib;
+
 let
   cfg = config.sys.hardware;
 in {
-  options.sys.hardware = with lib; {
+  options.sys.hardware = {
     sleep = mkOption {
       type = types.bool;
       default = true;
@@ -26,6 +28,10 @@ in {
           power-button-action = "nothing";
           sleep-inactive-ac-timeout = 0;
           sleep-inactive-battery-timeout = 0;
+        };
+
+        "org/gnome/shell" = {
+          last-selected-power-profile = "performance";
         };
       };
     }];
