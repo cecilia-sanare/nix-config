@@ -22,10 +22,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    gnomeExtensions.hide-activities-button
-    gnomeExtensions.just-perfection
-    gnomeExtensions.search-light
-    gnomeExtensions.dash-to-dock
     gnome.gnome-terminal
     vim
     git
@@ -33,6 +29,7 @@
     firefox
     slack
     zoom-us
+    spotify
     gparted
   ];
 }

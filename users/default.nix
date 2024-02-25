@@ -3,6 +3,12 @@
     ./ceci.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    gnomeExtensions.hide-activities-button
+    gnomeExtensions.just-perfection
+    gnomeExtensions.dash-to-dock
+  ];
+
   users.defaultUserShell = pkgs.zsh;
 
   home-manager.sharedModules = [{
@@ -30,12 +36,13 @@
       "org/gnome/shell".enabled-extensions = with pkgs; [
         gnomeExtensions.hide-activities-button.extensionUuid
         gnomeExtensions.just-perfection.extensionUuid
-        gnomeExtensions.search-light.extensionUuid
         gnomeExtensions.dash-to-dock.extensionUuid
       ];
 
       "org/gnome/mutter" = {
         edge-tiling = true;
+        # TODO: Disable activities hotkey once I find an application launcher
+        # overlay-key = "";
       };
       
       "org/gnome/desktop/wm/preferences" = {
@@ -44,6 +51,8 @@
 
       "org/gnome/shell/extensions/dash-to-dock" = {
           click-action = "minimize-or-previews";
+          show-trash = false;
+          show-show-apps-button = false;
       };
     };
 
