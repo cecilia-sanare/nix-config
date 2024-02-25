@@ -1,5 +1,32 @@
 { config, pkgs, ... }:
 
+let 
+  cli = with pkgs; [
+    rnix-lsp # Nix Language Server
+    vim
+    git
+  ];
+
+  gui = with pkgs; [
+    autorandr
+    gnome.gnome-terminal
+    gnome.file-roller
+    gnome.nautilus
+    gparted
+    vlc
+    gnumake
+    firefox
+    slack
+    zoom-us
+    spotify
+    figma-linux
+    rustdesk
+    obs-studio
+    # megasync
+    # TODO: This doesn't do anything right now... why?
+    # jellyfin-web
+  ];
+in 
 {
   imports = [
     ./1password
@@ -22,20 +49,5 @@
     xterm
   ];
 
-  environment.systemPackages = with pkgs; [
-    rnix-lsp # Nix Language Server
-    autorandr
-    gnome.gnome-terminal
-    gnome.nautilus
-    gparted
-    vim
-    git
-    gnumake
-    firefox
-    slack
-    zoom-us
-    spotify
-    # TODO: This doesn't do anything right now... why?
-    # jellyfin-web
-  ];
+  environment.systemPackages = cli ++ gui;
 }
