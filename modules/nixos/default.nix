@@ -32,6 +32,7 @@
     gnumake
     firefox
     slack
+    zoom-us
     gparted
   ];
 }
