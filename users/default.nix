@@ -65,10 +65,12 @@ in {
         edge-tiling = true;
         # TODO: Disable activities hotkey once I find an application launcher
         # overlay-key = "";
+        dynamic-workspaces = false;
       };
       
       "org/gnome/desktop/wm/preferences" = {
         button-layout = ":minimize,maximize,close";
+        num-workspaces = 1;
       };
 
       "org/gnome/shell/extensions/dash-to-dock" = {
