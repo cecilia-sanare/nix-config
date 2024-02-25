@@ -10,6 +10,7 @@ let
     vim
     git
     gparted
+    killall
   ];
 
   cli = with pkgs; [
