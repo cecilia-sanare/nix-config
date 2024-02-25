@@ -1,0 +1,32 @@
+{
+  "show_tray_icon": true,
+  "tts_enabled": false,
+  "allow_network_access": false,
+  "profile_directory": "/home/ceci/.local/share/goxlr-utility/profiles",
+  "mic_profile_directory": "/home/ceci/.local/share/goxlr-utility/mic-profiles",
+  "samples_directory": "/home/ceci/.local/share/goxlr-utility/samples",
+  "presets_directory": "/home/ceci/.local/share/goxlr-utility/presets",
+  "icons_directory": "/home/ceci/.local/share/goxlr-utility/icons",
+  "logs_directory": "/home/ceci/.local/share/goxlr-utility/logs",
+  "log_level": "Debug",
+  "activate": null,
+  "devices": {
+    "S210312461DI7": {
+      "profile": "Default",
+      "mic_profile": "DEFAULT",
+      "hold_delay": 500,
+      "sampler_pre_buffer": null,
+      "chat_mute_mutes_mic_to_chat": true,
+      "lock_faders": false,
+      "enable_monitor_with_fx": false,
+      "shutdown_commands": [
+        {
+          "SaveProfile": []
+        },
+        {
+          "SaveMicProfile": []
+        }
+      ]
+    }
+  }
+}

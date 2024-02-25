@@ -8,7 +8,7 @@
     ./vscode
     ./discord
     ./gaming
-    ./goxlr
+    ./hardware
   ];
 
   nixpkgs.config.allowUnfree = true;
