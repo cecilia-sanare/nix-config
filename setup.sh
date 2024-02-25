@@ -37,4 +37,4 @@ sudo ln -s $DOTFILES_DIR /etc/nixos > /dev/null
 sudo nixos-rebuild switch
 
 # Update the origin to the SSH version now that we're all setup!
-(cd $DOTFILES_DIR && git remote set-url origin git@github.com:cecilia-sanare/dotfiles.git)
+git -C $DOTFILES_DIR remote set-url origin git@github.com:cecilia-sanare/dotfiles.git
