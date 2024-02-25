@@ -1,31 +1,24 @@
-## .dotfiles
+# .dotfiles
 
 Welcome to my dotfiles!
 
-These are collection of my preferences when working on a Mac, feel free to check it out!
+Although... its not really a dotfiles repo anymore!
+I run linux now and more specifically NixOS!
+So here's my setup!
 
-## Apps to install
+## Quick Start
 
-- [ ] [VS Code](https://code.visualstudio.com)
-- [ ] [Docker](https://store.docker.com/editions/community/docker-ce-desktop-mac)
-- [ ] [1Password](https://1password.com/)
-
-## Terminal
-
-- [ ] Import `dotfiles.terminal` to automatically configure the terminal styling.
-
-## Setup
-
-### zsh, node, and other cool stuff
-
-- [ ] install [homebrew](https://brew.sh)
-- [ ] `brew install zsh zsh-completion git node`
-- [ ] `chsh -s /bin/zsh`
-- [ ] install [oh my zsh](https://github.com/robbyrussell/oh-my-zsh)
-
-### git
+Running the command below *should* just download and run my NixOS config, however its fairly opinionated on where it puts it!
 
 ```sh
-git config --global user.name my-name
-git config --global user.email my-email
+curl https://github.com/cecilia-sanare/dotfiles/setup.sh | sh -c
 ```
+
+## Manual Bits
+
+### 1Password (SSH Agent)
+
+- Login > Settings > Developer
+- Set Up SSH Agent
+- Use Key Names
+- Remember key approval: until 1Password quits
