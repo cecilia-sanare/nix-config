@@ -10,4 +10,14 @@
     heroic
     xivlauncher
   ];
+
+  home-manager.sharedModules = [{
+    home = {
+      file.mangohud-config = {
+        enable = true;
+        source = ./MangoHud.conf;
+        target = "./.config/MangoHud/MangoHud.conf";
+      };
+    };
+  }];
 }
