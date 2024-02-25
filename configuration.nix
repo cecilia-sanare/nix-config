@@ -52,6 +52,11 @@ in
   sys.hardware.sleep = false;
   # Let it know we have a goxlr!
   sys.hardware.goxlr = true;
+
+  sys.virtualisation = {
+    containers = "podman";
+    discovery = true;
+  };
   
   sys.hardware.displays = [
     {

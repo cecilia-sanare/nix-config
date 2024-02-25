@@ -3,8 +3,8 @@
 {
   imports = [
     ./1password
+    ./containers
     ./zsh
-    ./docker
     ./vscode
     ./discord
     ./gaming
