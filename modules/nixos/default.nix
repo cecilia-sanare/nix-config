@@ -38,7 +38,6 @@ in
 {
   imports = [
     ./1password
-    ./containers
     ./zsh
     ./vscode
     ./discord

@@ -13,4 +13,15 @@
     device = "/dev/nvme2n1p1";
     fsType = "ext4";
   };
+
+  dotfiles = {
+    # users = {
+    #   ceci = {
+    #     name = "Cecilia Sanare";
+    #   };
+    # };
+
+    containers.enable = true;
+    desktop.enable = true;
+  };
 }

@@ -1,23 +1,33 @@
-{ config, pkgs, lib, ... }:
+{ lib, config, pkgs, ... }: 
 
 with lib;
-with builtins; let
-  cfg = config.sys.virtualisation;
+
+let
+  cfg = config.dotfiles.containers;
 in {
-  options.sys.virtualisation = {
-    containers = mkOption {
-      description = "The containerization format to use (docker or podman)";
-      type = types.nullOr (types.enum ["podman" "docker"]);
+  options.dotfiles.containers = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
+    tool = mkOption {
+      type = types.nullOr(types.enum ["docker" "podman"]);
       default = "podman";
     };
+
     discovery = mkOption {
       description = "Opens up http(s) ports if service discovery is going to be utilized.";
       type = types.bool;
+      default = true;
     };
   };
 
-  config = {
-    virtualisation.docker = mkIf (cfg.containers == "docker") {
+  config = let
+    docker = cfg.tool == "docker";
+    podman = cfg.tool == "podman";
+  in mkIf (cfg.enable) {
+    virtualisation.docker = mkIf (docker) {
       enable = true;
 
       rootless = {
@@ -26,7 +36,7 @@ in {
       };
     };
 
-    virtualisation.podman = mkIf (cfg.containers == "podman") {
+    virtualisation.podman = mkIf (podman) {
       enable = true;
       enableNvidia = true;
       dockerCompat = true;
@@ -34,17 +44,18 @@ in {
     };
 
     environment.systemPackages = with pkgs; [
-      (mkIf (cfg.containers == "podman") podman-compose)
-      (mkIf (cfg.containers == "docker") docker-compose)
+      (mkIf (docker) docker-compose)
+      (mkIf (podman) podman-compose)
     ];
 
+    # TODO: Move this somewhere else
     networking.firewall = {
       allowedTCPPorts = mkIf (cfg.discovery) [80 443];
       allowedUDPPorts = mkIf (cfg.discovery) [80 443];
     };
 
     boot.kernel.sysctl = {
-      "net.ipv4.ip_unprivileged_port_start" = 80;  
+      "net.ipv4.ip_unprivileged_port_start" = 0;
     };
   };
 }
