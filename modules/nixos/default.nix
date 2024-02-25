@@ -8,6 +8,7 @@
     ./vscode
     ./discord
     ./gaming
+    ./goxlr
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -23,6 +24,8 @@
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-terminal
+    gnome.nautilus
+    gparted
     vim
     git
     gnumake
@@ -30,6 +33,7 @@
     slack
     zoom-us
     spotify
-    gparted
+    # TODO: This doesn't do anything right now... why?
+    # jellyfin-web
   ];
 }
