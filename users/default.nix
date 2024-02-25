@@ -59,7 +59,17 @@ in {
         clock-format = "12h";
       };
 
-      "org/gnome/shell".enabled-extensions = map (x: x.extensionUuid) ge;
+      "org/gnome/shell" = {
+        enabled-extensions = map (x: x.extensionUuid) ge;
+        # Located in /run/current-system/sw/share/applications
+        # TODO: Find a better way of linking to these
+        favorite-apps = [
+          "org.gnome.Nautilus.desktop"
+          "firefox.desktop"
+          "codium.desktop"
+          "discord.desktop"
+        ];
+      };
 
       "org/gnome/mutter" = {
         edge-tiling = true;
@@ -74,11 +84,11 @@ in {
       };
 
       "org/gnome/shell/extensions/dash-to-dock" = {
-          click-action = "minimize-or-previews";
-          show-trash = false;
-          show-show-apps-button = false;
-          dash-max-icon-size = 80;
-          multi-monitor = true;
+        click-action = "minimize-or-previews";
+        show-trash = false;
+        show-show-apps-button = false;
+        dash-max-icon-size = 80;
+        multi-monitor = true;
       };
     };
 

@@ -19,6 +19,10 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/cecilia-sanare/dotfiles/ma
 
 ## Manual Bits
 
+### Profile
+
+- Setup profile picture (https://github.com/NixOS/nixpkgs/issues/163080)
+
 ### 1Password (SSH Agent)
 
 - Login > Settings > Developer
