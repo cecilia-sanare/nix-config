@@ -6,6 +6,7 @@
   };
 
   config = {
+    # TODO: Figure out how to automate the goxlr config setup
     services.goxlr-utility.enable = config.sys.hardware.goxlr;
   };
 }
