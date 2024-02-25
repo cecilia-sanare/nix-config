@@ -22,6 +22,8 @@ let
     figma-linux
     rustdesk
     obs-studio
+    # Swap to another rest client when its available
+    bruno
     # megasync
     # TODO: This doesn't do anything right now... why?
     # jellyfin-web

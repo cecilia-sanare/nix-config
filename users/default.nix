@@ -81,8 +81,16 @@ in {
     gtk = {
       enable = true;
       theme = {
-        name = "Adwaita-dark";
+        name = "adwaita-dark";
         package = pkgs.gnome.gnome-themes-extra;
+      };
+    };
+
+    qt = {
+      enable = true;
+      platformTheme = "gnome";
+      style = {
+        name = "adwaita-dark";
       };
     };
 
