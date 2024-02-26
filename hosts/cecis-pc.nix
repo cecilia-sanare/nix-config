@@ -39,7 +39,7 @@
         resolution = "2560x1440";
         position = "0x0";
         rate = "144.01";
-      } 
+      }
     ];
 
     audio = {
@@ -111,6 +111,7 @@
           jnoortheen.nix-ide
           rust-lang.rust-analyzer
           hashicorp.terraform
+          esbenp.prettier-vscode
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "EditorConfig";

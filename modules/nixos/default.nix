@@ -14,6 +14,7 @@ let
   ];
 
   cli = with pkgs; [
+    nixpkgs-fmt
     rnix-lsp # Nix Language Server
     autorandr
     gnumake
