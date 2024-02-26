@@ -1,10 +1,107 @@
 ## NixOS Modules
 
+- [`dotfiles.audio`](#dotfilesaudio) ([source](./audio/default.nix))
+- [`dotfiles.containers`](#dotfilescontainers) ([source](./containers/default.nix))
+- [`dotfiles.desktop`](#dotfilesdesktop) ([source](./desktop/default.nix))
+- [`dotfiles.displays`](#dotfilesdisplays) ([source](./displays/default.nix))
+- [`dotfiles.gpu`](#dotfilesgpu) ([source](./gpu/default.nix))
 - [`dotfiles.intl`](#dotfilesintl) ([source](./intl/default.nix))
-- [`dotfiles.network`](#dotfilesnetwork) ([source](./intl/network.nix))
-- [`dotfiles.desktop`](#dotfilesdesktop) ([source](./intl/desktop.nix))
-- [`dotfiles.containers`](#dotfilescontainers) ([source](./intl/containers.nix))
-- [`dotfiles.gpu`](#dotfilesgpu) ([source](./intl/gpu.nix))
+- [`dotfiles.network`](#dotfilesnetwork) ([source](./network/default.nix))
+- [`dotfiles.storage`](#dotfilesstorage) ([source](./storage/default.nix))
+- [`dotfiles.users`](#dotfilesusers) ([source](./users/default.nix))
+
+### `dotfiles.audio` ([source](./audio/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        audio = {
+            enable = true; # defaults to false
+            server = "pulseaudio"; # defaults to pipewire
+            
+            goxlr = {
+                enable = true; # defaults to false
+                profile = ./MyProfile.goxlr;
+                micProfile = ./MyMicProfile.goxlrMicProfile;
+            };
+        };
+    };
+}
+```
+
+### `dotfiles.containers` ([source](./containers/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        containers = {
+            enable = true;      # defaults to false
+            tool = "docker";    # defaults to podman
+            discovery = true;   # defaults to true
+        };
+    };
+}
+```
+
+### `dotfiles.desktop` ([source](./desktop/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        desktop = {
+            enable = true;                  # defaults to false
+            protocol = ["xorg" "wayland"];  # defaults to xorg only
+            environment = "gnome";          # defaults to gnome
+            sleep = false;                  # defaults to true
+        };
+    };
+}
+```
+
+### `dotfiles.displays` ([source](./displays/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        displays = [
+            {
+                # Run 'autorandr --fingerprint' to get these values
+                name = "DP-1";                  # autorandr output name
+                fingerprint = "<fingerprint>";  # autorandr fingerprint
+
+                primary = true;                 # defaults to false
+
+                resolution = "2560x1440";
+                position = "2560x0";
+                rate = "144.01";
+            }
+        ];
+    };
+}
+```
+
+### `dotfiles.gpu` ([source](./gpu/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        gpu = {
+            enable = true;  # defaults to false
+            vendor = "amd"; # defaults to null
+        };
+    };
+}
+```
 
 ### `dotfiles.intl` ([source](./intl/default.nix))
 
@@ -38,18 +135,16 @@
 }
 ```
 
-### `dotfiles.desktop` ([source](./desktop/default.nix))
+### `dotfiles.storage` ([source](./storage/default.nix))
 
 ```nix
 {
     # ...
     dotfiles = {
         # ...
-        desktop = {
-            enable = true;                  # defaults to false
-            protocol = ["xorg" "wayland"];  # defaults to xorg only
-            environment = "gnome";          # defaults to gnome
-            sleep = false;                  # defaults to true
+        storage = {
+            enable = true; # defaults to false
+            type = "ssd"; # enables optimizations based upon what's present
         };
     };
 }
@@ -71,61 +166,6 @@
 
         users.ceci = {
             name = "Cecilia Sanare";
-        };
-    };
-}
-```
-
-### `dotfiles.displays` ([source](./displays/default.nix))
-
-```nix
-{
-    # ...
-    dotfiles = {
-        # ...
-        displays = [
-            {
-                # Run 'autorandr --fingerprint' to get these values
-                name = "DP-1";                  # autorandr output name
-                fingerprint = "<fingerprint>";  # autorandr fingerprint
-
-                primary = true;                 # defaults to false
-
-                resolution = "2560x1440";
-                position = "2560x0";
-                rate = "144.01";
-            }
-        ];
-    };
-}
-```
-
-### `dotfiles.containers` ([source](./containers/default.nix))
-
-```nix
-{
-    # ...
-    dotfiles = {
-        # ...
-        containers = {
-            enable = true;      # defaults to false
-            tool = "docker";    # defaults to podman
-            discovery = true;   # defaults to true
-        };
-    };
-}
-```
-
-### `dotfiles.gpu` ([source](./gpu/default.nix))
-
-```nix
-{
-    # ...
-    dotfiles = {
-        # ...
-        gpu = {
-            enable = true;  # defaults to false
-            vendor = "amd"; # defaults to null
         };
     };
 }
