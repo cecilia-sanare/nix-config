@@ -10,5 +10,6 @@
     ./network
     ./nixos
     ./storage
+    ./users
   ];
 }

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   # Host config for my desktop
@@ -15,15 +15,12 @@
   };
 
   dotfiles = {
-    # users.ceci = {
-    #   name = "Cecilia Sanare";
-    # };
-
     containers.enable = true;
 
     desktop = {
       enable = true;
       sleep = false;
+      dark = true;
     };
 
     displays = [
@@ -59,6 +56,82 @@
     gpu = {
       enable = true;
       vendor = "nvidia";
+    };
+  };
+
+  dotfiles.users = {
+    default = {
+      shell = "zsh";
+
+      background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+
+      aliases = {
+        code = "codium";
+      };
+
+      extensions = with pkgs; [
+        gnomeExtensions.hide-activities-button
+        gnomeExtensions.just-perfection
+        gnomeExtensions.dash-to-dock
+        gnomeExtensions.appindicator
+      ];
+
+      dconf = {
+        "org/gnome/shell/extensions/dash-to-dock" = {
+          click-action = "minimize-or-previews";
+          show-trash = false;
+          show-show-apps-button = false;
+          dash-max-icon-size = 80;
+          multi-monitor = true;
+        };
+      };
+
+      favorites = [
+        "org.gnome.Nautilus.desktop"
+        "firefox.desktop"
+        "codium.desktop"
+        "discord.desktop"
+      ];
+
+      cursor = {
+        enable = true;
+        url = "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.0/macOS-BigSur.tar.gz";
+        hash = "sha256-VZWFf1AHum2xDJPMZrBmcyVrrmYGKwCdXOPATw7myOA=";
+        name = "macOS-BigSur";
+      };
+
+      stateVersion = "23.11";
+    };
+
+    ceci = {
+      name = "Cecilia Sanare";
+      sudoer = true;
+
+      ssh = {
+        enable = true;
+        agent = "1password";
+      };
+
+      git = {
+        enable = true;
+        email = "ceci@sanare.dev";
+        gpg = {
+          enable = true;
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX";
+        };
+
+        aliases = {
+          cp = "cherry-pick";
+          st = "status -s";
+          cl = "clone";
+          ci = "commit";
+          co = "checkout";
+          br = "branch";
+          diff = "diff --word-diff";
+          dc = "diff --cached";
+          ca = "commit --amend --no-edit";
+        };
+      };
     };
   };
 }

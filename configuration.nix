@@ -10,10 +10,8 @@ in
     [
       (import "${home-manager}/nixos")
       ./hardware-configuration.nix
-      # TODO: Make this more dynamic
-      ./hosts/${host}.nix
       ./modules
-      ./users
+      ./hosts/${host}.nix
     ];
 
   # Bootloader.

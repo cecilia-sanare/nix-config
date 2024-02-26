@@ -14,7 +14,7 @@ in {
     vendor = mkOption {
       description = "The vendor of the GPU. (amd, intel, or nvidia)";
       # TODO: Setup to work with AMD / Intel GPUs
-      type = types.nullOr (types.enum ["nvidia"]);
+      type = types.nullOr (types.enum ["amd" "intel" "nvidia"]);
     };
   };
 
@@ -22,14 +22,35 @@ in {
     amd = cfg.vendor == "amd";
     intel = cfg.vendor == "intel";
     nvidia = cfg.vendor == "nvidia";
+    headless = cfg.vendor == null;
     xorg = elem "xorg" config.dotfiles.desktop.protocol;
+    desktopMode = config.dotfiles.desktop.protocol != null;
   in mkIf (cfg.enable) {
     # Enable OpenGL
-    hardware.opengl = {
+    hardware.opengl = mkIf (!headless) {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        (mkIf amd amdvlk)
+        (mkIf intel intel-media-driver)
+        (mkIf intel vaapiIntel)
+        (mkIf intel vaapiVdpau)
+        (mkIf intel libvdpau-va-gl)
+        libva
+      ];
     };
+
+    environment.systemPackages = with pkgs; [
+      (mkIf amd radeontop)
+      (mkIf intel libva-utils)
+    ] ++ lib.optionals desktopMode [
+      vulkan-tools
+      vulkan-loader
+      vulkan-headers
+      glxinfo
+      dfeet
+    ];
 
     # Load nvidia driver for Xorg and Wayland
     services.xserver.videoDrivers = [
@@ -39,11 +60,13 @@ in {
     ];
 
     hardware.nvidia = mkIf (nvidia) {
-      # Modesetting is required.
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
+      forceFullCompositionPipeline = true;
 
       # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
       powerManagement.enable = false;
+
       # Fine-grained power management. Turns off GPU when not in use.
       # Experimental and only works on modern Nvidia GPUs (Turing or newer).
       powerManagement.finegrained = false;
@@ -60,9 +83,6 @@ in {
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.
       nvidiaSettings = true;
-
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 }

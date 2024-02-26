@@ -21,7 +21,7 @@
 }
 ```
 
-### `dotfiles.network` ([source](./intl/network.nix))
+### `dotfiles.network` ([source](./network/default.nix))
 
 ```nix
 {
@@ -38,7 +38,7 @@
 }
 ```
 
-### `dotfiles.desktop` ([source](./intl/desktop.nix))
+### `dotfiles.desktop` ([source](./desktop/default.nix))
 
 ```nix
 {
@@ -55,7 +55,28 @@
 }
 ```
 
-### `dotfiles.displays` ([source](./intl/displays.nix))
+### `dotfiles.users` ([source](./users/default.nix))
+
+> This will probably get reworked heavily at some point since it kinda got everything thrown into it
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        users.default = {
+            # Anything placed in here will apply to all users
+            shell = "zsh";
+        };
+
+        users.ceci = {
+            name = "Cecilia Sanare";
+        };
+    };
+}
+```
+
+### `dotfiles.displays` ([source](./displays/default.nix))
 
 ```nix
 {
@@ -79,7 +100,7 @@
 }
 ```
 
-### `dotfiles.containers` ([source](./intl/containers.nix))
+### `dotfiles.containers` ([source](./containers/default.nix))
 
 ```nix
 {
@@ -95,7 +116,7 @@
 }
 ```
 
-### `dotfiles.gpu` ([source](./intl/gpu.nix))
+### `dotfiles.gpu` ([source](./gpu/default.nix))
 
 ```nix
 {
