@@ -58,6 +58,13 @@ in {
     systemd.targets.hybrid-sleep.enable = cfg.sleep;
 
     home-manager.sharedModules = [
+      {
+        dconf.settings = {
+          "org/gnome/nautilus/icon-view" = {
+            default-zoom-level = "small-plus";
+          };
+        };
+      }
       (mkIf (cfg.sleep) {
         dconf.settings = {
           "org/gnome/settings-daemon/plugins/power" = {
