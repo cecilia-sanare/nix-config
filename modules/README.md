@@ -1,10 +1,12 @@
 ## NixOS Modules
 
-- [`dotfiles.intl`](#dotfilesintl)
-- [`dotfiles.desktop`](#dotfilesdesktop)
-- [`dotfiles.containers`](#dotfilescontainers)
+- [`dotfiles.intl`](#dotfilesintl) ([source](./intl/default.nix))
+- [`dotfiles.network`](#dotfilesnetwork) ([source](./intl/network.nix))
+- [`dotfiles.desktop`](#dotfilesdesktop) ([source](./intl/desktop.nix))
+- [`dotfiles.containers`](#dotfilescontainers) ([source](./intl/containers.nix))
+- [`dotfiles.gpu`](#dotfilesgpu) ([source](./intl/gpu.nix))
 
-### `dotfiles.intl`
+### `dotfiles.intl` ([source](./intl/default.nix))
 
 ```nix
 {
@@ -12,14 +14,31 @@
     dotfiles = {
         # ...
         intl = {
-            timeZone = "America/NewYork"; # Defaults to America/Chicago
-            locale = "en_US.UTF-8"; # Defaults to en_US.UTF-8
+            timeZone = "America/NewYork";   # defaults to 'America/Chicago'
+            locale = "en_US.UTF-8";         # defaults to 'en_US.UTF-8'
         };
     };
 }
 ```
 
-### `dotfiles.desktop`
+### `dotfiles.network` ([source](./intl/network.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        network = {
+            enable = true;          # defaults to false
+            hostName = "cecis-pc";  # defaults to 'nixos'
+            wifi = true;            # defaults to false
+            printing = true;        # defaults to false
+        };
+    };
+}
+```
+
+### `dotfiles.desktop` ([source](./intl/desktop.nix))
 
 ```nix
 {
@@ -27,15 +46,40 @@
     dotfiles = {
         # ...
         desktop = {
-            enable = true; # defaults to false
-            protocol = ["xorg" "wayland"]; # defaults to xorg only
-            environment = "gnome"; # defaults to gnome
+            enable = true;                  # defaults to false
+            protocol = ["xorg" "wayland"];  # defaults to xorg only
+            environment = "gnome";          # defaults to gnome
+            sleep = false;                  # defaults to true
         };
     };
 }
 ```
 
-### `dotfiles.containers`
+### `dotfiles.displays` ([source](./intl/displays.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        displays = [
+            {
+                # Run 'autorandr --fingerprint' to get these values
+                name = "DP-1";                  # autorandr output name
+                fingerprint = "<fingerprint>";  # autorandr fingerprint
+
+                primary = true;                 # defaults to false
+
+                resolution = "2560x1440";
+                position = "2560x0";
+                rate = "144.01";
+            }
+        ];
+    };
+}
+```
+
+### `dotfiles.containers` ([source](./intl/containers.nix))
 
 ```nix
 {
@@ -43,9 +87,24 @@
     dotfiles = {
         # ...
         containers = {
-            enable = true; # defaults to false
-            tool = "docker"; # defaults to podman
-            discovery = true; # defaults to true
+            enable = true;      # defaults to false
+            tool = "docker";    # defaults to podman
+            discovery = true;   # defaults to true
+        };
+    };
+}
+```
+
+### `dotfiles.gpu` ([source](./intl/gpu.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        gpu = {
+            enable = true;  # defaults to false
+            vendor = "amd"; # defaults to null
         };
     };
 }

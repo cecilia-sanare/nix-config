@@ -1,19 +1,11 @@
-# Custom configurations:
-#  (should trigger automatically)
-# [ both primary external ]
-#
-# Default configurations:
-#  (can be used with unknown displays)
-# [ horizontal vertical common clone-largest ]
-
 { config, lib, pkgs, ... }:
 
 with lib;
 
 let
-  cfg = config.sys.hardware.displays;
+  cfg = config.dotfiles;
 in {
-  options.sys.hardware.displays = mkOption {
+  options.dotfiles.displays = mkOption {
     description = "The config for each display";
     type = with types; listOf ( submodule {
       options = {
@@ -66,12 +58,12 @@ in {
   };
 
   config = {
-    # TODO: Figure out why nothing is respecting these settings
+    # TODO: Figure out why this isn't effecting the greeter
     services.autorandr = {
       enable = true;
       profiles = {
         home = {
-          fingerprint = builtins.listToAttrs(map( v: { name = v.name; value = v.fingerprint; }) cfg);
+          fingerprint = builtins.listToAttrs(map( v: { name = v.name; value = v.fingerprint; }) cfg.displays);
           config = builtins.listToAttrs(map(v: { 
             name = v.name; 
             value = {
@@ -81,8 +73,7 @@ in {
               position = v.position;
               rate = v.rate;
             }; 
-          }) cfg );
-          # };
+          }) cfg.displays );
         };
       };
     };
