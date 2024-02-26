@@ -72,6 +72,7 @@ in
           dconf.settings = {
             "org/gnome/settings-daemon/plugins/power" = {
               power-button-action = "nothing";
+              sleep-inactive-ac-type = "nothing";
               sleep-inactive-ac-timeout = 0;
               sleep-inactive-battery-timeout = 0;
             };

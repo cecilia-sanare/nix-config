@@ -89,57 +89,64 @@ in
       mkIf (default != null) {
         environment.systemPackages = default.extensions;
 
-        home-manager.sharedModules = [{
-          home = {
-            pointerCursor = mkIf (default.cursor.enable) {
-              gtk.enable = true;
-              x11.enable = true;
-              name = default.cursor.name;
-              package = pkgs.runCommand "moveUp" { } ''
-                mkdir -p $out/share/icons
-                ln -s ${pkgs.fetchzip {
-                  url = default.cursor.url;
-                  hash = default.cursor.hash;
-                }} $out/share/icons/${default.cursor.name}
-              '';
+        home-manager.sharedModules = [
+          ({ config, ... }: {
+            home = {
+              pointerCursor = mkIf (default.cursor.enable) {
+                gtk.enable = true;
+                x11.enable = true;
+                name = default.cursor.name;
+                package = pkgs.runCommand "moveUp" { } ''
+                  mkdir -p $out/share/icons
+                  ln -s ${pkgs.fetchzip {
+                    url = default.cursor.url;
+                    hash = default.cursor.hash;
+                  }} $out/share/icons/${default.cursor.name}
+                '';
+              };
+
+              stateVersion = default.stateVersion;
             };
 
-            stateVersion = default.stateVersion;
-          };
+            xdg.systemDirs.data = [
+              "/var/lib/flatpak/exports/share"
+              "${config.home.homeDirectory}/.local/share/flatpak/exports/share"
+            ];
 
-          dconf.settings = mkMerge [
-            {
-              "org/gnome/desktop/background" = {
-                picture-uri-light = "${default.background}";
-                picture-uri-dark = "${default.background}";
-              };
+            dconf.settings = mkMerge [
+              {
+                "org/gnome/desktop/background" = {
+                  picture-uri-light = "${default.background}";
+                  picture-uri-dark = "${default.background}";
+                };
 
-              "org/gnome/desktop/interface" = {
-                enable-hot-corners = false;
-                clock-format = "12h";
-              };
+                "org/gnome/desktop/interface" = {
+                  enable-hot-corners = false;
+                  clock-format = "12h";
+                };
 
-              "org/gnome/shell" = {
-                enabled-extensions = map (x: x.extensionUuid) default.extensions;
-                # Located in /run/current-system/sw/share/applications
-                favorite-apps = default.favorites;
-              };
+                "org/gnome/shell" = {
+                  enabled-extensions = map (x: x.extensionUuid) default.extensions;
+                  # Located in /run/current-system/sw/share/applications
+                  favorite-apps = default.favorites;
+                };
 
-              "org/gnome/mutter" = {
-                edge-tiling = true;
-                # TODO: Disable activities hotkey once I find an application launcher
-                # overlay-key = "";
-                dynamic-workspaces = false;
-              };
+                "org/gnome/mutter" = {
+                  edge-tiling = true;
+                  # TODO: Disable activities hotkey once I find an application launcher
+                  # overlay-key = "";
+                  dynamic-workspaces = false;
+                };
 
-              "org/gnome/desktop/wm/preferences" = {
-                button-layout = ":minimize,maximize,close";
-                num-workspaces = 1;
-              };
-            }
-            default.dconf
-          ];
-        }];
+                "org/gnome/desktop/wm/preferences" = {
+                  button-layout = ":minimize,maximize,close";
+                  num-workspaces = 1;
+                };
+              }
+              default.dconf
+            ];
+          })
+        ];
       }
     )
     # Individual users

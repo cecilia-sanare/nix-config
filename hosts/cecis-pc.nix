@@ -3,14 +3,8 @@
 {
   # Host config for my desktop
 
-  # Old OS
-  fileSystems."/mnt/old" = {
-    device = "/dev/nvme0n1p1";
-    fsType = "ext4";
-  };
-
   fileSystems."/mnt/media" = {
-    device = "/dev/nvme2n1p1";
+    device = "/dev/disk/by-uuid/8684aa26-feec-4a16-af91-07d69ef2979d";
     fsType = "ext4";
   };
 

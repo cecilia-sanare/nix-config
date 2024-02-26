@@ -7,6 +7,7 @@ let
     gnome.file-roller
     gnome.nautilus
     gnome.gnome-system-monitor
+    baobab # Disk usage analyzer
     vim
     git
     gparted
@@ -29,6 +30,7 @@ let
     figma-linux
     rustdesk
     obs-studio
+    caprine-bin # Facebook Messenger App
     # Swap to another rest client when its available
     bruno
     # megasync
