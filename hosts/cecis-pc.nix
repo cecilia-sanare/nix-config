@@ -42,6 +42,15 @@
       } 
     ];
 
+    audio = {
+      enable = true;
+      goxlr = {
+        enable = true;
+        profile = ./Default.goxlr;
+        micProfile = ./DEFAULT.goxlrMicProfile;
+      };
+    };
+
     storage = {
       enable = true;
       type = "ssd";

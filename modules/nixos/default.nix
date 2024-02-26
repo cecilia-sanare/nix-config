@@ -42,7 +42,6 @@ in
     ./vscode
     ./discord
     ./gaming
-    ./hardware
   ];
 
   nixpkgs.config.allowUnfree = true;

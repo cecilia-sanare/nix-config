@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./audio
     ./containers
     ./desktop
     ./displays
