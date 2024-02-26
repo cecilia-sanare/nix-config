@@ -40,24 +40,19 @@ in {
     zsh = cfg.type == "zsh";
   in mkIf (cfg.enable) {
     users.defaultUserShell = pkgs.${cfg.type};
+    programs.${cfg.type}.enable = true;
 
-    programs.bash = mkIf(bash) {
-      enable = true;
-    };
-
-    programs.zsh = mkIf(zsh) {
-      enable = true;
-      ohMyZsh = mkIf(cfg.ohMyZsh.enable) {
+    home-manager.sharedModules = [{
+      programs.zsh = mkIf(zsh) {
         enable = true;
-        plugins = cfg.ohMyZsh.plugins;
-        theme = cfg.ohMyZsh.theme;
+        oh-my-zsh = mkIf (cfg.ohMyZsh.enable) {
+          enable = true;
+          plugins = cfg.ohMyZsh.plugins;
+          theme = cfg.ohMyZsh.theme;
+        };
       };
-    };
-
-    home-manager.sharedModules = mkIf(cfg.aliases != null) [{
-      home = {
-        shellAliases = cfg.aliases;
-      };
+      
+      home.shellAliases = cfg.aliases;
     }];
   };
 }
