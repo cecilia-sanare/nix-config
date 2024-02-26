@@ -4,8 +4,8 @@
   imports = [
     ./containers
     ./desktop
+    ./gpu
     ./intl
-    ./nvidia
     ./nixos
   ];
 }

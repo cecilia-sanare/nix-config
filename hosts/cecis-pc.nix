@@ -15,13 +15,16 @@
   };
 
   dotfiles = {
-    # users = {
-    #   ceci = {
-    #     name = "Cecilia Sanare";
-    #   };
+    # users.ceci = {
+    #   name = "Cecilia Sanare";
     # };
 
     containers.enable = true;
     desktop.enable = true;
+
+    gpu = {
+      enable = true;
+      vendor = "nvidia";
+    };
   };
 }
