@@ -1,14 +1,14 @@
 ## NixOS Modules
 
-- [`dotfiles.audio`](#dotfilesaudio) ([source](./audio/default.nix))
-- [`dotfiles.containers`](#dotfilescontainers) ([source](./containers/default.nix))
-- [`dotfiles.desktop`](#dotfilesdesktop) ([source](./desktop/default.nix))
-- [`dotfiles.displays`](#dotfilesdisplays) ([source](./displays/default.nix))
-- [`dotfiles.gpu`](#dotfilesgpu) ([source](./gpu/default.nix))
-- [`dotfiles.intl`](#dotfilesintl) ([source](./intl/default.nix))
-- [`dotfiles.network`](#dotfilesnetwork) ([source](./network/default.nix))
-- [`dotfiles.storage`](#dotfilesstorage) ([source](./storage/default.nix))
-- [`dotfiles.users`](#dotfilesusers) ([source](./users/default.nix))
+- [`dotfiles.audio`](#dotfilesaudio-source) ([source](./audio/default.nix))
+- [`dotfiles.containers`](#dotfilescontainers-source) ([source](./containers/default.nix))
+- [`dotfiles.desktop`](#dotfilesdesktop-source) ([source](./desktop/default.nix))
+- [`dotfiles.displays`](#dotfilesdisplays-source) ([source](./displays/default.nix))
+- [`dotfiles.gpu`](#dotfilesgpu-source) ([source](./gpu/default.nix))
+- [`dotfiles.intl`](#dotfilesintl-source) ([source](./intl/default.nix))
+- [`dotfiles.network`](#dotfilesnetwork-source) ([source](./network/default.nix))
+- [`dotfiles.storage`](#dotfilesstorage-source) ([source](./storage/default.nix))
+- [`dotfiles.users`](#dotfilesusers-source) ([source](./users/default.nix))
 
 ### `dotfiles.audio` ([source](./audio/default.nix))
 
