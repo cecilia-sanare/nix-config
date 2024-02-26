@@ -46,8 +46,8 @@
       enable = true;
       goxlr = {
         enable = true;
-        profile = ./Default.goxlr;
-        micProfile = ./DEFAULT.goxlrMicProfile;
+        profile = ./configs/Default.goxlr;
+        micProfile = ./configs/DEFAULT.goxlrMicProfile;
       };
     };
 
