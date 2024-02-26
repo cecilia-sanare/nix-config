@@ -38,8 +38,6 @@ in
 {
   imports = [
     ./1password
-    ./zsh
-    ./vscode
     ./discord
     ./gaming
   ];

@@ -100,6 +100,22 @@
           ca = "commit --amend --no-edit";
         };
       };
+
+      vscodium = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          jnoortheen.nix-ide
+          rust-lang.rust-analyzer
+          hashicorp.terraform
+        ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "EditorConfig";
+            publisher = "EditorConfig";
+            version = "0.16.4";
+            sha256 = "j+P2oprpH0rzqI0VKt0JbZG19EDE7e7+kAb3MGGCRDk=";
+          }
+        ];
+      };
     };
   };
 
