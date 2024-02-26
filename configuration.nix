@@ -11,6 +11,7 @@ in
     (import "${home-manager}/nixos")
     ./hardware-configuration.nix
     ./modules
+    ./packages
     ./hosts/${host}.nix
   ];
 

@@ -71,55 +71,6 @@ in {
           type = types.bool;
         };
 
-        ssh = {
-          enable = mkOption {
-            description = "Whether to enable ssh for this user";
-            type = types.bool;
-            default = false;
-          };
-
-          agent = mkOption {
-            description = "Specify an agent to automatically setup";
-            type = nullOr(types.enum(["1password"]));
-          };
-        };
-
-        git = {
-          enable = mkOption {
-            description = "Whether this user should have the 'wheel' group";
-            type = types.bool;
-            default = false;
-          };
-
-          name = mkOption {
-            description = "The name to sign your commits with (defaults to user.name)";
-            type = nullOr(types.str);
-            default = null;
-          };
-
-          email = mkOption {
-            description = "The email to sign your commits with";
-            type = types.str;
-          };
-
-          aliases = mkOption {
-            description = "Your git aliases";
-            type = nullOr(attrsOf(types.str));
-          };
-
-          gpg = {
-            enable = mkOption {
-              description = "Whether commits should be signed via gpg";
-              type = types.bool;
-            };
-
-            publicKey = mkOption {
-              description = "The public signing key";
-              type = types.str;
-            };
-          };
-        };
-
         stateVersion = mkOption {
           description = "The home-manager state version";
           type = types.str;
@@ -196,60 +147,6 @@ in {
           "networkmanager" # What does this group do?
           "wheel"
         ];
-      }) cfg.users;
-
-
-      home-manager.users = builtins.mapAttrs (name: value: mkIf(name != "default") {
-        programs.ssh = mkIf(value.ssh.enable) {
-          enable = true;
-          forwardAgent = value.ssh.agent != null;
-          extraConfig = mkIf (value.ssh.agent == "1password") "IdentityAgent ~/.1password/agent.sock";
-        };
-
-        programs.git = mkIf(value.git.enable) {
-          enable = true;
-          userName = if value.git.name != null then value.git.name else value.name;
-          userEmail = value.git.email;
-
-          aliases = value.git.aliases;
-
-          extraConfig = mkMerge [
-            {
-              init.defaultBranch = "main";
-              push.autoSetupRemote = true;
-
-              color = {
-                diff = "auto";
-                status = "auto";
-                branch = "auto";
-                ui = "auto";
-              };
-
-              core = {
-                excludesfile = "~/.gitignore";
-                editor = "vim";
-              };
-
-              help = {
-                autocorrect = 1;
-              };
-
-              push = {
-                default = "simple";
-              };
-            }
-            # GPG Configuration
-            (mkIf(value.git.gpg.enable) {
-              commit.gpgsign = true;
-              user.signingkey = value.git.gpg.publicKey;
-
-              gpg = mkIf(value.ssh.agent == "1password") {
-                format = "ssh";
-                ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
-              };
-            })
-          ];
-        };
       }) cfg.users;
     }
   ];

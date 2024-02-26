@@ -75,6 +75,32 @@
         code = "codium";
       };
     };
+
+    packages = {
+      git = {
+        enable = true;
+        agent = "1password";
+        name = "Cecilia Sanare";
+        email = "ceci@sanare.dev";
+
+        gpg = {
+          enable = true;
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX";
+        };
+
+        aliases = {
+          cp = "cherry-pick";
+          st = "status -s";
+          cl = "clone";
+          ci = "commit";
+          co = "checkout";
+          br = "branch";
+          diff = "diff --word-diff";
+          dc = "diff --cached";
+          ca = "commit --amend --no-edit";
+        };
+      };
+    };
   };
 
   dotfiles.users = {
@@ -118,32 +144,6 @@
     ceci = {
       name = "Cecilia Sanare";
       sudoer = true;
-
-      ssh = {
-        enable = true;
-        agent = "1password";
-      };
-
-      git = {
-        enable = true;
-        email = "ceci@sanare.dev";
-        gpg = {
-          enable = true;
-          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX";
-        };
-
-        aliases = {
-          cp = "cherry-pick";
-          st = "status -s";
-          cl = "clone";
-          ci = "commit";
-          co = "checkout";
-          br = "branch";
-          diff = "diff --word-diff";
-          dc = "diff --cached";
-          ca = "commit --amend --no-edit";
-        };
-      };
     };
   };
 }
