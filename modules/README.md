@@ -18,11 +18,11 @@
     dotfiles = {
         # ...
         audio = {
-            enable = true; # defaults to false
-            server = "pulseaudio"; # defaults to pipewire
+            enable = true;          # defaults to false
+            server = "pulseaudio";  # defaults to pipewire
             
             goxlr = {
-                enable = true; # defaults to false
+                enable = true;      # defaults to false
                 profile = ./MyProfile.goxlr;
                 micProfile = ./MyMicProfile.goxlrMicProfile;
             };
@@ -143,8 +143,8 @@
     dotfiles = {
         # ...
         storage = {
-            enable = true; # defaults to false
-            type = "ssd"; # enables optimizations based upon what's present
+            enable = true;  # defaults to false
+            type = "ssd";   # enables optimizations based upon what's present
         };
     };
 }
