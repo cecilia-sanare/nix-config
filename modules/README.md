@@ -135,6 +135,29 @@
 }
 ```
 
+### `dotfiles.shell` ([source](./storage/default.nix))
+
+```nix
+{
+    # ...
+    dotfiles = {
+        # ...
+        shell = {
+            enable = true;              # defaults to false
+            ohMyZsh = {
+                enable = true;          # defaults to false
+                theme = "robbyrussell"; # defaults to robbyrussell
+                plugins = ["git"];      # defaults to [ "git" "sudo" "docker" ]
+            };
+
+            aliases = {
+                code = "codium";
+            };
+        };
+    };
+}
+```
+
 ### `dotfiles.storage` ([source](./storage/default.nix))
 
 ```nix

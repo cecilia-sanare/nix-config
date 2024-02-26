@@ -14,18 +14,6 @@ in {
           default = true;
         };
 
-        shell = mkOption {
-          description = "The shell to enable for this user";
-          type = types.enum(["bash" "zsh"]);
-          default = "bash";
-        };
-
-        aliases = mkOption {
-          description = "The shell aliases for this user";
-          type = nullOr(attrsOf(types.str));
-          default = null;
-        };
-
         background = mkOption {
           description = "The wallpaper background";
           type = nullOr(types.str);
@@ -146,15 +134,9 @@ in {
       default = cfg.users.default;
     in mkIf(default != null) {
       environment.systemPackages = default.extensions;
-      users.defaultUserShell = pkgs.${default.shell};
 
       home-manager.sharedModules = [{
-        programs.zsh.enable = default.shell == "zsh";
-        programs.bash.enable = default.shell == "bash";
-
         home = {
-          shellAliases = default.aliases;
-
           pointerCursor = mkIf(default.cursor.enable) {
             gtk.enable = true;
             x11.enable = true;
@@ -174,6 +156,7 @@ in {
         dconf.settings = mkMerge [
           {
             "org/gnome/desktop/background" = {
+              picture-uri-light = "${default.background}";
               picture-uri-dark = "${default.background}";
             };
 

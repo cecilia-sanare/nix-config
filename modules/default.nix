@@ -10,6 +10,7 @@
     ./intl
     ./network
     ./nixos
+    ./shell
     ./storage
     ./users
   ];

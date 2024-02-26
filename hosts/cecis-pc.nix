@@ -66,17 +66,20 @@
       enable = true;
       vendor = "nvidia";
     };
-  };
 
-  dotfiles.users = {
-    default = {
-      shell = "zsh";
-
-      background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    shell = {
+      enable = true;
+      ohMyZsh.enable = true;
 
       aliases = {
         code = "codium";
       };
+    };
+  };
+
+  dotfiles.users = {
+    default = {
+      background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
 
       extensions = with pkgs; [
         gnomeExtensions.hide-activities-button
