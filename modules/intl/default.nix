@@ -1,13 +1,14 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.intl;
   # TODO: Is there any way to infer this from time.timeZone?
-  nospace  = str: filter (c: c == " ") (stringToCharacters str) == [];
+  nospace = str: filter (c: c == " ") (stringToCharacters str) == [ ];
   timezone = types.nullOr (types.addCheck types.str nospace);
-in {
+in
+{
   options.dotfiles.intl = {
     timeZone = mkOption {
       type = timezone;

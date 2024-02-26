@@ -1,22 +1,23 @@
-{ lib, config, pkgs, ... }: 
+{ lib, config, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.shell;
-in {
+in
+{
   options.dotfiles.shell = with types; {
     enable = mkEnableOption "Enable the shell configuration";
 
     type = mkOption {
       description = "The shell to enable for this user";
-      type = types.enum(["bash" "zsh"]);
+      type = types.enum ([ "bash" "zsh" ]);
       default = "zsh";
     };
 
     aliases = mkOption {
       description = "The shell aliases for this user";
-      type = nullOr(attrsOf(types.str));
+      type = nullOr (attrsOf (types.str));
       default = null;
     };
 
@@ -24,8 +25,8 @@ in {
       enable = mkEnableOption "Enable the ohMyZsh configuration";
 
       plugins = mkOption {
-        type = listOf(types.str);
-        default = ["git" "sudo" "docker"];
+        type = listOf (types.str);
+        default = [ "git" "sudo" "docker" ];
       };
 
       theme = mkOption {
@@ -35,24 +36,26 @@ in {
     };
   };
 
-  config = let
-    bash = cfg.type == "bash";
-    zsh = cfg.type == "zsh";
-  in mkIf (cfg.enable) {
-    users.defaultUserShell = pkgs.${cfg.type};
-    programs.${cfg.type}.enable = true;
+  config =
+    let
+      bash = cfg.type == "bash";
+      zsh = cfg.type == "zsh";
+    in
+    mkIf (cfg.enable) {
+      users.defaultUserShell = pkgs.${cfg.type};
+      programs.${cfg.type}.enable = true;
 
-    home-manager.sharedModules = [{
-      programs.zsh = mkIf(zsh) {
-        enable = true;
-        oh-my-zsh = mkIf (cfg.ohMyZsh.enable) {
+      home-manager.sharedModules = [{
+        programs.zsh = mkIf (zsh) {
           enable = true;
-          plugins = cfg.ohMyZsh.plugins;
-          theme = cfg.ohMyZsh.theme;
+          oh-my-zsh = mkIf (cfg.ohMyZsh.enable) {
+            enable = true;
+            plugins = cfg.ohMyZsh.plugins;
+            theme = cfg.ohMyZsh.theme;
+          };
         };
-      };
-      
-      home.shellAliases = cfg.aliases;
-    }];
-  };
+
+        home.shellAliases = cfg.aliases;
+      }];
+    };
 }

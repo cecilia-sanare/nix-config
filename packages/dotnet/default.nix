@@ -1,10 +1,11 @@
-{ lib, config, pkgs, ... }: 
+{ lib, config, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.packages.dotnet;
-in {
+in
+{
   options.dotfiles.packages.dotnet = with types; {
     enable = mkEnableOption "Enable the dotnet package";
   };

@@ -1,10 +1,11 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.network;
-in {
+in
+{
   options.dotfiles.network = {
     enable = mkOption {
       type = types.bool;

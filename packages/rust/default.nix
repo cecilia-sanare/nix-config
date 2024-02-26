@@ -1,10 +1,11 @@
-{ lib, config, pkgs, ... }: 
+{ lib, config, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.packages.rust;
-in {
+in
+{
   options.dotfiles.packages.rust = with types; {
     enable = mkEnableOption "Enable the rust package";
   };

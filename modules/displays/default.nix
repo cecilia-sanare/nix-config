@@ -4,10 +4,11 @@ with lib;
 
 let
   cfg = config.dotfiles;
-in {
+in
+{
   options.dotfiles.displays = mkOption {
     description = "The config for each display";
-    type = with types; listOf ( submodule {
+    type = with types; listOf (submodule {
       options = {
         enable = mkOption {
           description = "Whether this display is enabled";
@@ -54,7 +55,7 @@ in {
           type = str;
         };
       };
-    } );
+    });
   };
 
   config = {
@@ -63,17 +64,19 @@ in {
       enable = true;
       profiles = {
         home = {
-          fingerprint = builtins.listToAttrs(map( v: { name = v.name; value = v.fingerprint; }) cfg.displays);
-          config = builtins.listToAttrs(map(v: { 
-            name = v.name; 
-            value = {
-              enable = v.enable;
-              mode = v.resolution;
-              primary = v.primary;
-              position = v.position;
-              rate = v.rate;
-            }; 
-          }) cfg.displays );
+          fingerprint = builtins.listToAttrs (map (v: { name = v.name; value = v.fingerprint; }) cfg.displays);
+          config = builtins.listToAttrs (map
+            (v: {
+              name = v.name;
+              value = {
+                enable = v.enable;
+                mode = v.resolution;
+                primary = v.primary;
+                position = v.position;
+                rate = v.rate;
+              };
+            })
+            cfg.displays);
         };
       };
     };

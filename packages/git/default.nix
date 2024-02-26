@@ -1,10 +1,11 @@
-{ lib, config, pkgs, ... }: 
+{ lib, config, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.packages.git;
-in {
+in
+{
   options.dotfiles.packages.git = with types; {
     enable = mkEnableOption "Enable the git package";
 
@@ -20,12 +21,12 @@ in {
 
     aliases = mkOption {
       description = "Your git aliases";
-      type = nullOr(attrsOf(types.str));
+      type = nullOr (attrsOf (types.str));
     };
 
     agent = mkOption {
       description = "Specify an agent to automatically setup";
-      type = nullOr(types.enum(["1password"]));
+      type = nullOr (types.enum ([ "1password" ]));
     };
 
     gpg = {
@@ -76,11 +77,11 @@ in {
             };
           }
           # GPG Configuration
-          (mkIf(cfg.gpg.enable) {
+          (mkIf (cfg.gpg.enable) {
             commit.gpgsign = true;
             user.signingkey = cfg.gpg.publicKey;
 
-            gpg = mkIf(cfg.agent == "1password") {
+            gpg = mkIf (cfg.agent == "1password") {
               format = "ssh";
               ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
             };

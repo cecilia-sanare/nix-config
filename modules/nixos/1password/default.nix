@@ -6,7 +6,7 @@
     _1password-gui = {
       package = pkgs._1password-gui;
       enable = true;
-      polkitPolicyOwners = ["ceci"];
+      polkitPolicyOwners = [ "ceci" ];
     };
   };
 }

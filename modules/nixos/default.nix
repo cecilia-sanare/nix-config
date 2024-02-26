@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-let 
+let
   # Core utilities, generally don't uninstall these
   core = with pkgs; [
     gnome.gnome-terminal
@@ -35,7 +35,7 @@ let
     # TODO: This doesn't do anything right now... why?
     # jellyfin-web
   ];
-in 
+in
 {
   imports = [
     ./1password
@@ -46,7 +46,7 @@ in
   nixpkgs.config.allowUnfree = true;
   services.gnome.core-utilities.enable = false;
 
-  environment.gnome.excludePackages = with pkgs; [ 
+  environment.gnome.excludePackages = with pkgs; [
     gnome-tour
   ];
 

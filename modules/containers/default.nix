@@ -1,10 +1,11 @@
-{ lib, config, pkgs, ... }: 
+{ lib, config, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.dotfiles.containers;
-in {
+in
+{
   options.dotfiles.containers = {
     enable = mkOption {
       type = types.bool;
@@ -12,7 +13,7 @@ in {
     };
 
     tool = mkOption {
-      type = types.nullOr(types.enum ["docker" "podman"]);
+      type = types.nullOr (types.enum [ "docker" "podman" ]);
       default = "podman";
     };
 
@@ -23,39 +24,41 @@ in {
     };
   };
 
-  config = let
-    docker = cfg.tool == "docker";
-    podman = cfg.tool == "podman";
-  in mkIf (cfg.enable) {
-    virtualisation.docker = mkIf (docker) {
-      enable = true;
-
-      rootless = {
+  config =
+    let
+      docker = cfg.tool == "docker";
+      podman = cfg.tool == "podman";
+    in
+    mkIf (cfg.enable) {
+      virtualisation.docker = mkIf (docker) {
         enable = true;
-        setSocketVariable = true;
+
+        rootless = {
+          enable = true;
+          setSocketVariable = true;
+        };
+      };
+
+      virtualisation.podman = mkIf (podman) {
+        enable = true;
+        enableNvidia = true;
+        dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = true;
+      };
+
+      environment.systemPackages = with pkgs; [
+        (mkIf (docker) docker-compose)
+        (mkIf (podman) podman-compose)
+      ];
+
+      # TODO: Move this somewhere else
+      networking.firewall = {
+        allowedTCPPorts = mkIf (cfg.discovery) [ 80 443 ];
+        allowedUDPPorts = mkIf (cfg.discovery) [ 80 443 ];
+      };
+
+      boot.kernel.sysctl = {
+        "net.ipv4.ip_unprivileged_port_start" = 0;
       };
     };
-
-    virtualisation.podman = mkIf (podman) {
-      enable = true;
-      enableNvidia = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-
-    environment.systemPackages = with pkgs; [
-      (mkIf (docker) docker-compose)
-      (mkIf (podman) podman-compose)
-    ];
-
-    # TODO: Move this somewhere else
-    networking.firewall = {
-      allowedTCPPorts = mkIf (cfg.discovery) [80 443];
-      allowedUDPPorts = mkIf (cfg.discovery) [80 443];
-    };
-
-    boot.kernel.sysctl = {
-      "net.ipv4.ip_unprivileged_port_start" = 0;
-    };
-  };
 }
