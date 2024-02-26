@@ -77,6 +77,10 @@
     };
 
     packages = {
+      rust.enable = true;
+      dotnet.enable = true;
+      node.enable = true;
+
       git = {
         enable = true;
         agent = "1password";
