@@ -3,6 +3,9 @@
 build:
 	sudo nixos-rebuild switch
 
+build-verbose:
+	sudo nixos-rebuild switch -v
+
 cleanup:
 	sudo nix-collect-garbage --delete-older-than 1d && sudo nixos-rebuild boot
 

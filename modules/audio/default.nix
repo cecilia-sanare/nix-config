@@ -29,15 +29,18 @@ in {
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = let
+    pipewire = cfg.server == "pipewire";
+    pulseaudio = cfg.server == "pulseaudio";
+  in mkIf (cfg.enable) {
     environment.systemPackages = [
       # Need pulseaudio cli tools for pipewire.
-      (mkIf (cfg.server == "pipewire") pkgs.pulseaudio)
+      (mkIf (pipewire) pkgs.pulseaudio)
     ];
 
     security.rtkit.enable = true;
 
-    services.pipewire = mkIf (cfg.server == "pipewire") {
+    services.pipewire = mkIf (pipewire) {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
@@ -45,31 +48,27 @@ in {
       jack.enable = true;
     };
 
-    sound.enable = cfg.server == "pulseaudio";
+    sound.enable = pulseaudio;
     hardware.pulseaudio = {
-      enable = cfg.server == "pulseaudio";
+      enable = pulseaudio;
       support32Bit = true;
       package = pkgs.pulseaudioFull;
     };
 
     services.goxlr-utility.enable = cfg.goxlr.enable;
 
-    home-manager.sharedModules = mkIf(cfg.goxlr.enable) [{
-      home = {
-        file.goxlr-settings = {
-          enable = true;
-          text = 
-          ''
+    home-manager.sharedModules = mkIf(cfg.goxlr.enable) [({ config, ... }: {
+        home.file.".config/goxlr-utility/settings.json".text = ''
           {
             "show_tray_icon": true,
             "tts_enabled": false,
             "allow_network_access": false,
-            "profile_directory": "~/.local/share/goxlr-utility/profiles",
-            "mic_profile_directory": "~/.local/share/goxlr-utility/mic-profiles",
-            "samples_directory": "~/.local/share/goxlr-utility/samples",
-            "presets_directory": "~/.local/share/goxlr-utility/presets",
-            "icons_directory": "~/.local/share/goxlr-utility/icons",
-            "logs_directory": "~/.local/share/goxlr-utility/logs",
+            "profile_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/profiles",
+            "mic_profile_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/mic-profiles",
+            "samples_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/samples",
+            "presets_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/presets",
+            "icons_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/icons",
+            "logs_directory": "${config.home.homeDirectory}/.local/share/goxlr-utility/logs",
             "log_level": "Debug",
             "activate": null,
             "devices": {
@@ -92,22 +91,10 @@ in {
               }
             }
           }
-          '';
-          target = "./.config/goxlr-utility/settings.json";
-        };
+        '';
 
-        file.goxlr-profile = {
-          enable = true;
-          source = cfg.goxlr.profile;
-          target = "./.local/share/goxlr-utility/profiles/Default.goxlr";
-        };
-
-        file.goxlr-mic-profile = {
-          enable = true;
-          source = cfg.goxlr.micProfile;
-          target = "./.local/share/goxlr-utility/mic-profiles/DEFAULT.goxlrMicProfile";
-        };
-      };
-    }];
+        home.file.".local/share/goxlr-utility/profiles/Default.goxlr".source = cfg.goxlr.profile;
+        home.file.".local/share/goxlr-utility/mic-profiles/DEFAULT.goxlrMicProfile".source = cfg.goxlr.micProfile;
+    })];
   };
 }
