@@ -77,10 +77,6 @@
     };
 
     packages = {
-      rust.enable = true;
-      dotnet.enable = true;
-      node.enable = true;
-
       git = {
         enable = true;
         agent = "1password";
@@ -142,6 +138,7 @@
           show-show-apps-button = false;
           dash-max-icon-size = 80;
           multi-monitor = true;
+          running-indicator-style = "DOTS";
         };
       };
 

@@ -4,8 +4,5 @@
   imports = [
     ./git
     ./vscodium
-    ./rust
-    ./dotnet
-    ./node
   ];
 }
