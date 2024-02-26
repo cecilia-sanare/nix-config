@@ -5,7 +5,7 @@ with lib;
 let
   cfg = config.dotfiles.packages.git;
 in {
-  options.dotfiles.packages.git = {
+  options.dotfiles.packages.git = with types; {
     enable = mkEnableOption "Enable the git package";
 
     name = mkOption {

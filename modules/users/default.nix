@@ -148,6 +148,11 @@ in {
           "wheel"
         ];
       }) cfg.users;
+
+      # *Always* initialize a INDIVIDUAL home manager user otherwise everything else will break.
+      home-manager.users = builtins.mapAttrs (name: value: mkIf(name != "default") {
+        home.stateVersion = "23.11";
+      }) cfg.users;
     }
   ];
 }
