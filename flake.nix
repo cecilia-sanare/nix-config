@@ -9,6 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
+    hardware.url = "github:nixos/nixos-hardware";
   };
 
   outputs = { ... } @ inputs: {
@@ -17,6 +18,8 @@
       modules = [
         inputs.nix-flatpak.nixosModules.nix-flatpak
         inputs.home-manager.nixosModules.home-manager
+        "${inputs.hardware}/common/gpu/nvidia"
+        "${inputs.hardware}/common/cpu/intel"
         ./hardware-configuration.nix
         ./configuration.nix
       ];

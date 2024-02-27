@@ -19,6 +19,7 @@ let
     nixd # Nix Language Server
     autorandr
     gnumake
+    lshw
   ];
 
   apps = with pkgs; [
