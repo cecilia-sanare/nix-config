@@ -20,6 +20,9 @@ let
     autorandr
     gnumake
     lshw
+    sops
+    age
+    gnupg
   ];
 
   apps = with pkgs; [
