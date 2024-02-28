@@ -13,6 +13,7 @@ rec {
       # Pass flake inputs to our config
       specialArgs = {
         inherit inputs outputs desktop hostname platform stateVersion headless authorizedKeys users sudoers;
+        vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
       };
 
       modules = [

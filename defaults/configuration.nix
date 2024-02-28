@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ authorizedKeys, inputs, users, outputs, desktop, hostname, platform, stateVersion, headless, sudoers, config, lib, pkgs, ... }:
+{ authorizedKeys, inputs, users, outputs, desktop, hostname, platform, stateVersion, headless, sudoers, config, lib, pkgs, vscode-extensions, ... }:
 
 with lib;
 
@@ -81,7 +81,7 @@ with lib;
   home-manager = {
     # Pass flake inputs to our config
     extraSpecialArgs = {
-      inherit inputs outputs desktop hostname platform headless;
+      inherit inputs outputs desktop hostname platform headless vscode-extensions;
     };
 
     useGlobalPkgs = true;
