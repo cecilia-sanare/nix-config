@@ -44,6 +44,12 @@ in {
   dotfiles.desktop = {
     enable = true;
     background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+    favorites = [
+      "org.gnome.Nautilus.desktop"
+      "firefox.desktop"
+      "codium.desktop"
+      "discord.desktop"
+    ];
   };
 
   dotfiles.apps.vscodium = {

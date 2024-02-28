@@ -1,3 +1,13 @@
 {
-    "nixEnvSelector.suggestion": false
+    "nixEnvSelector.suggestion": false,
+    "editor.detectIndentation": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": [
+      "source.addMissingImports",
+      "source.fixAll.eslint"
+    ],
+    "[nix]": {
+        "editor.defaultFormatter": "jnoortheen.nix-ide",
+    }
 }
