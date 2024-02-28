@@ -5,7 +5,7 @@
   programs.git = {
     enable = true;
     userName = "Cecilia Sanare";
-    userEmail = "admin@sanare.dev";
+    userEmail = "ceci@sanare.dev";
   };
 
   dotfiles.apps."1password" = {

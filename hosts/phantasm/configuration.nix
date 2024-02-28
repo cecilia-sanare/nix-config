@@ -11,6 +11,8 @@
     ../../mixins/nixos/apps/runescape.nix
   ];
 
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
+
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 

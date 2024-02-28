@@ -7,6 +7,32 @@
     "${inputs.hardware}/common/gpu/nvidia"
   ];
 
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    modesetting.enable = true;
+    forceFullCompositionPipeline = true;
+
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement.enable = false;
+
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of 
+    # supported GPUs is at: 
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus 
+    # Only available from driver 515.43.04+
+    # Currently alpha-quality/buggy, so false is currently the recommended setting.
+    open = false;
+
+    # Enable the Nvidia settings menu,
+    # accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+  };
+
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   # boot.initrd.kernelModules = [ ];
   # boot.kernelModules = [ "kvm-intel" ];
@@ -30,10 +56,10 @@
       fsType = "ext4";
     };
 
-  # fileSystems."/mnt/media" = {
-  #   device = "/dev/disk/by-uuid/8684aa26-feec-4a16-af91-07d69ef2979d";
-  #   fsType = "ext4";
-  # };
+  fileSystems."/mnt/media" = {
+    device = "/dev/disk/by-uuid/8684aa26-feec-4a16-af91-07d69ef2979d";
+    fsType = "ext4";
+  };
 
   swapDevices = [ ];
 

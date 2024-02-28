@@ -41,9 +41,7 @@ in
       socket = if containerType != null then sockets.${containerType} else null;
     in
     mkIf (cfg.enable) {
-      networking.firewall = {
-        allowedTCPPorts = [ 80 443 8080 ];
-      };
+      networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 
       services.traefik = {
         enable = true;

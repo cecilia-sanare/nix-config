@@ -1,19 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ config, pkgs, ... }: {
-  imports = [
-    ../../../mixins/home-manager/ssh
-    ../../../mixins/home-manager/git
-    ../../../mixins/home-manager/apps/discord.nix
-    ../../../mixins/home-manager/presets/gaming.nix
-  ];
+{ config, pkgs, ... }: 
 
-  home.shellAliases = {
-    "code" = "codium";
-  };
-
-  home.packages = with pkgs; [
+let 
+  stable-packages = with pkgs; [
     vlc
     firefox
     slack
@@ -26,11 +17,28 @@
     heroic
     protontricks
     xivlauncher
+    smart-open
   ];
+
+  unstable-packages = with pkgs.unstable; [];
+in {
+  imports = [
+    ../../../mixins/home-manager/ssh
+    ../../../mixins/home-manager/git
+    ../../../mixins/home-manager/apps/discord.nix
+    ../../../mixins/home-manager/presets/gaming.nix
+  ];
+
+  home.shellAliases = {
+    "so" = "smart-open";
+    "code" = "codium";
+  };
+
+  home.packages = stable-packages ++ unstable-packages;
 
   programs.git = {
     userName = "Cecilia Sanare";
-    userEmail = "admin@sanare.dev";
+    userEmail = "ceci@sanare.dev";
   };
 
   dotfiles.desktop = {
@@ -45,6 +53,7 @@
       rust-lang.rust-analyzer
       hashicorp.terraform
       esbenp.prettier-vscode
+      arrterian.nix-env-selector
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "EditorConfig";
