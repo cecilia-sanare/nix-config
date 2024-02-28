@@ -5,5 +5,6 @@
     ./displays.nix
     ./goxlr.nix
     ./traefik.nix
+    ./vscode.nix
   ];
 }

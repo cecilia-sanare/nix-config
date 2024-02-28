@@ -4,6 +4,12 @@ HOST := vm
 clean:
 	rm -f *.qcow2 result
 
+garbage:
+	nix-env --delete-generations old
+	nix-store --gc
+	sudo nix-collect-garbage -d
+	sudo nixos-rebuild boot
+
 build: clean
 	nixos-rebuild build-vm --flake .#${HOST} --fast -I nixpkgs=.
 

@@ -1,7 +1,7 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ config, pkgs, platform, vscode-extensions, ... }:
+{ config, lib, pkgs, platform, vscode-extensions, ... }:
 
 let
   stable-packages = with pkgs; [
@@ -34,7 +34,6 @@ in
 
   home.shellAliases = {
     "so" = "smart-open";
-    "code" = "codium";
   };
 
   home.packages = stable-packages ++ unstable-packages;
@@ -66,22 +65,5 @@ in
       url = "https://avatars.githubusercontent.com/u/9692284?v=4";
       sha256 = "11gdxhgk9xqfh1936vg3gq3nqqj0d6fwgpc3zzh5c64y94g96vaj";
     };
-  };
-
-  dotfiles.apps.vscodium = {
-    enable = true;
-    latest = true;
-    extensions = with vscode-extensions.open-vsx; [
-      arrterian.nix-env-selector
-      # Code Analysis
-      jnoortheen.nix-ide
-      rust-lang.rust-analyzer
-      hashicorp.terraform
-      # Formatters
-      esbenp.prettier-vscode
-      editorconfig.editorconfig
-      # Linters
-      dbaeumer.vscode-eslint
-    ];
   };
 }

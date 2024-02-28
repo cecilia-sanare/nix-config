@@ -3,12 +3,11 @@
 with lib;
 
 let
-  cfg = config.dotfiles.apps.vscodium;
-  package = if cfg.latest then pkgs.unstable.vscodium else pkgs.vscodium;
+  cfg = config.dotfiles.apps.vscode;
 in
 {
-  options.dotfiles.apps.vscodium = with types; {
-    enable = mkEnableOption "vscodium package";
+  options.dotfiles.apps.vscode = with types; {
+    enable = mkEnableOption "vscode";
 
     latest = mkEnableOption "latest release";
 
@@ -26,11 +25,10 @@ in
   };
 
   config = mkIf (cfg.enable) {
-    programs.vscode = {
-      enable = true;
-      package = package;
-      extensions = cfg.extensions;
-      userSettings = mkIf (cfg.settings != null) cfg.settings;
-    };
+    environment.systemPackages = with pkgs; [
+      (vscode-with-extensions.override {
+        vscodeExtensions = cfg.extensions;
+      })
+    ];
   };
 }

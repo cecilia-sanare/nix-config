@@ -55,4 +55,44 @@
     profile = ./configs/Default.goxlr;
     micProfile = ./configs/DEFAULT.goxlrMicProfile;
   };
+
+  environment.systemPackages = [
+    pkgs.dotnet-sdk_8
+  ];
+
+  dotfiles.apps.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      arrterian.nix-env-selector
+      jnoortheen.nix-ide
+      rust-lang.rust-analyzer
+      esbenp.prettier-vscode
+      editorconfig.editorconfig
+      dbaeumer.vscode-eslint
+      (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "csharp";
+          publisher = "ms-dotnettools";
+          version = "2.15.30";
+          sha256 = "sha256-i5shbpjp0e0qUIG6FLPu1mIN0DD2+zdCq/nZa49v5iI=";
+          arch = "linux-x64";
+        };
+
+        postPatch = ''
+          sed -i -E -e 's_uname -m_${pkgs.coreutils}/bin/uname -m_g' "$PWD/dist/extension.js"
+
+          patchelf --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
+            --set-rpath "${lib.makeLibraryPath [ pkgs.stdenv.cc.cc ]}:\$ORIGIN" \
+            "./.roslyn/Microsoft.CodeAnalysis.LanguageServer"
+        '';
+      })
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "vscode-dotnet-runtime";
+        publisher = "ms-dotnettools";
+        version = "2.0.2";
+        sha256 = "sha256-7Nx8OiXA5nWRcpFSAqBWmwSwwNLSYvw5DEC5Q3qdDgU=";
+      }
+    ];
+  };
 }
