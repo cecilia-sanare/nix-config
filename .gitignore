@@ -1,2 +1,0 @@
-# This is pulled dynamically when setup.sh is run from /etc/nixos/hardware-configuration.nix
-# /hardware-configuration.nix

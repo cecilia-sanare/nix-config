@@ -7,24 +7,27 @@ if [ $UID -eq 0 ]; then
     exit 1
 fi
 
+HOST=${1:-$(uname -n)}
+
 REPOS_DIR=$HOME/repos
-DOTFILES_DIR=$REPOS_DIR/dotfiles
+REPO_DIR=$REPOS_DIR/nix-config
+HOST_DIR=$REPO_DIR/hosts/$HOST
 
 # Temporarily install git if it isn't already
 which git > /dev/null 2>&1 || nix-shell -p git
 mkdir -p $REPOS_DIR > /dev/null
 
-if [ ! -d "$DOTFILES_DIR" ]; then
-    echo "Pulling down dotfiles..."
-    git clone https://github.com/cecilia-sanare/dotfiles $DOTFILES_DIR > /dev/null
+if [ ! -d "$REPO_DIR" ]; then
+    echo "Pulling down repo..."
+    git clone https://github.com/cecilia-sanare/nix-config $REPO_DIR > /dev/null
 else
-    echo "Dotfiles detected, skipping clone"
-    git -C $DOTFILES_DIR remote set-url origin https://github.com/cecilia-sanare/dotfiles
+    echo "Repo detected, skipping clone"
+    git -C $REPO_DIR remote set-url origin https://github.com/cecilia-sanare/nix-config
 fi
 
-if [ ! -e "$DOTFILES_DIR/hardware-configuration.nix" ]; then
+if [ ! -e "$HOST_DIR/hardware-configuration.nix" ]; then
     echo "Unable to locate hardware config, pulling from NixOS..."
-    sudo cp /etc/nixos/hardware-configuration.nix $DOTFILES_DIR/hardware-configuration.nix
+    sudo cp /etc/nixos/hardware-configuration.nix $HOST_DIR/hardware-configuration.nix
 fi
 
 if [ -d "/etc/nixos" ]; then
@@ -33,8 +36,8 @@ if [ -d "/etc/nixos" ]; then
 fi
 
 echo "Creating symlink..."
-sudo ln -s $DOTFILES_DIR /etc/nixos > /dev/null
-sudo nixos-rebuild switch
+sudo ln -s $REPO_DIR /etc/nixos > /dev/null
+sudo nixos-rebuild switch --flake .#${HOST}
 
-# Update the origin to the SSH version now that we're all setup!
-git -C $DOTFILES_DIR remote set-url origin git@github.com:cecilia-sanare/dotfiles.git
+# # Update the origin to the SSH version now that we're all setup!
+git -C $REPO_DIR remote set-url origin git@github.com:cecilia-sanare/nix-config.git

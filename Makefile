@@ -1,16 +1,21 @@
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := run
+HOST := vm
 
-build:
+clean:
+	rm -f *.qcow2 result
+
+build: clean
+	nixos-rebuild build-vm --flake .#${HOST} --fast -I nixpkgs=.
+
+build-iso:
+	nix build .#nixosConfigurations.iso.config.system.build.isoImage
+
+run: build
+	./result/bin/run-${HOST}-vm
+
+switch:
+ifdef DEPLOY_HOST
+	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST}
+else
 	sudo nixos-rebuild switch
-
-build-verbose:
-	sudo nixos-rebuild switch -v
-
-cleanup:
-	sudo nix-collect-garbage --delete-older-than 1d && sudo nixos-rebuild boot
-
-cleanup-all:
-	sudo nix-collect-garbage --delete-old && sudo nixos-rebuild boot
-
-history:
-	sudo nix profile history --extra-experimental-features nix-command --profile /nix/var/nix/profiles/system
+endif
