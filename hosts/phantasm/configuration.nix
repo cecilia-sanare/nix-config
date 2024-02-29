@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ inputs, lib, users, config, pkgs, ... }: {
+{ inputs, lib, users, config, pkgs, vscode-extensions, ... }: {
   imports = [
     ../../mixins/nixos/desktop/settings/no-sleep
     ../../mixins/nixos/desktop/settings/no-alerts
@@ -62,13 +62,17 @@
 
   dotfiles.apps.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    extensions = with vscode-extensions.open-vsx; [
       arrterian.nix-env-selector
       jnoortheen.nix-ide
+      oven.bun-vscode
       rust-lang.rust-analyzer
       esbenp.prettier-vscode
       editorconfig.editorconfig
       dbaeumer.vscode-eslint
+      tamasfe.even-better-toml
+      bradlc.vscode-tailwindcss
+    ] ++ (with pkgs.vscode-extensions; [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "csharp";
@@ -86,13 +90,13 @@
             "./.roslyn/Microsoft.CodeAnalysis.LanguageServer"
         '';
       })
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    ]) ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "vscode-dotnet-runtime";
         publisher = "ms-dotnettools";
         version = "2.0.2";
         sha256 = "sha256-7Nx8OiXA5nWRcpFSAqBWmwSwwNLSYvw5DEC5Q3qdDgU=";
       }
-    ];
+    ]);
   };
 }
