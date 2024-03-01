@@ -28,6 +28,8 @@
     # nix-colors.url = "github:misterio77/nix-colors";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
+
+    nurpkgs.url = "github:nix-community/NUR";
   };
 
   outputs = { self, ... } @ inputs:
@@ -51,7 +53,7 @@
           {
             hostname = "phantasm";
             users = [ "ceci" ];
-            desktop = "plasma";
+            desktop = "gnome";
           }
           {
             hostname = "polymorph";

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, headless, ... }:
+{ config, lib, pkgs, desktop, ... }:
 
 with lib;
 
@@ -7,5 +7,5 @@ with lib;
     ../managers/flatpak.nix
   ];
 
-  services.flatpak.packages = mkIf (!headless) [ "com.adamcake.Bolt" ];
+  services.flatpak.packages = mkIf (desktop.isNotHeadless) [ "com.adamcake.Bolt" ];
 }

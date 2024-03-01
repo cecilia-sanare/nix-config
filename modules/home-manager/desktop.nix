@@ -4,7 +4,6 @@ with lib;
 
 let
   cfg = config.dotfiles.desktop;
-  gnome = desktop == "gnome";
   profileHashSub = with types; submodule
     {
       options = {
@@ -32,9 +31,16 @@ in
         type = nullOr (types.str);
       };
 
+      systemFavorites = mkOption {
+        description = "Favorites specified by the desktop environment";
+        type = nullOr (listOf (types.str));
+        default = [ ];
+      };
+
       favorites = mkOption {
         description = "Any apps you'd like to favorite. (used by various dock extensions)";
-        type = nullOr (listOf (types.str));
+        type = listOf (types.str);
+        default = [ ];
       };
 
       picture = mkOption {
@@ -43,11 +49,7 @@ in
       };
 
       cursor = {
-        enable = mkOption {
-          description = "Whether the cursor should be overridden";
-          type = types.bool;
-          default = false;
-        };
+        enable = mkEnableOption "cursor overrides";
 
         url = mkOption {
           description = "The url of the cursor tar file";
@@ -90,13 +92,18 @@ in
       };
 
     dconf.settings = mkMerge [
-      (mkIf (gnome) {
-        "org/gnome/desktop/background" = mkIf (cfg.background != null) {
-          picture-uri-dark = "${cfg.background}";
-        };
-        "org/gnome/shell" = mkIf (cfg.favorites != null) {
+      (mkIf (desktop.isGnome) {
+        "org/gnome/shell" = {
           # Located in /run/current-system/sw/share/applications
-          favorite-apps = cfg.favorites;
+          favorite-apps = cfg.systemFavorites ++ cfg.favorites;
+        };
+        "org/gnome/desktop/background" = mkIf (cfg.background != null) {
+          picture-uri-dark = cfg.background;
+        };
+        "org/gnome/desktop/screensaver" = {
+          picture-uri = cfg.background;
+          primary-color = "#3465a4";
+          secondary-color = "#000000";
         };
       })
     ];

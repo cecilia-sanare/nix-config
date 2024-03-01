@@ -8,7 +8,7 @@
     ../../mixins/nixos/containers/podman/unstable.nix
     ../../mixins/nixos/shells/fish
     ../../mixins/nixos/presets/gaming.nix
-    ../../mixins/nixos/apps/runescape.nix
+    # ../../mixins/nixos/apps/runescape.nix
   ];
 
   networking.firewall.allowedTCPPorts = [ 80 443 8080 ];

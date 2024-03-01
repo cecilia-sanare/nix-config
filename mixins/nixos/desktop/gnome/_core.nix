@@ -1,4 +1,8 @@
-# An opinionated gnome config
+# ####################
+# Core Gnome Config #
+# ##############################################
+# shared between gnome-mac and gnome-windows ##
+# ############################################
 { inputs, lib, pkgs, config, ... }:
 
 with lib;
@@ -6,6 +10,7 @@ with lib.gvariant;
 
 let
   extensions = with pkgs; [
+    gnomeExtensions.user-themes
     gnomeExtensions.hide-activities-button
     gnomeExtensions.just-perfection
     gnomeExtensions.dash-to-dock
@@ -16,7 +21,7 @@ let
 in
 {
   imports = [
-    ./_core.nix
+    ../_core.nix
   ];
 
   environment.gnome.excludePackages = with pkgs; [
@@ -51,10 +56,6 @@ in
     profiles = {
       user.databases = [{
         settings = {
-          "org/gnome/nautilus/icon-view" = {
-            default-zoom-level = "small-plus";
-          };
-
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
             enable-hot-corners = false;
@@ -67,17 +68,16 @@ in
           };
 
           "org/gnome/desktop/wm/preferences" = {
-            button-layout = ":minimize,maximize,close";
             num-workspaces = mkInt32 1;
           };
 
           "org/gnome/shell/extensions/dash-to-dock" = {
             click-action = "minimize-or-previews";
             show-trash = false;
-            # show-show-apps-button = false;
             dash-max-icon-size = mkInt32 80;
             multi-monitor = true;
             running-indicator-style = "DOTS";
+            custom-theme-shrink = false;
           };
 
           "org/gnome/shell" = {
@@ -88,31 +88,13 @@ in
     };
   };
 
-  # Is there a better way of doing this?
   home-manager.sharedModules = [{
     dotfiles.desktop = {
       enable = mkDefault true;
 
-      cursor = mkDefault {
-        enable = true;
-        url = "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.0/macOS-BigSur.tar.gz";
-        hash = "sha256-VZWFf1AHum2xDJPMZrBmcyVrrmYGKwCdXOPATw7myOA=";
-        name = "macOS-BigSur";
-      };
-    };
-
-    gtk = {
-      enable = true;
-      theme = {
-        name = "Adwaita-dark";
-        package = pkgs.gnome.gnome-themes-extra;
-      };
+      systemFavorites = [
+        "org.gnome.Nautilus.desktop"
+      ];
     };
   }];
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-  };
 }

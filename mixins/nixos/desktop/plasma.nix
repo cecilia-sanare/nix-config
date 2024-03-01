@@ -1,4 +1,18 @@
-# An opinionated plasma config
+# #########
+# Plasma #
+# #####################################
+# An opinionated plasma environment ##
+# ###################################
+
+# ####################
+# #### WARNING ######
+# ##################
+
+# #########################################################
+# Plasma isn't very well supported in NixOS and a *lot* ##
+# of config options are missing or implemented in      ##
+# a *VERY* cludgy way leading to various issues       ##
+# #####################################################
 { inputs, lib, pkgs, config, ... }:
 
 with lib;

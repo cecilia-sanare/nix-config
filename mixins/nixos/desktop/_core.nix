@@ -1,5 +1,5 @@
 # Core desktop setup
-{ lib, pkgs, config, headless, ... }:
+{ lib, pkgs, config, desktop, ... }:
 
 with lib;
 
@@ -11,8 +11,6 @@ let
     vim
     git
     killall
-    nixpkgs-fmt
-    nixd # Nix Language Server
     gnumake
     lshw
     sops
@@ -21,10 +19,10 @@ let
     # Need pulseaudio cli tools for pipewire.
     pipewire
   ];
-  desktopPackages = with pkgs; [ kitty ];
+  desktopPackages = with pkgs; [ ];
 in
 {
-  environment.systemPackages = corePackages ++ lib.optionals (!headless) desktopPackages;
+  environment.systemPackages = corePackages ++ lib.optionals (desktop.isNotHeadless) desktopPackages;
 
   sound.enable = false;
   hardware.pulseaudio.enable = false;
@@ -38,7 +36,7 @@ in
 
   services.xserver.excludePackages = with pkgs; [ xterm ];
 
-  hardware.opengl = mkIf (!headless) {
+  hardware.opengl = mkIf (desktop.isNotHeadless) {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
@@ -52,5 +50,5 @@ in
     ];
   };
 
-  services.xserver.enable = !headless;
+  services.xserver.enable = desktop.isNotHeadless;
 }

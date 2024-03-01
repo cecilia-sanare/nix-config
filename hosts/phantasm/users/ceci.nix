@@ -6,7 +6,6 @@
 let
   stable-packages = with pkgs.stable; [
     vlc
-    firefox
     slack
     zoom-us
     spotify
@@ -29,6 +28,7 @@ in
     ../../../mixins/home-manager/ssh
     ../../../mixins/home-manager/git
     ../../../mixins/home-manager/apps/discord.nix
+    ../../../mixins/home-manager/apps/firefox.nix
     ../../../mixins/home-manager/presets/gaming.nix
   ];
 
@@ -45,10 +45,8 @@ in
 
   dotfiles.desktop = {
     enable = true;
-    background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
 
     favorites = [
-      # "org.gnome.Nautilus.desktop"
       "firefox.desktop"
       "codium.desktop"
       "discord.desktop"

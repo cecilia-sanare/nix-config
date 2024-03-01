@@ -4,6 +4,8 @@ with inputs.nixpkgs.lib;
 with inputs.home-manager.lib;
 
 rec {
+  startsWith = value: subValue: (builtins.substring 0 (builtins.stringLength subValue) value) == subValue;
+
   mkNixosConfiguration = { authorizedKeys, hostname, users, sudoers, desktop, iso, platform }:
     let
       headless = desktop == null;
@@ -11,8 +13,16 @@ rec {
     nixosSystem {
       # Pass flake inputs to our config
       specialArgs = {
-        inherit inputs outputs desktop hostname platform stateVersion headless authorizedKeys users sudoers;
+        inherit inputs outputs hostname platform stateVersion authorizedKeys users sudoers;
         vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
+
+        desktop = {
+          type = desktop;
+          isHeadless = headless;
+          isNotHeadless = !headless;
+          isGnome = startsWith desktop "gnome";
+          isPlasma = startsWith desktop "plasma";
+        };
       };
 
       modules = [

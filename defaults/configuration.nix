@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ authorizedKeys, inputs, users, outputs, desktop, hostname, platform, stateVersion, headless, sudoers, config, lib, pkgs, vscode-extensions, ... }:
+{ authorizedKeys, inputs, users, outputs, desktop, hostname, platform, stateVersion, sudoers, config, lib, pkgs, vscode-extensions, ... }:
 
 with lib;
 
@@ -10,7 +10,7 @@ with lib;
     inputs.nix-flatpak.nixosModules.nix-flatpak
     ../hosts/${hostname}/hardware-configuration.nix
     ../hosts/${hostname}/configuration.nix
-    ../mixins/nixos/desktop/${desktop}.nix
+    ../mixins/nixos/desktop/${desktop.type}
     ../modules/nixos
   ];
 
@@ -20,6 +20,7 @@ with lib;
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.master-packages
+      inputs.nurpkgs.overlay
     ];
 
     config = {
@@ -82,7 +83,7 @@ with lib;
   home-manager = {
     # Pass flake inputs to our config
     extraSpecialArgs = {
-      inherit inputs outputs desktop hostname platform headless vscode-extensions;
+      inherit inputs outputs desktop hostname platform vscode-extensions;
     };
 
     useGlobalPkgs = true;

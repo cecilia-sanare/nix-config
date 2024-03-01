@@ -1,9 +1,9 @@
-{ config, lib, pkgs, headless, desktop, ... }:
+{ config, lib, pkgs, desktop, ... }:
 
 with lib;
 
 {
-  services.flatpak = mkIf (!headless) {
+  services.flatpak = mkIf (desktop.isNotHeadless) {
     enable = true;
     uninstallUnmanagedPackages = true;
 
