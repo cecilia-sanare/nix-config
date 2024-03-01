@@ -8,9 +8,10 @@
   config = {
     virtualisation.podman = {
       enable = true;
-      enableNvidia = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
     };
+
+    virtualisation.containers.cdi.dynamic.nvidia.enable = true;
   };
 }

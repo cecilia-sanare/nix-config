@@ -18,6 +18,7 @@
 
   users.users.ceci.description = "Cecilia Sanare";
   users.users.ceci.hashedPassword = "$6$P9EJMHnu8b/OVVRS$1qECnQmYav5EhbnTOk3mnO3dBlMOAsF9/lgCRONwO/GHUfHZFIpxYSyOTPqpv6S6dqO4uSxSZ9KMDl5yX9AHH1";
+  # users.users.ceci.initialPassword = null;
 
   dotfiles.displays = [
     {

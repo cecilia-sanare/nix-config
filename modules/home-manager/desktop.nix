@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.dotfiles.desktop;
+  gnome = desktop == "gnome";
   profileHashSub = with types; submodule
     {
       options = {
@@ -89,7 +90,7 @@ in
       };
 
     dconf.settings = mkMerge [
-      (mkIf (desktop == "gnome") {
+      (mkIf (gnome) {
         "org/gnome/desktop/background" = mkIf (cfg.background != null) {
           picture-uri-dark = "${cfg.background}";
         };

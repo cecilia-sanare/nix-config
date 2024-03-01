@@ -3,7 +3,6 @@
 with inputs.nixpkgs.lib;
 with inputs.home-manager.lib;
 
-
 rec {
   mkNixosConfiguration = { authorizedKeys, hostname, users, sudoers, desktop, iso, platform }:
     let
@@ -23,7 +22,7 @@ rec {
       ]);
     };
 
-  mkHost = { authorizedKeys ? null, hostname, users, sudoers ? users, desktop ? "headless", iso ? false, platform ? "x86_64-linux" }: {
+  mkHost = { authorizedKeys ? null, hostname, users, sudoers ? users, desktop ? null, iso ? false, platform ? "x86_64-linux" }: {
     ${hostname} = mkNixosConfiguration {
       inherit authorizedKeys hostname users sudoers desktop iso platform;
     };

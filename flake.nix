@@ -3,16 +3,21 @@
 
   inputs = {
     # NixOS official package source, using the nixos-23.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs at the same time.
     # See 'unstable-packages' overlay in 'overlays/default.nix'.
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos.url = "nixpkgs/23.11";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixos.url = "nixpkgs/nixos-unstable";
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    plasma-manager.url = "github:pjones/plasma-manager/trunk";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
 
     hardware.url = "github:nixos/nixos-hardware";
 
@@ -46,7 +51,7 @@
           {
             hostname = "phantasm";
             users = [ "ceci" ];
-            desktop = "gnome";
+            desktop = "plasma";
           }
           {
             hostname = "polymorph";

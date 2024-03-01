@@ -9,7 +9,7 @@ clean:
 	rm -f *.qcow2 result
 
 build: clean
-	nixos-rebuild build-vm --flake .#${HOST} --fast -I nixpkgs=.
+	nixos-rebuild build-vm --flake .#${HOST} --fast -I nixpkgs=. --show-trace
 
 build-iso:
 	nix build .#nixosConfigurations.iso.config.system.build.isoImage
@@ -40,7 +40,7 @@ garbage-base:
 # Switch Utilities ####
 # ###################
 
-switch: switch-safe
+switch: switch-base
 switch-full: garbage-full switch-base garbage-full
 switch-safe: garbage-safe switch-base garbage-safe
 
@@ -50,3 +50,4 @@ ifdef DEPLOY_HOST
 else
 	sudo nixos-rebuild switch
 endif
+	./refresh-desktop.fish

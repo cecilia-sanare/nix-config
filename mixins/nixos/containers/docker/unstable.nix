@@ -6,9 +6,9 @@
   ];
 
   config = {
-    virtualisation.docker.package = pkgs.unstable.docker;
+    virtualisation.docker.package = pkgs.docker;
 
-    environment.systemPackages = with pkgs.unstable; [
+    environment.systemPackages = with pkgs; [
       docker-compose
     ];
   };

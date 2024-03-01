@@ -4,7 +4,7 @@
 { config, lib, pkgs, platform, vscode-extensions, ... }:
 
 let
-  stable-packages = with pkgs; [
+  stable-packages = with pkgs.stable; [
     vlc
     firefox
     slack
@@ -17,11 +17,11 @@ let
     heroic
     protontricks
     xivlauncher
-    smart-open
   ];
 
-  unstable-packages = with pkgs.unstable; [
+  unstable-packages = with pkgs; [
     tuba
+    smart-open
   ];
 in
 {
@@ -48,18 +48,11 @@ in
     background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
 
     favorites = [
-      "org.gnome.Nautilus.desktop"
+      # "org.gnome.Nautilus.desktop"
       "firefox.desktop"
       "codium.desktop"
       "discord.desktop"
     ];
-
-    cursor = {
-      enable = true;
-      url = "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.0/macOS-BigSur.tar.gz";
-      hash = "sha256-VZWFf1AHum2xDJPMZrBmcyVrrmYGKwCdXOPATw7myOA=";
-      name = "macOS-BigSur";
-    };
 
     picture = {
       url = "https://avatars.githubusercontent.com/u/9692284?v=4";

@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
   ];
 
   nativeBuildInputs = [
-    pkgs.unstable.rustc
+    pkgs.rustc
     pkg-config
   ];
 

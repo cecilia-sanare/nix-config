@@ -1,22 +1,19 @@
 { config, pkgs, lib, ... }:
 
-let
-  podmanPackage = (pkgs.unstable.podman.override {
-    extraPackages =
-      # setuid shadow
-      [ "/run/wrappers" ]
-      ++ lib.optional (builtins.elem "zfs" config.boot.supportedFilesystems) config.boot.zfs.package;
-  });
-in
 {
   imports = [
     ./_core.nix
   ];
 
   config = {
-    virtualisation.podman.package = podmanPackage;
+    virtualisation.podman.package = (pkgs.podman.override {
+      extraPackages =
+        # setuid shadow
+        [ "/run/wrappers" ]
+        ++ lib.optional (config.boot.supportedFilesystems.zfs or false) config.boot.zfs.package;
+    });
 
-    environment.systemPackages = with pkgs.unstable; [
+    environment.systemPackages = with pkgs; [
       podman-compose
     ];
   };

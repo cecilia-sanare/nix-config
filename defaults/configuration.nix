@@ -18,7 +18,8 @@ with lib;
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      outputs.overlays.stable-packages
+      outputs.overlays.master-packages
     ];
 
     config = {
@@ -41,7 +42,7 @@ with lib;
     nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     optimise.automatic = true;
-    package = pkgs.unstable.nix;
+    package = pkgs.nix;
     settings = {
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
@@ -66,7 +67,7 @@ with lib;
       name = user;
       value = {
         name = user;
-        initialPassword = "changeme";
+        initialPassword = if config.users.users.${user}.hashedPassword == null then "changeme" else null;
         isNormalUser = true;
         openssh.authorizedKeys.keys = authorizedKeys;
 
@@ -86,6 +87,8 @@ with lib;
 
     useGlobalPkgs = true;
     useUserPackages = true;
+
+    backupFileExtension = "backup";
 
     users = listToAttrs
       (map

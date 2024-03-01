@@ -6,11 +6,11 @@
   ];
 
   config = {
-    virtualisation.podman.package = kgs.unstable.podman.override {
+    virtualisation.podman.package = pkgs.stable.podman.override {
       extraPackages = cfg.extraPackages
         # setuid shadow
         ++ [ "/run/wrappers" ]
-        ++ lib.optional (builtins.elem "zfs" config.boot.supportedFilesystems) config.boot.zfs.package;
+        ++ lib.optional (config.boot.supportedFilesystems.zfs or false) config.boot.zfs.package;
     };
 
     environment.systemPackages = with pkgs; [

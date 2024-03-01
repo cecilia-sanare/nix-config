@@ -7,9 +7,7 @@ let
   amd = builtins.elem "amd" config.services.xserver.videoDrivers;
   nvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
   intel = builtins.elem "intel" config.services.xserver.videoDrivers;
-in
-{
-  environment.systemPackages = with pkgs; [
+  corePackages = with pkgs; [
     vim
     git
     killall
@@ -23,6 +21,10 @@ in
     # Need pulseaudio cli tools for pipewire.
     pipewire
   ];
+  desktopPackages = with pkgs; [ kitty ];
+in
+{
+  environment.systemPackages = corePackages ++ lib.optionals (!headless) desktopPackages;
 
   sound.enable = false;
   hardware.pulseaudio.enable = false;
