@@ -30,6 +30,7 @@ in
     gnome.gnome-system-monitor
     baobab # Disk usage analyzer
     gparted
+    gnome.eog # Image Viewer
   ];
 
   services = {
