@@ -50,4 +50,4 @@ ifdef DEPLOY_HOST
 else
 	sudo nixos-rebuild switch --show-trace --option eval-cache false
 endif
-	./refresh-desktop.fish
+	nix-shell -p fish --run "./refresh-desktop.fish"
