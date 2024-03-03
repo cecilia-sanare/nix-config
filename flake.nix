@@ -28,6 +28,8 @@
     # nix-colors.url = "github:misterio77/nix-colors";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
+    protontweaks.url = "github:rain-cafe/protontweaks/?ref=v0.2.0";
+    protontweaks.inputs.nixpkgs.follows = "nixpkgs";
 
     nurpkgs.url = "github:nix-community/NUR";
   };

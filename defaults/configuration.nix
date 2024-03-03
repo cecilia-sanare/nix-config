@@ -21,6 +21,7 @@ with lib;
       outputs.overlays.stable-packages
       outputs.overlays.master-packages
       inputs.nurpkgs.overlay
+      inputs.protontweaks.overlay
     ];
 
     config = {

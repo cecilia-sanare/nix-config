@@ -1,7 +1,7 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ config, lib, pkgs, platform, vscode-extensions, ... }:
+{ inputs, config, lib, pkgs, platform, vscode-extensions, ... }:
 
 let
   stable-packages = with pkgs.stable; [
@@ -20,6 +20,7 @@ let
     heroic
     tuba
     smart-open
+    protontweaks
   ];
 in
 {
@@ -42,18 +43,18 @@ in
     userEmail = "ceci@sanare.dev";
   };
 
-  programs.firefox.profiles.ceci.bookmarks = [
-    {
-      name = "";
-      tags = [ "git" "sourcecode" ];
-      url = "https://github.com/cecilia-sanare";
-    }
-    {
-      name = "";
-      tags = [ "youtube" ];
-      url = "https://youtube.com";
-    }
-  ];
+  # programs.firefox.profiles.ceci.bookmarks = [
+  #   {
+  #     name = "";
+  #     tags = [ "git" "sourcecode" ];
+  #     url = "https://github.com/cecilia-sanare";
+  #   }
+  #   {
+  #     name = "";
+  #     tags = [ "youtube" ];
+  #     url = "https://youtube.com";
+  #   }
+  # ];
 
   dotfiles.desktop = {
     enable = true;

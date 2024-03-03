@@ -6,7 +6,7 @@
     ../../mixins/nixos/desktop/settings/no-sleep
     ../../mixins/nixos/desktop/settings/no-alerts
     ../../mixins/nixos/containers/podman/unstable.nix
-    ../../mixins/nixos/shells/nushell
+    ../../mixins/nixos/shells/fish
     ../../mixins/nixos/presets/gaming.nix
     # ../../mixins/nixos/apps/runescape.nix
   ];

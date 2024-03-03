@@ -240,6 +240,27 @@
         "type": "github"
       }
     },
+    "protontweaks": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709452328,
+        "narHash": "sha256-h8m+OUIbz6zz5RpYBzJFHESaJRAP+G6V55MXa0VavLs=",
+        "owner": "rain-cafe",
+        "repo": "protontweaks",
+        "rev": "15ccd8aeb40a25143672f2d12eaa7002920965db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rain-cafe",
+        "ref": "v0.2.0",
+        "repo": "protontweaks",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "hardware": "hardware",
@@ -252,6 +273,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nurpkgs": "nurpkgs",
         "plasma-manager": "plasma-manager",
+        "protontweaks": "protontweaks",
         "sops-nix": "sops-nix"
       }
     },

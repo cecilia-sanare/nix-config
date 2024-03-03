@@ -3,5 +3,4 @@
 
 { pkgs ? (import ../nixpkgs.nix) { } }: {
   smart-open = pkgs.callPackage ./smart-open { };
-  protontweaks = pkgs.callPackage ./protontweaks { };
 }

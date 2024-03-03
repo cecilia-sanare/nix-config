@@ -19,6 +19,8 @@
     extraConfig = {
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+      pull.ff = "only";
+      merge.ff = false;
 
       color = {
         diff = "auto";

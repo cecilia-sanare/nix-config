@@ -28,8 +28,22 @@ in
         ublock-origin
         refined-github
         bypass-paywalls-clean
+        sponsorblock
         # # Missing:
         # pwas-for-firefox
+      ];
+
+      bookmarks = [
+        {
+          name = "";
+          tags = [ "git" "sourcecode" ];
+          url = "https://github.com/cecilia-sanare";
+        }
+        {
+          name = "";
+          tags = [ "youtube" ];
+          url = "https://youtube.com";
+        }
       ];
 
       search = {
@@ -105,7 +119,7 @@ in
         "extensions.getAddons.showPane" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         "extensions.pocket.enabled" = false;
-        "identity.fxaccounts.enabled" = false;
+        "identity.fxaccounts.enabled" = true;
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.socialtracking.enabled" = true;
 
