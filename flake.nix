@@ -28,8 +28,11 @@
     # nix-colors.url = "github:misterio77/nix-colors";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
-    protontweaks.url = "github:rain-cafe/protontweaks/?ref=v0.2.0";
+    protontweaks.url = "github:rain-cafe/protontweaks/?ref=v0.2.1";
     protontweaks.inputs.nixpkgs.follows = "nixpkgs";
+
+    smart-open.url = "github:rain-cafe/smart-open/?ref=v0.1.4";
+    smart-open.inputs.nixpkgs.follows = "nixpkgs";
 
     nurpkgs.url = "github:nix-community/NUR";
   };

@@ -247,16 +247,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1709452328,
-        "narHash": "sha256-h8m+OUIbz6zz5RpYBzJFHESaJRAP+G6V55MXa0VavLs=",
+        "lastModified": 1709490728,
+        "narHash": "sha256-7FrhK8qgYa+u+mOVg+IG5bw/tXJBa3NgGJDfpkD+a+c=",
         "owner": "rain-cafe",
         "repo": "protontweaks",
-        "rev": "15ccd8aeb40a25143672f2d12eaa7002920965db",
+        "rev": "575c831031495c5237f66ead502fabf6eeacf46d",
         "type": "github"
       },
       "original": {
         "owner": "rain-cafe",
-        "ref": "v0.2.0",
+        "ref": "v0.2.1",
         "repo": "protontweaks",
         "type": "github"
       }
@@ -274,7 +274,29 @@
         "nurpkgs": "nurpkgs",
         "plasma-manager": "plasma-manager",
         "protontweaks": "protontweaks",
+        "smart-open": "smart-open",
         "sops-nix": "sops-nix"
+      }
+    },
+    "smart-open": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709495357,
+        "narHash": "sha256-x73RhMRLqdwn/SpMwpFNpoFT+Gw6J+eG3VEOUpRhYxk=",
+        "owner": "rain-cafe",
+        "repo": "smart-open",
+        "rev": "55ebaf96b5e021d08d63171317eb9ecd772fb25c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rain-cafe",
+        "ref": "v0.1.4",
+        "repo": "smart-open",
+        "type": "github"
       }
     },
     "sops-nix": {

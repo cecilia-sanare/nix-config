@@ -16,12 +16,12 @@ with lib;
 
   nixpkgs = {
     overlays = [
-      outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       outputs.overlays.master-packages
       inputs.nurpkgs.overlay
       inputs.protontweaks.overlay
+      inputs.smart-open.overlay
     ];
 
     config = {
