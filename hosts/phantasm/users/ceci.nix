@@ -13,12 +13,11 @@ let
     obs-studio
     rustdesk # Teamviewer alternative
     caprine-bin # Facebook Messenger App
-    heroic
-    protontricks
-    xivlauncher
   ];
 
   unstable-packages = with pkgs; [
+    xivlauncher
+    heroic
     tuba
     smart-open
   ];
@@ -42,6 +41,19 @@ in
     userName = "Cecilia Sanare";
     userEmail = "ceci@sanare.dev";
   };
+
+  programs.firefox.profiles.ceci.bookmarks = [
+    {
+      name = "";
+      tags = [ "git" "sourcecode" ];
+      url = "https://github.com/cecilia-sanare";
+    }
+    {
+      name = "";
+      tags = [ "youtube" ];
+      url = "https://youtube.com";
+    }
+  ];
 
   dotfiles.desktop = {
     enable = true;

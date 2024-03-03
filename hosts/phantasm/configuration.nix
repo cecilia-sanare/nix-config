@@ -98,6 +98,12 @@
         version = "2.0.2";
         sha256 = "sha256-7Nx8OiXA5nWRcpFSAqBWmwSwwNLSYvw5DEC5Q3qdDgU=";
       }
+      {
+        name = "vscode-nushell-lang";
+        publisher = "TheNuProjectContributors";
+        version = "1.8.0";
+        sha256 = "sha256-Si7N50vonpG79lPingGZiNAZjeoRJ45PDuolnR9a9tY=";
+      }
     ]);
   };
 }

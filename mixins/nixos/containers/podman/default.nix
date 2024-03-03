@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -7,9 +7,9 @@
 
   config = {
     virtualisation.podman.package = pkgs.stable.podman.override {
-      extraPackages = cfg.extraPackages
+      extraPackages =
         # setuid shadow
-        ++ [ "/run/wrappers" ]
+        [ "/run/wrappers" ]
         ++ lib.optional (config.boot.supportedFilesystems.zfs or false) config.boot.zfs.package;
     };
 

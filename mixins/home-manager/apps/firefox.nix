@@ -27,6 +27,7 @@ in
         translate-web-pages
         ublock-origin
         refined-github
+        bypass-paywalls-clean
         # # Missing:
         # pwas-for-firefox
       ];
@@ -94,7 +95,7 @@ in
         "browser.quitShortcut.disabled" = true;
         "browser.shell.checkDefaultBrowser" = false;
         "browser.ssb.enabled" = true;
-        "browser.toolbars.bookmarks.visibility" = "never";
+        "browser.toolbars.bookmarks.visibility" = "always";
         "browser.urlbar.placeholderName" = "DuckDuckGo";
         "browser.urlbar.suggest.openpage" = false;
         "datareporting.policy.dataSubmissionEnable" = false;
