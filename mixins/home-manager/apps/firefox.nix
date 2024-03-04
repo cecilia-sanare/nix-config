@@ -33,19 +33,6 @@ in
         # pwas-for-firefox
       ];
 
-      bookmarks = [
-        {
-          name = "";
-          tags = [ "git" "sourcecode" ];
-          url = "https://github.com/cecilia-sanare";
-        }
-        {
-          name = "";
-          tags = [ "youtube" ];
-          url = "https://youtube.com";
-        }
-      ];
-
       search = {
         force = true;
         default = "DuckDuckGo";

@@ -18,6 +18,7 @@ rec {
 
         desktop = {
           type = desktop;
+          preset = "sane";
           isHeadless = headless;
           isNotHeadless = !headless;
           isGnome = startsWith desktop "gnome";

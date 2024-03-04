@@ -5,7 +5,7 @@ with lib;
 
 {
   imports = [
-    "${inputs.sops-nix}/modules/sops"
+    inputs.nix-desktop.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-flatpak.nixosModules.nix-flatpak
     ../hosts/${hostname}/hardware-configuration.nix
@@ -80,6 +80,14 @@ with lib;
       };
     })
     users);
+
+  nix-desktop = {
+    enable = true;
+    type = desktop.type;
+    preset = desktop.preset;
+
+    workspaces.number = 1;
+  };
 
   home-manager = {
     # Pass flake inputs to our config

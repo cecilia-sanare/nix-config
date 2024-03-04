@@ -12,6 +12,9 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
+    nix-desktop.url = "github:cecilia-sanare/nix-desktop/main";
+    nix-desktop.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,12 +23,6 @@
     plasma-manager.inputs.home-manager.follows = "home-manager";
 
     hardware.url = "github:nixos/nixos-hardware";
-
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
     protontweaks.url = "github:rain-cafe/protontweaks/?ref=v0.2.1";

@@ -45,9 +45,10 @@ switch-full: garbage-full switch-base garbage-full
 switch-safe: garbage-safe switch-base garbage-safe
 
 switch-base:
+	@nix flake lock --update-input nix-desktop
 ifdef DEPLOY_HOST
 	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --show-trace --option eval-cache false
 else
 	sudo nixos-rebuild switch --show-trace --option eval-cache false
 endif
-	nix-shell -p fish --run "./refresh-desktop.fish"
+	@nix-shell -p fish --run "./refresh-desktop.fish"

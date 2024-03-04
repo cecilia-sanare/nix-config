@@ -43,21 +43,53 @@ in
     userEmail = "ceci@sanare.dev";
   };
 
-  # programs.firefox.profiles.ceci.bookmarks = [
-  #   {
-  #     name = "";
-  #     tags = [ "git" "sourcecode" ];
-  #     url = "https://github.com/cecilia-sanare";
-  #   }
-  #   {
-  #     name = "";
-  #     tags = [ "youtube" ];
-  #     url = "https://youtube.com";
-  #   }
-  # ];
+  programs.firefox.profiles.ceci.bookmarks = [
+    {
+      name = "Toolbar";
+      toolbar = true;
+      bookmarks = [
+        {
+          name = "Work";
+          bookmarks = [
+            {
+              name = "Jumpcloud";
+              url = "https://console.jumpcloud.com";
+            }
+            {
+              name = "Timesheets";
+              url = "https://c36.qbo.intuit.com/qbo36/login/";
+            }
+          ];
+        }
+        {
+          name = "";
+          tags = [ "git" "sourcecode" ];
+          url = "https://github.com/cecilia-sanare";
+        }
+        {
+          name = "";
+          tags = [ "git" "sourcecode" ];
+          url = "https://gitlab.com";
+        }
+        {
+          name = "";
+          tags = [ "youtube" ];
+          url = "https://youtube.com";
+        }
+      ];
+    }
+  ];
 
   dotfiles.desktop = {
     enable = true;
+    background = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
+
+    cursor = {
+      enable = true;
+      url = "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.0/macOS-BigSur.tar.gz";
+      hash = "sha256-VZWFf1AHum2xDJPMZrBmcyVrrmYGKwCdXOPATw7myOA=";
+      name = "macOS-BigSur";
+    };
 
     favorites = [
       "firefox.desktop"
