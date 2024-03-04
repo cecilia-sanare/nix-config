@@ -3,7 +3,5 @@
 
 { inputs, lib, config, pkgs, ... }: {
   imports = [
-    ../../mixins/nixos/desktop/settings/no-sleep
-    ../../mixins/nixos/desktop/settings/no-alerts
   ];
 }

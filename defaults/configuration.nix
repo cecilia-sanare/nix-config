@@ -10,8 +10,17 @@ with lib;
     inputs.nix-flatpak.nixosModules.nix-flatpak
     ../hosts/${hostname}/hardware-configuration.nix
     ../hosts/${hostname}/configuration.nix
-    ../mixins/nixos/desktop/${desktop.type}
     ../modules/nixos
+  ];
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    killall
+    gnumake
+    gnupg
+    # Need pulseaudio cli tools for pipewire.
+    pipewire
   ];
 
   nixpkgs = {
@@ -85,6 +94,7 @@ with lib;
     enable = true;
     type = desktop.type;
     preset = desktop.preset;
+    sleep = false;
 
     workspaces.number = 1;
   };

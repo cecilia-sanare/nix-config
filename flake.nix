@@ -18,10 +18,6 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    plasma-manager.url = "github:pjones/plasma-manager/trunk";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "home-manager";
-
     hardware.url = "github:nixos/nixos-hardware";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
@@ -39,32 +35,35 @@
       inherit (self) outputs;
       stateVersion = "23.11";
       libx = import ./lib { inherit inputs outputs stateVersion; };
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX"
+      ];
+
+      users = [ "ceci" ];
     in
     {
-      nixosConfigurations = libx.mkHosts {
-        authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX"
-        ];
+      nixosConfigurations = {
+        vm = libx.mkHost {
+          inherit authorizedKeys;
+          hostname = "vm";
+          users = [ "test" ];
+        };
 
-        hosts = [
-          {
-            hostname = "vm";
-            users = [ "test" ];
-            # desktop = "gnome";
-          }
-          {
-            hostname = "phantasm";
-            users = [ "ceci" ];
-            desktop = "gnome";
-          }
-          {
-            hostname = "polymorph";
-            users = [ "ceci" ];
-          }
-        ];
+        phantasm = libx.mkHost {
+          inherit authorizedKeys users;
+          hostname = "phantasm";
+          desktop = "gnome";
+          preset = "sane";
+        };
+
+        polymorph = libx.mkHost {
+          inherit authorizedKeys users;
+          hostname = "polymorph";
+          desktop = "gnome";
+          preset = "sane";
+        };
       };
 
       overlays = import ./overlays { inherit inputs; };
-
     };
 }

@@ -4,9 +4,7 @@ with inputs.nixpkgs.lib;
 with inputs.home-manager.lib;
 
 rec {
-  startsWith = value: subValue: (builtins.substring 0 (builtins.stringLength subValue) value) == subValue;
-
-  mkNixosConfiguration = { authorizedKeys, hostname, users, sudoers, desktop, iso, platform }:
+  mkHost = { authorizedKeys ? null, hostname, users, sudoers ? users, desktop ? null, preset ? null, iso ? false, platform ? "x86_64-linux" }:
     let
       headless = desktop == null;
     in
@@ -18,11 +16,11 @@ rec {
 
         desktop = {
           type = desktop;
-          preset = "sane";
+          preset = preset;
           isHeadless = headless;
           isNotHeadless = !headless;
-          isGnome = startsWith desktop "gnome";
-          isPlasma = startsWith desktop "plasma";
+          isGnome = desktop == "gnome";
+          isPlasma = desktop == "plasma";
         };
       };
 
@@ -32,12 +30,4 @@ rec {
         "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if headless then "minimal" else "graphical-calamares"}.nix"
       ]);
     };
-
-  mkHost = { authorizedKeys ? null, hostname, users, sudoers ? users, desktop ? null, iso ? false, platform ? "x86_64-linux" }: {
-    ${hostname} = mkNixosConfiguration {
-      inherit authorizedKeys hostname users sudoers desktop iso platform;
-    };
-  };
-
-  mkHosts = { authorizedKeys ? null, hosts }: attrsets.mergeAttrsList (map (x: mkHost (x)) hosts);
 }
