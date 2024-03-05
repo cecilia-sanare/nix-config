@@ -95,12 +95,6 @@ with lib;
     preset = desktop.preset;
     sleep = false;
 
-    theme.cursors = {
-      size = 32;
-      light = "macOS-Monterey-White";
-      dark = "macOS-Monterey";
-    };
-
     workspaces.number = 1;
   };
 

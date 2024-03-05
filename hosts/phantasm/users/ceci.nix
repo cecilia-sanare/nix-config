@@ -83,6 +83,13 @@ in
   dotfiles.desktop = {
     enable = true;
 
+    cursor = {
+      enable = true;
+      url = "https://github.com/ful1e5/apple_cursor/releases/download/v2.0.0/macOS-BigSur.tar.gz";
+      hash = "sha256-VZWFf1AHum2xDJPMZrBmcyVrrmYGKwCdXOPATw7myOA=";
+      name = "macOS-BigSur";
+    };
+
     favorites = [
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"

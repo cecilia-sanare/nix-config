@@ -21,7 +21,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
-    protontweaks.url = "github:rain-cafe/protontweaks/?ref=v0.2.1";
+    protontweaks.url = "github:rain-cafe/protontweaks/main";
     protontweaks.inputs.nixpkgs.follows = "nixpkgs";
 
     smart-open.url = "github:rain-cafe/smart-open/?ref=v0.1.4";

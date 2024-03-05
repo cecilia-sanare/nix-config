@@ -42,9 +42,42 @@ in
         description = "The profile picture path or url + hash";
         type = nullOr (types.oneOf ([ types.path profileHashSub ]));
       };
+
+      cursor = {
+        enable = mkEnableOption "cursor overrides";
+
+        url = mkOption {
+          description = "The url of the cursor tar file";
+          type = types.str;
+        };
+
+        hash = mkOption {
+          description = "The hash of the tar file";
+          type = types.str;
+        };
+
+        name = mkOption {
+          description = "The hash of the tar file";
+          type = types.str;
+        };
+      };
     };
 
   config = mkIf (cfg.enable) {
+    home.pointerCursor = mkIf (cfg.cursor.enable)
+      {
+        gtk.enable = true;
+        x11.enable = true;
+        name = cfg.cursor.name;
+        package = pkgs.runCommand "moveUp" { } ''
+          mkdir -p $out/share/icons
+          ln -s ${pkgs.fetchzip {
+            url = cfg.cursor.url;
+            hash = cfg.cursor.hash;
+          }} $out/share/icons/${cfg.cursor.name}
+        '';
+      };
+
     home.file.".face" = mkIf (cfg.picture != null) {
       source = if builtins.typeOf (cfg.picture) == "path" then cfg.picture else
       builtins.fetchurl {

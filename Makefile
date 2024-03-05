@@ -45,7 +45,7 @@ switch-full: garbage-full switch-base garbage-full
 switch-safe: garbage-safe switch-base garbage-safe
 
 switch-base:
-	@nix flake lock --update-input nix-desktop
+	@nix flake lock --update-input nix-desktop --update-input protontweaks
 ifdef DEPLOY_HOST
 	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --show-trace --option eval-cache false
 else
