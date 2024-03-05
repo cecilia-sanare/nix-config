@@ -9,6 +9,11 @@
     # ../../mixins/nixos/apps/runescape.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    dotnet-sdk_8
+    gnome.gnome-tweaks
+  ];
+
   networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 
   time.timeZone = "America/Chicago";
@@ -53,10 +58,6 @@
     profile = ./configs/Default.goxlr;
     micProfile = ./configs/DEFAULT.goxlrMicProfile;
   };
-
-  environment.systemPackages = [
-    pkgs.dotnet-sdk_8
-  ];
 
   dotfiles.apps.vscode = {
     enable = true;

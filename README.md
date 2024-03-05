@@ -23,11 +23,6 @@ This is here to simplify the setup process for _me_ first and foremost.
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/cecilia-sanare/dotfiles/main/setup.sh)" -s phantasm
 ```
 
-## Support Desktop Environments
-
-- Gnome
-- Plasma (Automation via Nix is _really_ not that great and tends to have issues)
-
 <!-- Phantasm Links -->
 
 [Phantasm-Board]: https://rog.asus.com/us/motherboards/rog-strix/rog-strix-z690-a-gaming-wifi-d4-model/spec/

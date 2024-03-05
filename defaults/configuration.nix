@@ -19,8 +19,7 @@ with lib;
     killall
     gnumake
     gnupg
-    # Need pulseaudio cli tools for pipewire.
-    pipewire
+    apple-cursor
   ];
 
   nixpkgs = {
@@ -95,6 +94,12 @@ with lib;
     type = desktop.type;
     preset = desktop.preset;
     sleep = false;
+
+    theme.cursors = {
+      size = 32;
+      light = "macOS-Monterey-White";
+      dark = "macOS-Monterey";
+    };
 
     workspaces.number = 1;
   };
