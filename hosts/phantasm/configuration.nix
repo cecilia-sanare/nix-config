@@ -14,7 +14,7 @@
     gnome.gnome-tweaks
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 22 ];
 
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
