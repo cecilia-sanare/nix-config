@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 
 with lib;
 
@@ -26,7 +26,7 @@ in
       };
       domains = mkOption {
         description = "The domains to generate certs for";
-        type = listOf (types.str);
+        type = listOf types.str;
       };
     };
   };
@@ -40,7 +40,7 @@ in
       };
       socket = if containerType != null then sockets.${containerType} else null;
     in
-    mkIf (cfg.enable) {
+    mkIf cfg.enable {
       networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 
       services.traefik = {
@@ -69,11 +69,11 @@ in
             };
           };
 
-          certificatesresolvers.leresolver.acme = mkIf (cfg.letsencrypt.enable) {
-            email = cfg.letsencrypt.email;
+          certificatesresolvers.leresolver.acme = mkIf cfg.letsencrypt.enable {
+            inherit (cfg.letsencrypt) email;
             storage = "acme.json";
             dnsChallenge = {
-              provider = cfg.letsencrypt.provider;
+              inherit (cfg.letsencrypt) provider;
               delayBeforeCheck = 0;
               resolvers = [ "8.8.8.8:53" ];
             };
@@ -89,7 +89,7 @@ in
             };
             websecure = {
               address = ":443";
-              http.tls = mkIf (cfg.letsencrypt.enable) {
+              http.tls = mkIf cfg.letsencrypt.enable {
                 certResolver = "leresolver";
                 domains = map
                   (domain: {

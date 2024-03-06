@@ -18,6 +18,9 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    nix-formatter-pack.url = "github:Gerschtli/nix-formatter-pack";
+    nix-formatter-pack.inputs.nixpkgs.follows = "nixpkgs";
+
     hardware.url = "github:nixos/nixos-hardware";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
@@ -30,39 +33,44 @@
     nurpkgs.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, ... } @ inputs:
+  outputs = { self, nix-formatter-pack, nixpkgs, ... } @ inputs:
     let
       inherit (self) outputs;
       stateVersion = "23.11";
       libx = import ./lib { inherit inputs outputs stateVersion; };
-      authorizedKeys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX"
-      ];
-
-      users = [ "ceci" ];
     in
     {
       nixosConfigurations = {
-        vm = libx.mkHost {
-          inherit authorizedKeys;
-          hostname = "vm";
-          users = [ "test" ];
-        };
-
-        phantasm = libx.mkHost {
-          inherit authorizedKeys users;
-          hostname = "phantasm";
-          desktop = "gnome";
-          preset = "sane";
-        };
-
-        polymorph = libx.mkHost {
-          inherit authorizedKeys users;
-          hostname = "polymorph";
-          desktop = "gnome";
-          preset = "sane";
-        };
+        # .iso images
+        iso-console = libx.mkHost { hostname = "iso-console"; username = "nixos"; };
+        iso-desktop = libx.mkHost { hostname = "iso-desktop"; username = "nixos"; };
+        # Workstations
+        phantasm = libx.mkHost { hostname = "phantasm"; username = "ceci"; };
+        spectre = libx.mkHost { hostname = "spectre"; username = "ceci"; platform = "aarch64-darwin"; };
+        # Servers
+        polymorph = libx.mkHost { hostname = "polymorph"; username = "ceci"; };
+        # VMs
+        vm = libx.mkHost { hostname = "vm"; username = "test"; };
       };
+
+      # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
+      devShells = libx.forAllPlatforms (platform:
+        let pkgs = nixpkgs.legacyPackages.${platform};
+        in import ./shell.nix { inherit pkgs; }
+      );
+
+      # nix fmt
+      formatter = libx.forAllPlatforms (platform:
+        nix-formatter-pack.lib.mkFormatter {
+          pkgs = nixpkgs.legacyPackages.${platform};
+          config.tools = {
+            alejandra.enable = false;
+            deadnix.enable = true;
+            nixpkgs-fmt.enable = true;
+            statix.enable = true;
+          };
+        }
+      );
 
       overlays = import ./overlays { inherit inputs; };
     };

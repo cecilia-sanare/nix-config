@@ -1,11 +1,12 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ inputs, lib, users, config, pkgs, vscode-extensions, ... }: {
+{ lib, pkgs, vscode-extensions, username, ... }: {
   imports = [
-    ../../mixins/nixos/containers/podman/unstable.nix
-    ../../mixins/nixos/shells/fish
-    ../../mixins/nixos/presets/gaming.nix
+    ./hardware.nix
+    ../../../mixins/nixos/containers/podman/unstable.nix
+    ../../../mixins/nixos/shells/fish
+    ../../../mixins/nixos/presets/gaming.nix
     # ../../mixins/nixos/apps/runescape.nix
   ];
 
@@ -14,13 +15,7 @@
     gnome.gnome-tweaks
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 22 ];
-
-  time.timeZone = "America/Chicago";
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  users.users.ceci.description = "Cecilia Sanare";
-  users.users.ceci.hashedPassword = "$6$P9EJMHnu8b/OVVRS$1qECnQmYav5EhbnTOk3mnO3dBlMOAsF9/lgCRONwO/GHUfHZFIpxYSyOTPqpv6S6dqO4uSxSZ9KMDl5yX9AHH1";
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 
   dotfiles.displays = [
     {
@@ -42,22 +37,14 @@
   ];
 
   # TODO: Figure out if we can somehow get this at a per user level
-  dotfiles.apps."1password" = {
-    inherit users;
-
-    enable = true;
-    agent = {
-      enable = true;
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX";
-    };
-  };
-
-  # TODO: Figure out if we can somehow get this at a per user level
   dotfiles.apps.goxlr = {
     enable = true;
     profile = ./configs/Default.goxlr;
     micProfile = ./configs/DEFAULT.goxlrMicProfile;
   };
+
+  programs.ssh.forwardX11 = true;
+  #programs.ssh.setXAuthLocation = true;
 
   dotfiles.apps.vscode = {
     enable = true;

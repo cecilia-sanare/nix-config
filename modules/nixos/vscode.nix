@@ -13,18 +13,18 @@ in
 
     extensions = mkOption {
       description = "The extensions you'd like to enable";
-      type = listOf (types.package);
+      type = listOf types.package;
       default = [ ];
     };
 
     settings = mkOption {
       description = "The extensions you'd like to enable";
-      type = nullOr (attrsOf (types.anything));
+      type = nullOr (attrsOf types.anything);
       default = null;
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       (vscode-with-extensions.override {
         vscodeExtensions = cfg.extensions;

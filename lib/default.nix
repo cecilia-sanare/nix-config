@@ -3,5 +3,5 @@ let
   helpers = import ./helpers.nix { inherit inputs outputs stateVersion; };
 in
 {
-  inherit (helpers) mkHost mkHosts;
+  inherit (helpers) mkHost mkHosts forAllPlatforms;
 }

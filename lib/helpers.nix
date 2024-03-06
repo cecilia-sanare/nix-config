@@ -1,33 +1,61 @@
 { inputs, outputs, stateVersion, ... }:
 
-with inputs.nixpkgs.lib;
-with inputs.home-manager.lib;
+let
+  platform-defaults = {
+    linux = {
+      desktop = "gnome";
+      preset = "sane";
+    };
+    darwin = null;
 
-rec {
-  mkHost = { authorizedKeys ? null, hostname, users, sudoers ? users, desktop ? null, preset ? null, iso ? false, platform ? "x86_64-linux" }:
+    "x86_64-linux" = platform-defaults.linux;
+    "aarch64-linux" = platform-defaults.linux;
+    "i686-linux" = platform-defaults.linux;
+    "aarch64-darwin" = platform-defaults.darwin;
+    "x86_64-darwin" = platform-defaults.darwin;
+  };
+
+  desktop-defaults = {
+    gnome = "sane";
+  };
+in
+{
+  mkHost = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "x86_64-linux" }:
     let
       headless = desktop == null;
+      inherit (inputs.nixpkgs) lib legacyPackages;
+      inherit (legacyPackages.${platform}.stdenv) isLinux isDarwin;
     in
-    nixosSystem {
+    lib.nixosSystem {
       # Pass flake inputs to our config
       specialArgs = {
-        inherit inputs outputs hostname platform stateVersion authorizedKeys users sudoers;
+        inherit inputs outputs hostname platform stateVersion username;
         vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
 
         desktop = {
           type = desktop;
-          preset = preset;
-          isHeadless = headless;
-          isNotHeadless = !headless;
-          isGnome = desktop == "gnome";
-          isPlasma = desktop == "plasma";
+          inherit preset;
+          libx = {
+            isHeadless = headless;
+            isNotHeadless = !headless;
+            isGnome = desktop == "gnome";
+            isPlasma = desktop == "plasma";
+            isInstall = iso;
+          };
         };
       };
 
-      modules = [
-        ../defaults/configuration.nix
-      ] ++ (optionals (iso) [
-        "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if headless then "minimal" else "graphical-calamares"}.nix"
-      ]);
+      modules = [ ../platform/nixos ];
+      # modules = lib.optional isLinux ../platform/nixos
+      #   ++ lib.optional isDarwin ../platform/nix-darwin
+      #   ++ lib.optional iso "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if headless then "minimal" else "graphical-calameres"}.nix";
     };
+
+  forAllPlatforms = inputs.nixpkgs.lib.genAttrs [
+    "aarch64-linux"
+    "i686-linux"
+    "x86_64-linux"
+    "aarch64-darwin"
+    "x86_64-darwin"
+  ];
 }

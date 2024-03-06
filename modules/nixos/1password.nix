@@ -17,11 +17,11 @@ in
     };
     users = mkOption {
       description = "The users to set as policy owners";
-      type = listOf (types.str);
+      type = listOf types.str;
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       _1password
       _1password-gui
@@ -36,9 +36,9 @@ in
       };
     };
 
-    home-manager.sharedModules = mkIf (cfg.agent.enable) [
+    home-manager.sharedModules = mkIf cfg.agent.enable [
       ({ config, ... }: {
-        programs.git = mkIf (config.programs.git.enable) {
+        programs.git = mkIf config.programs.git.enable {
           extraConfig = {
             commit.gpgsign = true;
             user.signingkey = cfg.agent.publicKey;
@@ -50,7 +50,7 @@ in
           };
         };
 
-        programs.ssh = mkIf (config.programs.ssh.enable) {
+        programs.ssh = mkIf config.programs.ssh.enable {
           forwardAgent = true;
           extraConfig = "IdentityAgent ~/.1password/agent.sock";
         };

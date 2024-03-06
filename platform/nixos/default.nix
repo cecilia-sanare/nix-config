@@ -1,26 +1,26 @@
 # Default Shared Configuration
-{ authorizedKeys, inputs, users, outputs, desktop, hostname, platform, stateVersion, sudoers, config, lib, pkgs, vscode-extensions, ... }:
-
-with lib;
+{ inputs, username, outputs, desktop, hostname, platform, stateVersion, config, lib, pkgs, vscode-extensions, ... }:
 
 {
   imports = [
     inputs.nix-desktop.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     inputs.nix-flatpak.nixosModules.nix-flatpak
-    ../hosts/${hostname}/hardware-configuration.nix
-    ../hosts/${hostname}/configuration.nix
-    ../modules/nixos
-  ];
+    ../../modules/nixos
+    ./${hostname}
+  ]
+  # Try to load ../../users/{username}/nixos.nix
+  ++ lib.optional (builtins.pathExists (./. + "/../../users/${username}/nixos.nix")) ../../users/${username}/nixos.nix;
 
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    killall
-    gnumake
-    gnupg
-    apple-cursor
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      vim
+      git
+      killall
+      gnumake
+      gnupg
+      apple-cursor
+    ];
 
   nixpkgs = {
     overlays = [
@@ -65,38 +65,33 @@ with lib;
     };
   };
 
-  # TODO: Setup Sops
-  # sops.defaultSopsFile = ../secrets.yaml;
-
   boot.loader.systemd-boot.enable = true;
 
   networking.hostName = hostname;
 
-  users.users = listToAttrs (map
-    (user: {
-      name = user;
-      value = {
-        name = user;
-        initialPassword = if config.users.users.${user}.hashedPassword == null then "changeme" else null;
-        isNormalUser = true;
-        openssh.authorizedKeys.keys = authorizedKeys;
+  users.users.${username} = {
+    name = username;
+    initialPassword = if config.users.users.${username}.hashedPassword == null then "changeme" else null;
+    isNormalUser = true;
 
-        extraGroups = mkIf (builtins.elem user sudoers) [
-          "networkmanager"
-          "wheel"
-        ];
-      };
-    })
-    users);
+    # Assume they're a sudoer.
+    # NOTE: This will need to be configurable if more users are ever added (which they probably won't be)
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+  };
 
   nix-desktop = {
     enable = true;
-    type = desktop.type;
-    preset = desktop.preset;
+    inherit (desktop) type preset;
     sleep = false;
 
     workspaces.number = 1;
   };
+
+  time.timeZone = "America/Chicago";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   home-manager = {
     # Pass flake inputs to our config
@@ -109,25 +104,26 @@ with lib;
 
     backupFileExtension = "backup";
 
-    users = listToAttrs
-      (map
-        (user: {
-          name = user;
-          value = {
-            imports = [
-              (import ./home-manager.nix)
-              (import ../hosts/${hostname}/users/${user}.nix)
-              (import ../modules/home-manager)
-            ];
+    users.${username} = {
+      imports = [
+        ../../modules/home-manager
+      ]
+      # Try to load ../../users/{username}/home.nix
+      ++ lib.optional (builtins.pathExists (./. + "/../../users/${username}/home.nix")) ../../users/${username}/home.nix;
 
-            home.stateVersion = stateVersion;
-          };
-        })
-        users);
+      # Enable home-manager and git
+      programs.home-manager.enable = true;
+      programs.git.enable = true;
+
+      # Nicely reload system units when changing configs
+      systemd.user.startServices = "sd-switch";
+
+      home.stateVersion = stateVersion;
+    };
   };
 
   services.openssh = {
-    enable = authorizedKeys != null;
+    enable = true;
 
     settings = {
       PermitRootLogin = "no";
@@ -135,9 +131,7 @@ with lib;
     };
   };
 
-  networking.firewall = mkIf (authorizedKeys != null) {
-    allowedTCPPorts = [ 22 ];
-  };
+  networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Set your system kind (needed for flakes)
   nixpkgs.hostPlatform = platform;

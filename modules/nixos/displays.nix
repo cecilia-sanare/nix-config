@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
@@ -64,16 +64,16 @@ in
       enable = true;
       profiles = {
         home = {
-          fingerprint = builtins.listToAttrs (map (v: { name = v.name; value = v.fingerprint; }) cfg.displays);
+          fingerprint = builtins.listToAttrs (map (v: { inherit (v) name; value = v.fingerprint; }) cfg.displays);
           config = builtins.listToAttrs (map
             (v: {
-              name = v.name;
+              inherit (v) name;
               value = {
-                enable = v.enable;
+                inherit (v) enable;
                 mode = v.resolution;
-                primary = v.primary;
-                position = v.position;
-                rate = v.rate;
+                inherit (v) primary;
+                inherit (v) position;
+                inherit (v) rate;
               };
             })
             cfg.displays);

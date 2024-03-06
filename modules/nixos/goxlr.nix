@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, ... }:
 
 with lib;
 
@@ -20,7 +20,7 @@ in
     };
   };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     services.goxlr-utility = {
       enable = true;
       autoStart.xdg = true;

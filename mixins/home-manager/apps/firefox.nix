@@ -9,13 +9,13 @@ let
   librewolf = false;
 in
 {
-  home.shellAliases = mkIf (librewolf) {
+  home.shellAliases = mkIf librewolf {
     "firefox" = "librewolf";
   };
 
   programs.firefox = {
     enable = true;
-    package = mkIf (librewolf) pkgs.librewolf;
+    package = mkIf librewolf pkgs.librewolf;
     profiles.${config.home.username} = {
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         buster-captcha-solver

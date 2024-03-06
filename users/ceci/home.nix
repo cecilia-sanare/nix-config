@@ -1,7 +1,7 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ inputs, config, lib, pkgs, platform, vscode-extensions, ... }:
+{ pkgs, ... }:
 
 let
   stable-packages = with pkgs.stable; [
@@ -25,11 +25,11 @@ let
 in
 {
   imports = [
-    ../../../mixins/home-manager/ssh
-    ../../../mixins/home-manager/git
-    ../../../mixins/home-manager/apps/discord.nix
-    ../../../mixins/home-manager/apps/firefox.nix
-    ../../../mixins/home-manager/presets/gaming.nix
+    ../../mixins/home-manager/ssh
+    ../../mixins/home-manager/git
+    ../../mixins/home-manager/apps/discord.nix
+    ../../mixins/home-manager/apps/firefox.nix
+    ../../mixins/home-manager/presets/gaming.nix
   ];
 
   home.shellAliases = {
@@ -39,6 +39,7 @@ in
   home.packages = stable-packages ++ unstable-packages;
 
   programs.git = {
+    enable = true;
     userName = "Cecilia Sanare";
     userEmail = "ceci@sanare.dev";
   };
