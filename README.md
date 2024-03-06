@@ -11,6 +11,7 @@ These computers are managed by this Nix flake ❄️
 **Key**
 
 - 🖥️ : Desktop
+- 💻️ : Laptop
 - ☁️ : Server
 
 ## Prerequisites

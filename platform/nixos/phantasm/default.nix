@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ lib, pkgs, vscode-extensions, username, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware.nix
     ../../../mixins/nixos/containers/podman/unstable.nix

@@ -33,13 +33,13 @@ let
       inherit (inputs.nixpkgs) lib;
     in
     platform: platform-short: (value:
-      [ ] ++ lib.optionals ((value.${platform} or null) != null) value.${platform}
+      lib.optionals ((value.${platform} or null) != null) value.${platform}
       ++ lib.optionals ((value.${platform-short} or null) != null) value.${platform-short}
       ++ lib.optionals ((value.shared or null) != null) value.shared
     );
 
   # Fetches the modules for a given platform (darwin / linux)
-  getModules = { platform, lib, hostname, username, iso, desktop }:
+  getModules = { platform, lib, hostname, username, iso ? false, desktop ? null }:
     let
       platform-short = getPlatformShort platform;
 
@@ -60,7 +60,8 @@ let
         ++ lib.optional (builtins.pathExists (./. + "/../platform/nixos/${hostname}/default.nix")) ../platform/nixos/${hostname}
         ++ lib.optional (builtins.pathExists (./. + "/../platform/nixos/${hostname}.nix")) ../platform/nixos/${hostname}.nix
         # Try to load ../../users/{username}/nixos.nix
-        ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/nixos.nix")) ../users/${username}/nixos.nix;
+        ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/nixos.nix")) ../users/${username}/nixos.nix
+        ++ lib.optional iso "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if desktop == null then "minimal" else "graphical-calameres"}.nix";
 
         darwin = [
           inputs.home-manager.darwinModules.home-manager
@@ -74,8 +75,7 @@ let
         ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/darwin.nix")) ../users/${username}/darwin.nix;
       }.${platform-short};
     in
-    shared-modules ++ platform-modules
-    ++ lib.optional iso "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if desktop == null then "minimal" else "graphical-calameres"}.nix";
+    shared-modules ++ platform-modules;
 
   # Creates the desktop wrapper for linux
   mkDesktop = { desktop, preset }: {
@@ -88,7 +88,7 @@ let
   };
 
   # Creates the libx helper
-  mkLibx = { iso, platform }:
+  mkLibx = { iso ? false, platform }:
     let
       platform-short = getPlatformShort platform;
     in
@@ -99,9 +99,8 @@ let
       getPlatformList = getPlatformList platform platform-short;
     };
 
-  mkDarwin = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "aarch64-darwin" }:
+  mkDarwin = { hostname, username, platform ? "aarch64-darwin" }:
     let
-      headless = desktop == null;
       inherit (inputs.nix-darwin) lib;
     in
     lib.darwinSystem {
@@ -109,17 +108,16 @@ let
         inherit inputs outputs hostname platform stateVersion username;
         vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
 
-        libx = mkLibx { inherit iso platform; };
+        libx = mkLibx { inherit platform; };
       };
 
       modules = getModules {
-        inherit platform lib hostname username iso desktop;
+        inherit platform lib hostname username;
       };
     };
 
   mkLinux = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "x86_64-linux" }:
     let
-      headless = desktop == null;
       inherit (inputs.nixpkgs) lib;
     in
     lib.nixosSystem {

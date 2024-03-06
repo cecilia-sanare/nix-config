@@ -1,10 +1,12 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ config, lib, libx, pkgs, ... }: let
+{ config, lib, libx, pkgs, ... }:
+let
   inherit (lib) mkIf;
   librewolf = false;
-in mkIf(libx.isLinux) {
+in
+mkIf libx.isLinux {
   home.shellAliases = mkIf librewolf {
     "firefox" = "librewolf";
   };

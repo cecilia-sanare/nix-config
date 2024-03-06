@@ -20,7 +20,7 @@
       tamasfe.even-better-toml
       bradlc.vscode-tailwindcss
     ]
-     ++ lib.optionals (libx.isLinux) [
+    ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "csharp";
@@ -38,7 +38,7 @@
             "./.roslyn/Microsoft.CodeAnalysis.LanguageServer"
         '';
       })
-    ] 
+    ]
     ++ (pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "vscode-dotnet-runtime";

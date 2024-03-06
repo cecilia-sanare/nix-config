@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ username, ... }:
+{ ... }:
 
 {
   imports = [

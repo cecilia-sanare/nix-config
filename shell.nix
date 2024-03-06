@@ -11,7 +11,7 @@
       nix
       home-manager
       nixpkgs-fmt
-      # nixd
+      nixd
     ];
   };
 }

@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ inputs, libx, username, outputs, desktop, hostname, platform, stateVersion, config, lib, pkgs, vscode-extensions, ... }:
+{ inputs, libx, username, outputs, desktop, hostname, platform, config, lib, pkgs, vscode-extensions, ... }:
 
 {
   environment.systemPackages = with pkgs; [

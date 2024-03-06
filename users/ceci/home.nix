@@ -1,11 +1,10 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ pkgs, lib, libx, ... }:
+{ pkgs, libx, ... }:
 
 let
-  inherit (lib) mkIf;
-  stable-packages = with pkgs.stable; libx.getPlatformList ({
+  stable-packages = with pkgs.stable; libx.getPlatformList {
     shared = [
       spotify
     ];
@@ -19,9 +18,9 @@ let
       obs-studio
       caprine-bin # Facebook Messenger App
     ];
-  });
+  };
 
-  unstable-packages = with pkgs; libx.getPlatformList ({
+  unstable-packages = with pkgs; libx.getPlatformList {
     "shared" = [
       tuba
       (discord.override {
@@ -35,7 +34,7 @@ let
       xivlauncher
       protontweaks
     ];
-  });
+  };
 in
 {
   imports = [

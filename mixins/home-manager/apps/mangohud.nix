@@ -1,6 +1,8 @@
-{ pkgs, lib, libx, ... }: let 
+{ pkgs, lib, libx, ... }:
+let
   inherit (lib) mkIf;
-in mkIf(libx.isLinux) {
+in
+mkIf libx.isLinux {
   home = {
     packages = with pkgs; [
       mangohud

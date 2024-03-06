@@ -63,7 +63,7 @@ in
       };
     };
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     home.pointerCursor = mkIf (libx.isLinux && cfg.cursor.enable) {
       gtk.enable = true;
       x11.enable = true;

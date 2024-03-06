@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ inputs, libx, pkgs, config, username, outputs, desktop, hostname, platform, stateVersion, lib, vscode-extensions, ... }:
+{ username, outputs, hostname, stateVersion, ... }:
 
 {
   imports = [ ];
