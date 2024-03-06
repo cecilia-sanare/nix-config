@@ -13,6 +13,10 @@ These computers are managed by this Nix flake ❄️
 - 🖥️ : Desktop
 - ☁️ : Server
 
+## Prerequisites
+
+- [Nix](https://nixos.org/download) _(not necessary if you're running NixOS)_
+
 ## Quick Start
 
 Running the command below _should_ just download and run my NixOS config, however its fairly opinionated on where it puts it!
@@ -21,7 +25,7 @@ I encourage you to fully understand the ramifications of running this before you
 This is here to simplify the setup process for _me_ first and foremost.
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/cecilia-sanare/dotfiles/main/setup.sh)" -s phantasm
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/cecilia-sanare/nix-config/main/setup.sh)" -s <hostname>
 ```
 
 <!-- Phantasm Links -->
