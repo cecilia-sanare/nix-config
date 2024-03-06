@@ -2,15 +2,7 @@
 { inputs, username, outputs, desktop, hostname, platform, stateVersion, config, lib, pkgs, vscode-extensions, ... }:
 
 {
-  imports = [
-    inputs.nix-desktop.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nix-flatpak.nixosModules.nix-flatpak
-    ../../modules/platform/nixos
-    ./${hostname}
-  ]
-  # Try to load ../../users/{username}/nixos.nix
-  ++ lib.optional (builtins.pathExists (./. + "/../../users/${username}/nixos.nix")) ../../users/${username}/nixos.nix;
+  imports = [ ];
 
   environment.systemPackages = with pkgs; [
     vim
@@ -20,21 +12,6 @@
     gnupg
     apple-cursor
   ];
-
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-      outputs.overlays.master-packages
-      inputs.nurpkgs.overlay
-      inputs.protontweaks.overlay
-      inputs.smart-open.overlay
-    ];
-
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   nix.optimise.automatic = true;
 

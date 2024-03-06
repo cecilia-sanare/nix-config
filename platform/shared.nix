@@ -9,7 +9,7 @@
     gnumake
     gnupg
   ];
-  
+
   networking.hostName = hostname;
 
   nixpkgs = {

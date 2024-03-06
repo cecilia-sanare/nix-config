@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
 
-with lib;
-
 let
   cfg = config.dotfiles.apps."1password";
+  inherit (lib) mkIf mkEnableOption mkOption types;
+  inherit (types) listOf;
 in
 {
   options.dotfiles.apps."1password" = {
@@ -12,6 +12,7 @@ in
     users = mkOption {
       description = "The users to set as policy owners";
       type = listOf types.str;
+      default = [ ];
     };
   };
 
@@ -26,7 +27,7 @@ in
       _1password-gui = {
         package = pkgs._1password-gui;
         enable = true;
-        polkitPolicyOwners = users;
+        polkitPolicyOwners = cfg.users;
       };
     };
   };

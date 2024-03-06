@@ -2,23 +2,14 @@
 { inputs, libx, pkgs, config, username, outputs, desktop, hostname, platform, stateVersion, lib, vscode-extensions, ... }:
 
 {
-  imports = [
-    inputs.home-manager.darwinModules.home-manager
-    ../../modules/platform/nix-darwin
-    ../shared.nix
-  ]
-  # Try to load ./{hostname}/default.nix or ./{hostname}.nix
-  ++ lib.optional (builtins.pathExists (./. + "/${hostname}/default.nix")) ./${hostname}
-  ++ lib.optional (builtins.pathExists (./. + "/${hostname}.nix")) ./${hostname}.nix
-  # Try to load ../../users/{username}/darwin.nix
-  ++ lib.optional (builtins.pathExists (./. + "/../../users/${username}/darwin.nix")) ../../users/${username}/darwin.nix;
+  imports = [ ];
 
   networking.computerName = hostname;
   system.defaults.smb.NetBIOSName = hostname;
 
   # Necessary for using flakes on this system.
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
   services.nix-daemon.enable = true;

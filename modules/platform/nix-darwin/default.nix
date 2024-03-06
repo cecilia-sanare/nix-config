@@ -1,6 +1,4 @@
 { ... }:
 {
-  imports = [ 
-    ../shared
-  ];
+  imports = [ ];
 }

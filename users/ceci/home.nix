@@ -5,11 +5,11 @@
 
 let
   inherit (lib) mkIf;
-  stable-packages = with pkgs.stable; libx.getPlatformList({
+  stable-packages = with pkgs.stable; libx.getPlatformList ({
     shared = [
       spotify
     ];
-    "darwin" = [];
+    "darwin" = [ ];
     "linux" = [
       rustdesk # Teamviewer alternative
       slack
@@ -21,7 +21,7 @@ let
     ];
   });
 
-  unstable-packages = with pkgs; libx.getPlatformList({
+  unstable-packages = with pkgs; libx.getPlatformList ({
     "shared" = [
       tuba
       (discord.override {
