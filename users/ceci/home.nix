@@ -1,35 +1,47 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ pkgs, ... }:
+{ pkgs, lib, libx, ... }:
 
 let
-  stable-packages = with pkgs.stable; [
-    vlc
-    slack
-    zoom-us
-    spotify
-    figma-linux
-    obs-studio
-    rustdesk # Teamviewer alternative
-    caprine-bin # Facebook Messenger App
-  ];
+  inherit (lib) mkIf;
+  stable-packages = with pkgs.stable; libx.getPlatformList({
+    shared = [
+      spotify
+    ];
+    "darwin" = [];
+    "linux" = [
+      rustdesk # Teamviewer alternative
+      slack
+      zoom-us
+      vlc
+      figma-linux
+      obs-studio
+      caprine-bin # Facebook Messenger App
+    ];
+  });
 
-  unstable-packages = with pkgs; [
-    xivlauncher
-    heroic
-    tuba
-    smart-open
-    protontweaks
-  ];
+  unstable-packages = with pkgs; libx.getPlatformList({
+    "shared" = [
+      tuba
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+      })
+    ];
+    "linux" = [
+      smart-open # TODO: This *should* work on macos, but currently doesn't
+      heroic
+      xivlauncher
+      protontweaks
+    ];
+  });
 in
 {
   imports = [
     ../../mixins/home-manager/ssh
-    ../../mixins/home-manager/git
-    ../../mixins/home-manager/apps/discord.nix
-    ../../mixins/home-manager/apps/firefox.nix
     ../../mixins/home-manager/presets/gaming.nix
+    ../../mixins/home-manager/apps/firefox.nix
   ];
 
   home.shellAliases = {
@@ -42,6 +54,45 @@ in
     enable = true;
     userName = "Cecilia Sanare";
     userEmail = "ceci@sanare.dev";
+
+    aliases = {
+      cp = "cherry-pick";
+      st = "status -s";
+      cl = "clone";
+      ci = "commit";
+      co = "checkout";
+      br = "branch";
+      diff = "diff --word-diff";
+      dc = "diff --cached";
+      ca = "commit --amend --no-edit";
+    };
+
+    extraConfig = {
+      init.defaultBranch = "main";
+      push.autoSetupRemote = true;
+      pull.ff = "only";
+      merge.ff = false;
+
+      color = {
+        diff = "auto";
+        status = "auto";
+        branch = "auto";
+        ui = "auto";
+      };
+
+      core = {
+        excludesfile = "~/.gitignore";
+        editor = "vim";
+      };
+
+      help = {
+        autocorrect = 1;
+      };
+
+      push = {
+        default = "simple";
+      };
+    };
   };
 
   programs.firefox.profiles.ceci.bookmarks = [
@@ -80,6 +131,11 @@ in
       ];
     }
   ];
+
+  dotfiles.apps."1password" = {
+    enable = true;
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoMrYMlRCELYBpwkn8f5IZOfdifcIzDkgB9b2SiyuAX";
+  };
 
   dotfiles.desktop = {
     enable = true;

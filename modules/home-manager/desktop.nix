@@ -1,4 +1,4 @@
-{ lib, config, pkgs, desktop, ... }:
+{ lib, libx, config, pkgs, desktop, ... }:
 
 with lib;
 
@@ -63,22 +63,21 @@ in
       };
     };
 
-  config = mkIf cfg.enable {
-    home.pointerCursor = mkIf cfg.cursor.enable
-      {
-        gtk.enable = true;
-        x11.enable = true;
-        inherit (cfg.cursor) name;
-        package = pkgs.runCommand "moveUp" { } ''
-          mkdir -p $out/share/icons
-          ln -s ${pkgs.fetchzip {
-            inherit (cfg.cursor) url;
-            inherit (cfg.cursor) hash;
-          }} $out/share/icons/${cfg.cursor.name}
-        '';
-      };
+  config = mkIf (cfg.enable) {
+    home.pointerCursor = mkIf (libx.isLinux && cfg.cursor.enable) {
+      gtk.enable = true;
+      x11.enable = true;
+      inherit (cfg.cursor) name;
+      package = pkgs.runCommand "moveUp" { } ''
+        mkdir -p $out/share/icons
+        ln -s ${pkgs.fetchzip {
+          inherit (cfg.cursor) url;
+          inherit (cfg.cursor) hash;
+        }} $out/share/icons/${cfg.cursor.name}
+      '';
+    };
 
-    home.file.".face" = mkIf (cfg.picture != null) {
+    home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {
       source = if builtins.typeOf cfg.picture == "path" then cfg.picture else
       builtins.fetchurl {
         inherit (cfg.picture) url;

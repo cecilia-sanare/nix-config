@@ -16,16 +16,13 @@ REPOS_DIR=$HOME/repos
 REPO_DIR=$REPOS_DIR/nix-config
 HOST_DIR=$REPO_DIR/hosts/$HOST
 
-# Assume git isn't available because Apple is dumb and adds an alias for xcode...
-nix-shell -p git
-
 mkdir -p $REPOS_DIR > /dev/null
 
 if [ ! -d "$REPO_DIR" ]; then
     echo "Pulling down repo..."
-    git clone https://github.com/cecilia-sanare/nix-config $REPO_DIR > /dev/null
+    nix-shell -p git --run "git clone https://github.com/cecilia-sanare/nix-config $REPO_DIR" > /dev/null
     # Update the origin to the SSH version now that we're all setup!
-    git -C $REPO_DIR remote set-url origin git@github.com:cecilia-sanare/nix-config.git
+    nix-shell -p git --run "git -C $REPO_DIR remote set-url origin git@github.com:cecilia-sanare/nix-config.git" > /dev/null
 else
     echo "Repo detected, skipping clone"
 fi
@@ -52,7 +49,7 @@ if [ $OS = "GNU/Linux" ]; then
         sudo nix build .#nixosConfigurations.${HOST}.config.system.build.toplevel
     fi
 elif [ $OS = "Darwin" ]; then
-    if [ -z "$(command -v nix)" ]; then
+    if [ -z "$(command -v darwin-rebuild)" ]; then
         darwin-rebuild switch --flake .#${HOST}
     else
         nix run nix-darwin -- switch --flake .#${HOST}

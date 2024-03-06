@@ -6,10 +6,12 @@
     # Enable experimental features without having to specify the argument
     NIX_CONFIG = "experimental-features = nix-command flakes";
     buildInputs = with pkgs; [
+      git
+      gnumake
       nix
       home-manager
       nixpkgs-fmt
-      nixd
+      # nixd
     ];
   };
 }

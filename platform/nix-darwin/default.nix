@@ -1,12 +1,11 @@
 # Default Shared Configuration
-{ inputs, username, outputs, desktop, hostname, platform, stateVersion, lib, vscode-extensions, ... }:
+{ inputs, libx, pkgs, config, username, outputs, desktop, hostname, platform, stateVersion, lib, vscode-extensions, ... }:
 
 {
   imports = [
-    inputs.nix-desktop.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
-    inputs.nix-flatpak.nixosModules.nix-flatpak
-    ../../modules/nix-darwin
+    inputs.home-manager.darwinModules.home-manager
+    ../../modules/platform/nix-darwin
+    ../shared.nix
   ]
   # Try to load ./{hostname}/default.nix or ./{hostname}.nix
   ++ lib.optional (builtins.pathExists (./. + "/${hostname}/default.nix")) ./${hostname}
@@ -14,48 +13,44 @@
   # Try to load ../../users/{username}/darwin.nix
   ++ lib.optional (builtins.pathExists (./. + "/../../users/${username}/darwin.nix")) ../../users/${username}/darwin.nix;
 
-  home-manager = {
-    # Pass flake inputs to our config
-    extraSpecialArgs = {
-      inherit inputs outputs desktop hostname platform vscode-extensions;
-    };
+  networking.computerName = hostname;
+  system.defaults.smb.NetBIOSName = hostname;
 
-    useGlobalPkgs = true;
-    useUserPackages = true;
+  # Necessary for using flakes on this system.
+  # Create /etc/zshrc that loads the nix-darwin environment.
+  programs.zsh.enable = true;  # default shell on catalina
+  # programs.fish.enable = true;
 
-    backupFileExtension = "backup";
+  services.nix-daemon.enable = true;
 
-    users.${username} = {
-      imports = [
-        (import ../modules/home-manager)
-      ]
-      # Try to load ../users/{username}/default.nix or ../users/{username}.nix
-      ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/home.nix")) ../users/${username}/home.nix;
+  # activationScripts are executed every time you boot the system or run `nixos-rebuild` / `darwin-rebuild`.
+  system.activationScripts.postUserActivation.text = ''
+    # activateSettings -u will reload the settings from the database and apply them to the current session,
+    # so we do not need to logout and login again to make the changes take effect.
+    /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  '';
 
-      # Enable home-manager and git
-      programs.home-manager.enable = true;
-      programs.git.enable = true;
+  # Add ability to used TouchID for sudo authentication
+  security.pam.enableSudoTouchIdAuth = true;
 
-      # Nicely reload system units when changing configs
-      systemd.user.startServices = "sd-switch";
+  users.users.${username}.home = "/Users/${username}";
 
-      home.stateVersion = stateVersion;
-    };
-  };
+  home-manager.users.${username}.home.stateVersion = stateVersion;
 
-  services.openssh = {
-    enable = true;
+  # services.openssh = {
+  #   enable = true;
 
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
+  #   settings = {
+  #     PermitRootLogin = "no";
+  #     PasswordAuthentication = false;
+  #   };
+  # };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # networking.firewall.allowedTCPPorts = [ 22 ];
 
-  # Set your system kind (needed for flakes)
-  nixpkgs.hostPlatform = platform;
+  # Set Git commit hash for darwin-version.
+  system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
 
-  system.stateVersion = stateVersion;
+  # nix-darwin has its own stateVersion
+  system.stateVersion = 4;
 }

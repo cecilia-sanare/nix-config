@@ -1,5 +1,3 @@
-_:
-
-{
+{ libx, ... }: {
   programs.gamemode.enable = true;
 }

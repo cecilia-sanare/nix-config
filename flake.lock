@@ -70,6 +70,26 @@
         "type": "github"
       }
     },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709554374,
+        "narHash": "sha256-1yYgwxBzia+QrOaQaZ6YKqGFfiQcSBwYLzd9XRsRLQY=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "daa03606dfb5296a22e842acb02b46c1c4e9f5e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nix-desktop": {
       "inputs": {
         "nixpkgs": [
@@ -300,6 +320,7 @@
       "inputs": {
         "hardware": "hardware",
         "home-manager": "home-manager",
+        "nix-darwin": "nix-darwin",
         "nix-desktop": "nix-desktop",
         "nix-flatpak": "nix-flatpak",
         "nix-formatter-pack": "nix-formatter-pack",

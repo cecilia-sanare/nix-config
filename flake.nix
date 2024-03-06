@@ -10,6 +10,9 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos.url = "nixpkgs/nixos-unstable";
 
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
     nix-desktop.url = "github:cecilia-sanare/nix-desktop/main";
@@ -42,15 +45,18 @@
     {
       nixosConfigurations = {
         # .iso images
-        iso-console = libx.mkHost { hostname = "iso-console"; username = "nixos"; };
-        iso-desktop = libx.mkHost { hostname = "iso-desktop"; username = "nixos"; };
+        iso-console = libx.hosts.mkLinux { hostname = "iso-console"; username = "nixos"; };
+        iso-desktop = libx.hosts.mkLinux { hostname = "iso-desktop"; username = "nixos"; };
         # Workstations
-        phantasm = libx.mkHost { hostname = "phantasm"; username = "ceci"; };
-        spectre = libx.mkHost { hostname = "spectre"; username = "ceci"; platform = "aarch64-darwin"; };
+        phantasm = libx.hosts.mkLinux { hostname = "phantasm"; username = "ceci"; };
         # Servers
-        polymorph = libx.mkHost { hostname = "polymorph"; username = "ceci"; };
+        polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "ceci"; };
         # VMs
-        vm = libx.mkHost { hostname = "vm"; username = "test"; };
+        vm = libx.hosts.mkLinux { hostname = "vm"; username = "test"; };
+      };
+
+      darwinConfigurations = {
+        spectre = libx.hosts.mkDarwin { hostname = "spectre"; username = "ceci"; };
       };
 
       # Devshell for bootstrapping; acessible via 'nix develop' or 'nix-shell' (legacy)
