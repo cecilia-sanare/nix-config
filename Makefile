@@ -49,6 +49,6 @@ switch-base:
 ifdef DEPLOY_HOST
 	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --show-trace --option eval-cache false
 else
-	sudo nixos-rebuild switch --show-trace --option eval-cache false
+	sudo nixos-rebuild switch --show-trace --option eval-cache false --impure
 endif
 	@nix-shell -p fish --run "./refresh-desktop.fish"

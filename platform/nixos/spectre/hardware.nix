@@ -23,7 +23,12 @@
     fsType = "vfat";
   };
 
-  hardware.asahi.peripheralFirmwareDirectory = ./firmware;
+  hardware.asahi = {
+    peripheralFirmwareDirectory = ./firmware;
+    useExperimentalGPUDriver = true;
+    # This makes us HAVE to use --impure :<
+    experimentalGPUInstallMode = "replace";
+  };
 
   swapDevices = [ ];
 
