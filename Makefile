@@ -8,7 +8,7 @@ HOST := vm
 clean:
 	rm -f *.qcow2 result
 
-build: clean
+build: clean update
 	nixos-rebuild build-vm --flake .#${HOST} --fast -I nixpkgs=. --show-trace
 
 build-iso:
@@ -44,11 +44,17 @@ switch: switch-base
 switch-full: garbage-full switch-base garbage-full
 switch-safe: garbage-safe switch-base garbage-safe
 
-switch-base:
-	@nix flake lock --update-input nix-desktop --update-input protontweaks
+switch-base: update
 ifdef DEPLOY_HOST
 	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --show-trace --option eval-cache false
 else
 	sudo nixos-rebuild switch --show-trace --option eval-cache false --impure
 endif
 	@nix-shell -p fish --run "./refresh-desktop.fish"
+
+# ######################
+# Update Utilities ####
+# ####################
+
+update:
+	@nix flake lock --update-input nix-desktop --update-input protontweaks

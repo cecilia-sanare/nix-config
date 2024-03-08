@@ -25,8 +25,6 @@
     };
   }];
 
-  # TODO: Disable this on nix-desktop
-  hardware.opengl.driSupport32Bit = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = false;
 
   networking.wireless.iwd = {
