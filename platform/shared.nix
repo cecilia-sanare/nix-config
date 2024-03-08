@@ -16,10 +16,7 @@
     # Set your system kind (needed for flakes)
     hostPlatform = platform;
 
-    overlays = [
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-      outputs.overlays.master-packages
+    overlays = (builtins.attrValues outputs.overlays) ++ [
       inputs.nurpkgs.overlay
       inputs.protontweaks.overlay
       inputs.smart-open.overlay

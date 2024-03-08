@@ -83,5 +83,11 @@
       );
 
       overlays = import ./overlays { inherit inputs; };
+
+      # Custom packages; acessible via 'nix build', 'nix shell', etc
+      packages = libx.forAllPlatforms (platform:
+        let pkgs = nixpkgs.legacyPackages.${platform};
+        in import ./pkgs { inherit pkgs; }
+      );
     };
 }

@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ username, ... }:
+{ username, pkgs, ... }:
 
 {
   imports = [
@@ -11,5 +11,11 @@
   dotfiles.apps."1password" = {
     enable = true;
     users = [ username ];
+  };
+
+  services.mullvad-vpn = {
+    enable = true;
+    enableExcludeWrapper = true;
+    package = pkgs.mullvad-vpn;
   };
 }

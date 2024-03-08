@@ -25,6 +25,7 @@ let
   unstable-packages = with pkgs; libx.getPlatformList {
     "shared" = [
       tuba
+      qbittorrent
     ];
     "linux" = [
       smart-open # TODO: This *should* work on macos, but currently doesn't
