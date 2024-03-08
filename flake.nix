@@ -34,12 +34,15 @@
     smart-open.inputs.nixpkgs.follows = "nixpkgs";
 
     nurpkgs.url = "github:nix-community/NUR";
+
+    apple-silicon-support.url = "github:tpwrules/nixos-apple-silicon/main";
+    apple-silicon-support.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nix-formatter-pack, nixpkgs, ... } @ inputs:
     let
       inherit (self) outputs;
-      stateVersion = "23.11";
+      stateVersion = "24.05";
       libx = import ./lib { inherit inputs outputs stateVersion; };
     in
     {
@@ -49,6 +52,7 @@
         iso-desktop = libx.hosts.mkLinux { hostname = "iso-desktop"; username = "nixos"; };
         # Workstations
         phantasm = libx.hosts.mkLinux { hostname = "phantasm"; username = "ceci"; };
+        spectre = libx.hosts.mkLinux { hostname = "spectre"; username = "ceci"; platform = "aarch64-linux"; };
         # Servers
         polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "ceci"; };
         # VMs

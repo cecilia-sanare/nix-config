@@ -6,12 +6,14 @@
 let
   stable-packages = with pkgs.stable; libx.getPlatformList {
     shared = [
-      spotify
     ];
     "darwin" = [ ];
     "linux" = [
-      rustdesk # Teamviewer alternative
+    ];
+    "x86_64-linux" = [
+      spotify
       slack
+      rustdesk # Teamviewer alternative
       zoom-us
       vlc
       figma-linux
@@ -23,13 +25,15 @@ let
   unstable-packages = with pkgs; libx.getPlatformList {
     "shared" = [
       tuba
+    ];
+    "linux" = [
+      smart-open # TODO: This *should* work on macos, but currently doesn't
+    ];
+    "x86_64-linux" = [
       (discord.override {
         withOpenASAR = true;
         withVencord = true;
       })
-    ];
-    "linux" = [
-      smart-open # TODO: This *should* work on macos, but currently doesn't
       heroic
       xivlauncher
       protontweaks

@@ -5,11 +5,6 @@
   imports = [ ];
 
   environment.systemPackages = with pkgs; [
-    vim
-    git
-    killall
-    gnumake
-    gnupg
     apple-cursor
   ];
 
