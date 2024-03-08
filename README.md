@@ -2,19 +2,23 @@
 
 These computers are managed by this Nix flake ❄️
 
-|  Hostname   |                Board                |            CPU            | RAM  |       Primary GPU        | Secondary GPU |  Role  | OS  | State |
-| :---------: | :---------------------------------: | :-----------------------: | :--: | :----------------------: | :-----------: | :----: | :-: | :---: |
-| `phantasm`  |      [Z690-A][Phantasm-Board]       | [i6-12700K][Phantasm-CPU] | 32GB | [RTX 3080][Phantasm-GPU] | Intel UHD 770 |   🖥️   | ❄️  |  ✅   |
-|  `spectre`  | [Macbook Air M1 13"][Spectre-Board] |    Apple M1 8-core CPU    | 16GB |   Apple M1 8-core GPU    |      N/A      | 🎭️💻️ | ❄️  |  🚧   |
-|  `spectre`  | [Macbook Air M1 13"][Spectre-Board] |    Apple M1 8-core CPU    | 16GB |   Apple M1 8-core GPU    |      N/A      | 🎭️💻️ | 🍏  |  🚧   |
-| `polymorph` |     [Z170 Pro][Polymorph-Board]     | [i5-9600][Polymorph-CPU]  | 16GB |      Intel UHD 630       |      N/A      |   ☁️   | ❄️  |  🚧   |
+|  Hostname   |                Board                |            CPU            | RAM  |       Primary GPU        | Secondary GPU |  Role  |  OS  | State |
+| :---------: | :---------------------------------: | :-----------------------: | :--: | :----------------------: | :-----------: | :----: | :--: | :---: |
+| `phantasm`  |      [Z690-A][Phantasm-Board]       | [i6-12700K][Phantasm-CPU] | 32GB | [RTX 3080][Phantasm-GPU] | Intel UHD 770 |   🖥️   |  ❄️  |  ✅   |
+|  `spectre`  | [Macbook Air M1 13"][Spectre-Board] |    Apple M1 8-core CPU    | 16GB |   Apple M1 8-core GPU    |      N/A      | 🎭️💻️ | ❄️🍏 |  🚧   |
+| `polymorph` |     [Z170 Pro][Polymorph-Board]     | [i5-9600][Polymorph-CPU]  | 16GB |      Intel UHD 630       |      N/A      |   ☁️   |  ❄️  |  🚧   |
 
-**Key**
+**Role Key**
 
 - 🎭️ : Dual boot
 - 🖥️ : Desktop
 - 💻️ : Laptop
 - ☁️ : Server
+
+**OS Key**
+
+- ❄️ : NixOS
+- 🍏 : OSX
 
 ## Prerequisites
 
