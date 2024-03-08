@@ -19,6 +19,7 @@
       dbaeumer.vscode-eslint
       tamasfe.even-better-toml
       bradlc.vscode-tailwindcss
+      hashicorp.terraform
     ]
     ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
