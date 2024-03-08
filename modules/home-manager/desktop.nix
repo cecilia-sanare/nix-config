@@ -77,6 +77,10 @@ in
       '';
     };
 
+    dconf.settings = {
+      "org/gnome/shell".favorite-apps = cfg.systemFavorites ++ cfg.favorites;
+    };
+
     home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {
       source = if builtins.typeOf cfg.picture == "path" then cfg.picture else
       builtins.fetchurl {

@@ -11,6 +11,20 @@
     inputs.apple-silicon-support.overlays.apple-silicon-overlay
   ];
 
+  nixpkgs.config.allowUnsupportedSystem = true;
+
+  programs.dconf.profiles.user.databases =
+    let
+      inherit (lib.gvariant) mkInt32;
+    in
+  [{
+    settings = {
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        dash-max-icon-size = mkInt32 50;
+      };
+    };
+  }];
+
   # TODO: Disable this on nix-desktop
   hardware.opengl.driSupport32Bit = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = false;
