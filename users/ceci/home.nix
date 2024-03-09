@@ -39,6 +39,9 @@ let
       xivlauncher
       protontweaks
     ];
+    "aarch64-linux" = [
+      vesktop
+    ];
   };
 in
 {

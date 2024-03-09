@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ lib, inputs, ... }: {
+{ lib, inputs, pkgs, ... }: {
   imports = [
     inputs.apple-silicon-support.nixosModules.default
     ./hardware.nix
@@ -10,6 +10,10 @@
   nixpkgs.overlays = [
     inputs.apple-silicon-support.overlays.apple-silicon-overlay
   ];
+
+  environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 
   nixpkgs.config.allowUnsupportedSystem = true;
 
