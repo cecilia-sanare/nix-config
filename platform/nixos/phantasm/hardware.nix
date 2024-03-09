@@ -50,16 +50,10 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home" =
-    {
+  fileSystems."/home" = {
       device = "/dev/disk/by-uuid/02f0a0ba-0022-48d6-a283-43074ada8681";
       fsType = "ext4";
     };
-
-  fileSystems."/mnt/media" = {
-    device = "/dev/disk/by-uuid/8684aa26-feec-4a16-af91-07d69ef2979d";
-    fsType = "ext4";
-  };
 
   swapDevices = [ ];
 
