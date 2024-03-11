@@ -1,6 +1,9 @@
 # Default Shared Configuration
-{ username, desktop, platform, stateVersion, config, pkgs, ... }:
+{ username, desktop, platform, stateVersion, config, pkgs, mkDefault, lib, ... }:
 
+let
+  inherit (lib) mkDefault;
+in
 {
   imports = [ ];
 
@@ -30,7 +33,7 @@
     inherit (desktop) type preset;
     sleep = false;
 
-    workspaces.number = 1;
+    workspaces.number = mkDefault 1;
   };
 
   time.timeZone = "America/Chicago";

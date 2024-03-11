@@ -14,6 +14,8 @@
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
   };
+  
+  nix-desktop.workspaces.dynamic = true;
 
   programs.dconf.profiles.user.databases =
     let
