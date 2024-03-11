@@ -63,8 +63,10 @@ in
       };
     };
 
-  config = mkIf cfg.enable {
-    home.pointerCursor = mkIf (libx.isLinux && cfg.cursor.enable) {
+  config = let 
+    cursorEnable = libx.isLinux && cfg.cursor.enable;
+  in mkIf cfg.enable {
+    home.pointerCursor = mkIf (cursorEnable) {
       gtk.enable = true;
       x11.enable = true;
       inherit (cfg.cursor) name;
@@ -79,6 +81,9 @@ in
 
     dconf.settings = {
       "org/gnome/shell".favorite-apps = cfg.systemFavorites ++ cfg.favorites;
+      "org/gnome/desktop/interface" = mkIf(cursorEnable) {
+        cursor-theme = cfg.cursor.name;
+      };
     };
 
     home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {
