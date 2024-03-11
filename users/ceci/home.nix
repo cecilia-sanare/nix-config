@@ -20,6 +20,9 @@ let
       obs-studio
       caprine-bin # Facebook Messenger App
     ];
+    "aarch64-linux" = [
+      spot # Spotify Open Source Client that supports ARM
+    ];
   };
 
   unstable-packages = with pkgs; libx.getPlatformList {
