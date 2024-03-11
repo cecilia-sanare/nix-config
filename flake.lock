@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709955462,
-        "narHash": "sha256-eDE8np8VhJXFc9KEb8EAkybAotGxSOj5wxilT+9Xj6c=",
+        "lastModified": 1710133041,
+        "narHash": "sha256-PS1iJtVnBilTS5degn3KYk5x/IH2GJtzNewOVRZv4G4=",
         "owner": "cecilia-sanare",
         "repo": "nix-desktop",
-        "rev": "8974b04b8ca262f883a8953b4f5448048f9e232d",
+        "rev": "0d3e66df3118ea8da935f670e0ab0c74d7eebf1f",
         "type": "github"
       },
       "original": {

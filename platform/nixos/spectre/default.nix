@@ -15,8 +15,6 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
-  nixpkgs.config.allowUnsupportedSystem = true;
-
   programs.dconf.profiles.user.databases =
     let
       inherit (lib.gvariant) mkInt32;
