@@ -12,6 +12,7 @@ in
   options.dotfiles.drivers.nvidia = mkOption {
     description = "Enable nvidia gpu support with the given driver";
     type = nullOr(types.enum(["nvidia" "mesa"]));
+    default = null;
   };
 
   config = mkMerge [
