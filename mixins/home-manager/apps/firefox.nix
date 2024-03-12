@@ -19,7 +19,7 @@ mkIf libx.isLinux {
         buster-captcha-solver
         clearurls
         onepassword-password-manager
-        # predirect
+        libredirect
         react-devtools
         reduxdevtools
         translate-web-pages
