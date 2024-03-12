@@ -52,7 +52,7 @@
         iso-desktop = libx.hosts.mkLinux { hostname = "iso-desktop"; username = "nixos"; };
         # Workstations
         phantasm = libx.hosts.mkLinux { hostname = "phantasm"; username = "ceci"; };
-        spectre = libx.hosts.mkLinux { hostname = "spectre"; username = "ceci"; platform = "aarch64-linux"; };
+        spectre = libx.hosts.mkLinux { hostname = "spectre"; username = "ceci"; platform = "aarch64-linux"; portable = true; };
         # Servers
         polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "kodi"; desktop = "kodi"; };
         # VMs

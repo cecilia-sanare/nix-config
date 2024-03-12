@@ -31,7 +31,8 @@ in
   nix-desktop = {
     enable = true;
     inherit (desktop) type preset;
-    sleep = false;
+    # Disable sleep if this isn't a portable device
+    sleep = desktop.isPortable;
 
     workspaces.number = mkDefault 1;
   };

@@ -78,9 +78,10 @@ let
     shared-modules ++ platform-modules;
 
   # Creates the desktop wrapper for linux
-  mkDesktop = { desktop, preset }: {
+  mkDesktop = { desktop, preset, portable }: {
     type = desktop;
     inherit preset;
+    isPortable = portable;
     isHeadless = desktop == null;
     isNotHeadless = desktop != null;
     isGnome = desktop == "gnome";
@@ -116,7 +117,7 @@ let
       };
     };
 
-  mkLinux = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "x86_64-linux" }:
+  mkLinux = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "x86_64-linux", portable ? false }:
     let
       inherit (inputs.nixpkgs) lib;
     in
@@ -127,7 +128,7 @@ let
         vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
 
         desktop = mkDesktop {
-          inherit desktop preset;
+          inherit desktop preset portable;
         };
 
         libx = mkLibx { inherit iso platform; };
