@@ -40,7 +40,6 @@ let
       })
       heroic
       xivlauncher
-      protontweaks
     ];
     "aarch64-linux" = [
       vesktop

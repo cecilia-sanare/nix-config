@@ -53,6 +53,7 @@ let
           inputs.nix-desktop.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
           inputs.nix-flatpak.nixosModules.nix-flatpak
+          inputs.protontweaks.nixosModules.protontweaks
           ../platform/nixos
           ../modules/platform/nixos
         ]

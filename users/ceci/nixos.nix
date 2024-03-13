@@ -18,4 +18,6 @@
     enableExcludeWrapper = true;
     package = pkgs.mullvad-vpn;
   };
+
+  services.protontweaks.enable = true;
 }
