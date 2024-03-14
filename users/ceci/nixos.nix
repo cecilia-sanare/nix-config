@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ username, pkgs, ... }:
+{ username, pkgs, platform, ... }:
 
 {
   imports = [
@@ -19,5 +19,5 @@
     package = pkgs.mullvad-vpn;
   };
 
-  services.protontweaks.enable = true;
+  services.protontweaks.enable = platform == "x86_64-linux";
 }

@@ -1,5 +1,8 @@
 { config, ... }:
 
+let
+  isNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
+in
 {
   imports = [
     ../_core.nix
@@ -12,6 +15,6 @@
       defaultNetwork.settings.dns_enabled = true;
     };
 
-    virtualisation.containers.cdi.dynamic.nvidia.enable = true;
+    virtualisation.containers.cdi.dynamic.nvidia.enable = isNvidia;
   };
 }

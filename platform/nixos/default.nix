@@ -5,7 +5,10 @@ let
   inherit (lib) mkDefault;
 in
 {
-  imports = [ ];
+  imports = [
+    ../../mixins/nixos/shells/fish
+    ../../mixins/nixos/containers/podman/unstable.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     apple-cursor

@@ -26,6 +26,7 @@
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
     useExperimentalGPUDriver = true;
+    setupAsahiSound = true;
     # This makes us HAVE to use --impure :<
     experimentalGPUInstallMode = "replace";
   };

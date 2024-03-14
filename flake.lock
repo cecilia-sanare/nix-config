@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710259588,
-        "narHash": "sha256-pmngRM/ButikNol1aPVCgmz+TA0mIHXiXBw6oDYkFB8=",
+        "lastModified": 1710387599,
+        "narHash": "sha256-51lm+GD3PIOz65nmtoJUpdJkteS0gOX6fotUusjAPoE=",
         "owner": "cecilia-sanare",
         "repo": "nix-desktop",
-        "rev": "fbe6acd4540f1d843bcf6fd84705a1a1a3bde548",
+        "rev": "bf0454dc704a650d15ffaa365c2f7655be1871c4",
         "type": "github"
       },
       "original": {
@@ -340,11 +340,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710295120,
-        "narHash": "sha256-713WXc7VCbZe3OsSF1dHezWqhTboDwGAjPgnqFM4j10=",
+        "lastModified": 1710381772,
+        "narHash": "sha256-NUMqZupVOPchSyWTfD9VNvsR+unHle2uQXiOD2+zmmA=",
         "owner": "rain-cafe",
         "repo": "protontweaks",
-        "rev": "a49fe53e9a0a393b631755f5c148e97fa8525b8f",
+        "rev": "ce2f2dc21b4ae252994da5d485d1de6c0f96b9af",
         "type": "github"
       },
       "original": {
