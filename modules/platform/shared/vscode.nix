@@ -36,6 +36,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.shellAliases = mkIf(cfg.open-source) {
+      code = "codium";
+    };
+
     environment.systemPackages = with pkgs; [
       (vscode-with-extensions.override {
         vscode = cfg.package;
