@@ -2,12 +2,6 @@
 
 {
   users.defaultUserShell = pkgs.nushell;
-  # programs.fish.enable = true;
-
-  # environment.systemPackages = with pkgs; [
-  #   fishPlugins.grc
-  #   grc
-  # ];
 
   home-manager.sharedModules = [{
     programs.nix-index = {

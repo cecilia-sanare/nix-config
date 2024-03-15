@@ -4,12 +4,23 @@ with lib;
 
 let
   cfg = config.dotfiles.apps.vscode;
+  package = {
+    inherit (pkgs) vscode vscodium;
+  }.${if cfg.open-source then "vscodium" else "vscode"};
 in
 {
   options.dotfiles.apps.vscode = with types; {
     enable = mkEnableOption "vscode";
 
-    latest = mkEnableOption "latest release";
+    open-source = mkEnableOption "vscodium" // {
+      default = true;
+    };
+
+    package = mkOption {
+      description = "The package to use";
+      type = types.package;
+      default = package;
+    };
 
     extensions = mkOption {
       description = "The extensions you'd like to enable";
@@ -27,6 +38,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       (vscode-with-extensions.override {
+        vscode = cfg.package;
         vscodeExtensions = cfg.extensions;
       })
     ];
