@@ -12,18 +12,6 @@
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "kodi";
 
-  dotfiles.apps.traefik = {
-    enable = true;
-    containers = true;
-
-    letsencrypt = {
-      enable = true;
-      email = "admin@sanare.dev";
-      provider = "route53";
-      domains = [ "*.sanare.dev" ];
-    };
-  };
-
   services.mullvad-vpn = {
     enable = true;
     enableExcludeWrapper = true;
