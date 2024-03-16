@@ -54,7 +54,7 @@
         phantasm = libx.hosts.mkLinux { hostname = "phantasm"; username = "ceci"; };
         spectre = libx.hosts.mkLinux { hostname = "spectre"; username = "ceci"; platform = "aarch64-linux"; portable = true; };
         # Servers
-        polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "kodi"; desktop = "kodi"; };
+        polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "kodi"; };
         # VMs
         vm = libx.hosts.mkLinux { hostname = "vm"; username = "test"; };
       };
