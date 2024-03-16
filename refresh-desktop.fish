@@ -17,6 +17,5 @@ else if test "$DESKTOP" = "gnome"
         "Gnome is generally well behaved and doesn't require restarting, however the following command may be ran if necessary...\n" \
         "   \$ killall -3 gnome-shell"
 else
-    echo "Unknown desktop environment! ($DESKTOP)"
-    exit 1
+    echo "Terminal detected, skipping..."
 end

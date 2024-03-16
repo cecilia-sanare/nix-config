@@ -67,3 +67,9 @@ else
     echo 2> "Unknown OS! ($OS)"
     exit 1
 fi
+
+if [ $HOST = "polymorph" ]; then
+    touch /home/kodi/acme.json
+    sudo chown kodi:users /home/kodi/acme.json
+    sudo chmod 600 /home/kodi/acme.json
+fi
