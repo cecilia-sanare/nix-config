@@ -7,10 +7,11 @@
     ../../../mixins/nixos/containers/podman/unstable.nix
   ];
 
-  # TODO: Make this start jellyfin via docker
-
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "kodi";
+
+  # Traefik Ports
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 
   services.mullvad-vpn = {
     enable = true;

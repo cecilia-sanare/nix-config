@@ -12,8 +12,6 @@
     gnome.gnome-tweaks
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
-
   dotfiles.displays = [
     {
       name = "DP-4";
