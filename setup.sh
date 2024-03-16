@@ -14,7 +14,16 @@ OS=$(uname -o)
 
 REPOS_DIR=$HOME/repos
 REPO_DIR=$REPOS_DIR/nix-config
-HOST_DIR=$REPO_DIR/hosts/$HOST
+
+if [ $OS = "GNU/Linux" ]; then
+    HOST_DIR=$REPO_DIR/platform/nixos/$HOST
+elif [ $OS = "Darwin" ]; then
+    HOST_DIR=$REPO_DIR/platform/nix-darwin/$HOST
+else
+    echo 2> "Unknown OS! ($OS)"
+    exit 1
+fi
+
 
 mkdir -p $REPOS_DIR > /dev/null
 
@@ -30,9 +39,9 @@ fi
 cd $REPO_DIR
 
 if [ -d "/etc/nixos" ]; then
-    if [ ! -e "$HOST_DIR/hardware-configuration.nix" ]; then
+    if [ ! -e "$HOST_DIR/hardware.nix" ]; then
         echo "Unable to locate hardware config, pulling from NixOS..."
-        sudo cp /etc/nixos/hardware-configuration.nix $HOST_DIR/hardware-configuration.nix
+        sudo cp /etc/nixos/hardware-configuration.nix $HOST_DIR/hardware.nix
     fi
 
     echo "/etc/nixos detected, removing to replace with symlink..."
