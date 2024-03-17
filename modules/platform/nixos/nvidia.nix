@@ -1,22 +1,22 @@
-{ inputs, lib, config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.dotfiles.drivers;
   isNvidia = cfg.nvidia == "nvidia";
   isMesa = cfg.nvidia == "mesa";
 
-  inherit (lib) mkEnableOption mkOption mkIf types mkMerge;
+  inherit (lib) mkOption mkIf types mkMerge;
   inherit (types) nullOr;
 in
 {
   options.dotfiles.drivers.nvidia = mkOption {
     description = "Enable nvidia gpu support with the given driver";
-    type = nullOr(types.enum(["nvidia" "mesa"]));
+    type = nullOr (types.enum [ "nvidia" "mesa" ]);
     default = null;
   };
 
   config = mkMerge [
-    (mkIf (isNvidia) {
+    (mkIf isNvidia {
       services.xserver.videoDrivers = lib.mkDefault [ "nvidia" ];
       hardware.opengl.extraPackages = with pkgs; [
         vaapiVdpau
@@ -49,10 +49,10 @@ in
       };
     })
     # NOTE: Still a WIP, not currently working
-    (mkIf (isMesa) {
+    (mkIf isMesa {
       # Current LTS Kernel
       boot.kernelPackages = pkgs.linuxPackages;
-      
+
       # Enable Nvidia drivers
       boot.blacklistedKernelModules = [ "nvidia" "nvidia_uvm" ];
       boot.initrd.kernelModules = [ "nouveau" ];

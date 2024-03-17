@@ -1,7 +1,7 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ lib, inputs, pkgs, ... }: {
+{ lib, inputs, ... }: {
   imports = [
     inputs.apple-silicon-support.nixosModules.default
     ./hardware.nix
@@ -14,20 +14,20 @@
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
   };
-  
+
   nix-desktop.workspaces.dynamic = true;
 
   programs.dconf.profiles.user.databases =
     let
       inherit (lib.gvariant) mkInt32;
     in
-  [{
-    settings = {
-      "org/gnome/shell/extensions/dash-to-dock" = {
-        dash-max-icon-size = mkInt32 50;
+    [{
+      settings = {
+        "org/gnome/shell/extensions/dash-to-dock" = {
+          dash-max-icon-size = mkInt32 50;
+        };
       };
-    };
-  }];
+    }];
 
   boot.loader.efi.canTouchEfiVariables = false;
 

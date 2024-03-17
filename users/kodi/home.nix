@@ -4,7 +4,7 @@
 { pkgs, libx, ... }:
 
 let
-  stable-packages = with pkgs.stable; [];
+  stable-packages = with pkgs.stable; [ ];
 
   unstable-packages = with pkgs; libx.getPlatformList {
     "shared" = [

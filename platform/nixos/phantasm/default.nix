@@ -4,13 +4,17 @@
 { pkgs, ... }: {
   imports = [
     ./hardware.nix
-    ../../../mixins/nixos/presets/gaming.nix
     # ../../mixins/nixos/apps/runescape.nix
   ];
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
   ];
+
+  dotfiles.gaming = {
+    enable = true;
+    ports.presets = [ "steam" "lidgren" ];
+  };
 
   dotfiles.displays = [
     {

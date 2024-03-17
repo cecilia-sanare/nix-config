@@ -11,7 +11,8 @@
       nix
       home-manager
       nixpkgs-fmt
-      nixd
+      # Why is this not working with nix-env selector??
+      # nixd
     ];
   };
 }

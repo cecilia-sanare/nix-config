@@ -36,7 +36,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.shellAliases = mkIf(cfg.open-source) {
+    environment.shellAliases = mkIf cfg.open-source {
       code = "codium";
     };
 

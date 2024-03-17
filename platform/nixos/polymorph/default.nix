@@ -10,6 +10,11 @@
   services.xserver.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "kodi";
 
+  dotfiles.gaming = {
+    enable = true;
+    ports.presets = [ "steam" "lidgren" ];
+  };
+
   # Traefik Ports
   networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
 

@@ -63,35 +63,37 @@ in
       };
     };
 
-  config = let 
-    cursorEnable = libx.isLinux && cfg.cursor.enable;
-  in mkIf cfg.enable {
-    home.pointerCursor = mkIf (cursorEnable) {
-      gtk.enable = true;
-      x11.enable = true;
-      inherit (cfg.cursor) name;
-      package = pkgs.runCommand "moveUp" { } ''
-        mkdir -p $out/share/icons
-        ln -s ${pkgs.fetchzip {
-          inherit (cfg.cursor) url;
-          inherit (cfg.cursor) hash;
-        }} $out/share/icons/${cfg.cursor.name}
-      '';
-    };
+  config =
+    let
+      cursorEnable = libx.isLinux && cfg.cursor.enable;
+    in
+    mkIf cfg.enable {
+      home.pointerCursor = mkIf cursorEnable {
+        gtk.enable = true;
+        x11.enable = true;
+        inherit (cfg.cursor) name;
+        package = pkgs.runCommand "moveUp" { } ''
+          mkdir -p $out/share/icons
+          ln -s ${pkgs.fetchzip {
+            inherit (cfg.cursor) url;
+            inherit (cfg.cursor) hash;
+          }} $out/share/icons/${cfg.cursor.name}
+        '';
+      };
 
-    dconf.settings = {
-      "org/gnome/shell".favorite-apps = cfg.systemFavorites ++ cfg.favorites;
-      "org/gnome/desktop/interface" = mkIf(cursorEnable) {
-        cursor-theme = cfg.cursor.name;
+      dconf.settings = {
+        "org/gnome/shell".favorite-apps = cfg.systemFavorites ++ cfg.favorites;
+        "org/gnome/desktop/interface" = mkIf cursorEnable {
+          cursor-theme = cfg.cursor.name;
+        };
+      };
+
+      home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {
+        source = if builtins.typeOf cfg.picture == "path" then cfg.picture else
+        builtins.fetchurl {
+          inherit (cfg.picture) url;
+          inherit (cfg.picture) sha256;
+        };
       };
     };
-
-    home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {
-      source = if builtins.typeOf cfg.picture == "path" then cfg.picture else
-      builtins.fetchurl {
-        inherit (cfg.picture) url;
-        inherit (cfg.picture) sha256;
-      };
-    };
-  };
 }

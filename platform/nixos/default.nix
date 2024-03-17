@@ -1,5 +1,5 @@
 # Default Shared Configuration
-{ username, desktop, platform, stateVersion, config, pkgs, mkDefault, lib, ... }:
+{ username, desktop, platform, stateVersion, config, pkgs, lib, ... }:
 
 let
   inherit (lib) mkDefault;

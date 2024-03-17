@@ -8,7 +8,7 @@ in
 {
   options.dotfiles.displays = mkOption {
     description = "The config for each display";
-    type = with types; nullOr ( listOf (submodule {
+    type = with types; nullOr (listOf (submodule {
       options = {
         enable = mkOption {
           description = "Whether this display is enabled";
@@ -59,7 +59,7 @@ in
     default = null;
   };
 
-  config = mkIf(cfg.displays != null) {
+  config = mkIf (cfg.displays != null) {
     # TODO: Figure out why this isn't effecting the greeter
     services.autorandr = {
       enable = true;
