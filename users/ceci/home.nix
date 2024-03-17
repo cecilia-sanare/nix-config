@@ -40,6 +40,7 @@ let
       })
       heroic
       xivlauncher
+      xclicker
     ];
     "aarch64-linux" = [
       vesktop
