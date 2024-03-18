@@ -41,6 +41,7 @@ let
       heroic
       xivlauncher
       xclicker
+      teams-for-linux
     ];
     "aarch64-linux" = [
       vesktop
