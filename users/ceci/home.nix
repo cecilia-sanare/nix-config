@@ -42,6 +42,7 @@ let
       xivlauncher
       xclicker
       teams-for-linux
+      parsec-bin
     ];
     "aarch64-linux" = [
       vesktop
