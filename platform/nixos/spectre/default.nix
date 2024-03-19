@@ -5,6 +5,7 @@
   imports = [
     inputs.apple-silicon-support.nixosModules.default
     ./hardware.nix
+    ../../../mixins/nixos/apps/runescape.nix
   ];
 
   nixpkgs.overlays = [

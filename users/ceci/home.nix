@@ -1,7 +1,7 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ pkgs, libx, ... }:
+{ pkgs, libx, lib, platform, ... }:
 
 let
   stable-packages = with pkgs.stable; libx.getPlatformList {
@@ -46,6 +46,8 @@ let
       vesktop
     ];
   };
+
+  inherit (lib) mkIf;
 in
 {
   imports = [
@@ -58,7 +60,7 @@ in
     "so" = "smart-open";
   };
 
-  services.protontweaks.config = {
+  services.protontweaks.config = mkIf(platform == "x86_64-linux") {
     gamemode = true;
     mangohud = true;
   };
