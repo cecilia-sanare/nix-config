@@ -58,8 +58,7 @@ in
     "so" = "smart-open";
   };
 
-  services.protontweaks = {
-    enable = true;
+  services.protontweaks.config = {
     gamemode = true;
     mangohud = true;
   };
