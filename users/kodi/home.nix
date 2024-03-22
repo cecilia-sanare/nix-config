@@ -16,7 +16,6 @@ let
     "x86_64-linux" = [
       heroic
       # xivlauncher
-      protontweaks
     ];
   };
 in
@@ -31,4 +30,5 @@ in
   };
 
   home.packages = stable-packages ++ unstable-packages;
+  services.protontweaks.enable = true;
 }

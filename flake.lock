@@ -340,11 +340,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1711037111,
-        "narHash": "sha256-z4fM0ShRFREL2tv3oDT7p+PHVwC6k/QypkAnp+obsUA=",
+        "lastModified": 1711122256,
+        "narHash": "sha256-5IczuTIbUuJeBr0fXn6LL1GEtdWnu4IV6MuhasAo+sc=",
         "owner": "rain-cafe",
         "repo": "protontweaks",
-        "rev": "53a73e2df7e66719a5af1bd3e6e884ef392b1e68",
+        "rev": "e836464942d6f6cdce26df1af77c9953bd0878cc",
         "type": "github"
       },
       "original": {
