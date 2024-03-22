@@ -68,6 +68,7 @@
 
     users.${username} = {
       imports = [
+          inputs.protontweaks.homeManagerModules.protontweaks
         ../modules/home-manager
       ]
       # Try to load ../../users/{username}/home.nix

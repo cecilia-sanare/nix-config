@@ -58,6 +58,12 @@ in
     "so" = "smart-open";
   };
 
+  services.protontweaks = {
+    enable = true;
+    gamemode = true;
+    mangohud = true;
+  };
+
   home.packages = stable-packages ++ unstable-packages;
 
   programs.git = {
