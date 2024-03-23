@@ -38,6 +38,7 @@ let
         withOpenASAR = true;
         withVencord = true;
       })
+      qpwgraph
       heroic
       xivlauncher
       xclicker
