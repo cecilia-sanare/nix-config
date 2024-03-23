@@ -4,7 +4,7 @@
 { pkgs, ... }: {
   imports = [
     ./hardware.nix
-    # ../../mixins/nixos/apps/runescape.nix
+    ../../../mixins/nixos/apps/runescape.nix
   ];
 
   environment.systemPackages = with pkgs; [
