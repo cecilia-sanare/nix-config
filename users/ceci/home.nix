@@ -31,6 +31,7 @@ let
       qbittorrent
     ];
     "linux" = [
+      ungoogled-chromium
       smart-open # TODO: This *should* work on macos, but currently doesn't
     ];
     "x86_64-linux" = [
