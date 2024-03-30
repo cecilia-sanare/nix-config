@@ -43,6 +43,7 @@ let
       heroic
       xivlauncher
       xclicker
+      parsec-bin
     ];
     "aarch64-linux" = [
       vesktop
