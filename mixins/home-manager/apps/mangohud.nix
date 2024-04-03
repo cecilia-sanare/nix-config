@@ -20,6 +20,7 @@ mkIf libx.isLinux {
       frame_timing
       mangoapp_steam
       text_outline
+      no_display
     '';
   };
 }

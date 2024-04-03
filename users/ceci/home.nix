@@ -32,6 +32,7 @@ let
     ];
     "linux" = [
       smart-open # TODO: This *should* work on macos, but currently doesn't
+      solaar
     ];
     "x86_64-linux" = [
       (discord.override {
