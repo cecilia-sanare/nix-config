@@ -30,5 +30,4 @@ in
   };
 
   home.packages = stable-packages ++ unstable-packages;
-  services.protontweaks.enable = true;
 }
