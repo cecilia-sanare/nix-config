@@ -17,6 +17,7 @@ in
   nix.optimise.automatic = true;
 
   boot.loader.systemd-boot.enable = true;
+  networking.wireless.enable = true;
   hardware.logitech.wireless.enable = true;
 
   users.users.${username} = {
