@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
+    teams-for-linux
   ];
 
   dotfiles.gaming = {
