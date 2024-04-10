@@ -55,6 +55,13 @@ in
     };
   };
 
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Set your system kind (needed for flakes)

@@ -33,6 +33,7 @@ let
     "linux" = [
       smart-open # TODO: This *should* work on macos, but currently doesn't
       solaar
+      android-tools
     ];
     "x86_64-linux" = [
       (discord.override {
@@ -45,6 +46,7 @@ let
       xivlauncher
       xclicker
       parsec-bin
+      gimp
     ];
     "aarch64-linux" = [
       vesktop
