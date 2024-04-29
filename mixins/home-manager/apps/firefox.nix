@@ -13,7 +13,7 @@ mkIf libx.isLinux {
 
   programs.firefox = {
     enable = true;
-    package = mkIf librewolf pkgs.librewolf;
+    package = if librewolf then pkgs.stable.librewolf else pkgs.stable.firefox;
     profiles.${config.home.username} = {
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         buster-captcha-solver

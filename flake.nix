@@ -27,10 +27,10 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.3.0";
-    protontweaks.url = "github:rain-cafe/protontweaks/main";
+    protontweaks.url = "github:ribbon-studios/protontweaks/main";
     protontweaks.inputs.nixpkgs.follows = "nixpkgs";
 
-    smart-open.url = "github:rain-cafe/smart-open/?ref=v0.1.4";
+    smart-open.url = "github:ribbon-studios/smart-open/?ref=v0.1.4";
     smart-open.inputs.nixpkgs.follows = "nixpkgs";
 
     nurpkgs.url = "github:nix-community/NUR";

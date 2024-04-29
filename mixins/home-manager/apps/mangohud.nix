@@ -21,6 +21,7 @@ mkIf libx.isLinux {
       mangoapp_steam
       text_outline
       no_display
+      round_corners=5
     '';
   };
 }

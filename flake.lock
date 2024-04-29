@@ -272,11 +272,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1709237383,
-        "narHash": "sha256-cy6ArO4k5qTx+l5o+0mL9f5fa86tYUX3ozE1S+Txlds=",
+        "lastModified": 1713537308,
+        "narHash": "sha256-XtTSSIB2DA6tOv+l0FhvfDMiyCmhoRbNB+0SeInZkbk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1536926ef5621b09bba54035ae2bb6d806d72ac8",
+        "rev": "5c24cf2f0a12ad855f444c30b2421d044120c66f",
         "type": "github"
       },
       "original": {
@@ -342,13 +342,13 @@
       "locked": {
         "lastModified": 1711479809,
         "narHash": "sha256-QpqbMK5SHWEgpI76gYZmCT3jbHZYArmFCuSK0AxpTJg=",
-        "owner": "rain-cafe",
+        "owner": "ribbon-studios",
         "repo": "protontweaks",
         "rev": "32175c375b24f6f389506443b90fff75de8f123b",
         "type": "github"
       },
       "original": {
-        "owner": "rain-cafe",
+        "owner": "ribbon-studios",
         "ref": "main",
         "repo": "protontweaks",
         "type": "github"
@@ -398,13 +398,13 @@
       "locked": {
         "lastModified": 1709495357,
         "narHash": "sha256-x73RhMRLqdwn/SpMwpFNpoFT+Gw6J+eG3VEOUpRhYxk=",
-        "owner": "rain-cafe",
+        "owner": "ribbon-studios",
         "repo": "smart-open",
         "rev": "55ebaf96b5e021d08d63171317eb9ecd772fb25c",
         "type": "github"
       },
       "original": {
-        "owner": "rain-cafe",
+        "owner": "ribbon-studios",
         "ref": "v0.1.4",
         "repo": "smart-open",
         "type": "github"

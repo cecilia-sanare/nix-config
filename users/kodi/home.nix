@@ -15,6 +15,7 @@ let
     ];
     "x86_64-linux" = [
       heroic
+      jellyfin-media-player
       # xivlauncher
     ];
   };

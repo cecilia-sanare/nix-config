@@ -1,7 +1,7 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
-{ pkgs, libx, lib, platform, ... }:
+{ pkgs, libx, lib, platform, inputs, ... }:
 
 let
   stable-packages = with pkgs.stable; libx.getPlatformList {
@@ -47,6 +47,7 @@ let
       xclicker
       parsec-bin
       gimp
+      blender
     ];
     "aarch64-linux" = [
       vesktop
