@@ -33,10 +33,26 @@ mkIf libx.isLinux {
 
       search = {
         force = true;
-        default = "DuckDuckGo";
-        privateDefault = "DuckDuckGo";
+        default = "Ecosia";
+        privateDefault = "Ecosia";
 
         engines = {
+          # DuckDuckGo allows microsoft trackers
+          # Ecosia does track and sell your data, in fact most search engines do.
+          # But at the very least the money is going to a good cause.
+          "Ecosia" = {
+            urls = [{
+              template = "https://www.ecosia.org/search";
+              params = [
+                { name = "method"; value = "index"; }
+                { name = "q"; value = "{searchTerms}"; }
+              ];
+            }];
+
+            icon = "https://www.ecosia.org/static/icons/favicon.ico";
+            # definedAliases = [ "@np" ];
+          };
+
           "Nix Packages" = {
             urls = [{
               template = "https://search.nixos.org/packages";
@@ -90,6 +106,7 @@ mkIf libx.isLinux {
         "browser.ctrlTab.recentlyUsedOrder" = false;
         "browser.discovery.enabled" = false;
         "browser.laterrun.enabled" = false;
+        "browser.startup.homepage" = "https://ecosia.org";
         "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" =
           false;
         "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" =
@@ -107,7 +124,7 @@ mkIf libx.isLinux {
         "browser.shell.checkDefaultBrowser" = false;
         "browser.ssb.enabled" = true;
         "browser.toolbars.bookmarks.visibility" = "always";
-        "browser.urlbar.placeholderName" = "DuckDuckGo";
+        "browser.urlbar.placeholderName" = "Ecosia";
         "browser.urlbar.suggest.openpage" = false;
         "datareporting.policy.dataSubmissionEnable" = false;
         "datareporting.policy.dataSubmissionPolicyAcceptedVersion" = 2;
