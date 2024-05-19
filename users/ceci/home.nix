@@ -48,6 +48,15 @@ let
       parsec-bin
       gimp
       blender
+      dolphin-emu
+      (retroarch.override {
+        cores = with libretro; [
+          mupen64plus
+          dolphin
+          pcsx2
+        ];
+      })
+      xemu
     ];
     "aarch64-linux" = [
       vesktop

@@ -340,11 +340,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1711479809,
-        "narHash": "sha256-QpqbMK5SHWEgpI76gYZmCT3jbHZYArmFCuSK0AxpTJg=",
+        "lastModified": 1714586346,
+        "narHash": "sha256-GAWO6W7IoJ0bnwbN1xvGgJQXDJO4DSqeoZzQNvrWreM=",
         "owner": "ribbon-studios",
         "repo": "protontweaks",
-        "rev": "32175c375b24f6f389506443b90fff75de8f123b",
+        "rev": "88555a9fd315c493fc61b0e6b9a8ba46f45f0ecc",
         "type": "github"
       },
       "original": {

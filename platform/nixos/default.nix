@@ -62,6 +62,11 @@ in
     openFirewall = true;
   };
 
+  networking.networkmanager.enable = mkDefault true;
+  boot.extraModulePackages = with config.boot.kernelPackages; [ 
+    config.boot.kernelPackages.rtl8812au
+  ];
+
   networking.firewall.allowedTCPPorts = [ 22 ];
 
   # Set your system kind (needed for flakes)
