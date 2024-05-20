@@ -49,6 +49,7 @@ let
       gimp
       blender
       dolphin-emu
+      mullvad-browser
       (retroarch.override {
         cores = with libretro; [
           mupen64plus
