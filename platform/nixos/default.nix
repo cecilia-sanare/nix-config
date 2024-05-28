@@ -69,6 +69,19 @@ in
 
   networking.firewall.allowedTCPPorts = [ 22 ];
 
+  boot.binfmt.registrations.appimage = {
+    wrapInterpreterInShell = false;
+    interpreter = "${pkgs.appimage-run}/bin/appimage-run";
+    recognitionType = "magic";
+    offset = 0;
+    mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
+    magicOrExtension = ''\x7fELF....AI\x02'';
+  };
+
+  boot.kernelParams = [
+    "kernel.split_lock_mitigate=0"
+  ];
+
   # Set your system kind (needed for flakes)
   nixpkgs.hostPlatform = platform;
 

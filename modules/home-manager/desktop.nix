@@ -86,6 +86,10 @@ in
         "org/gnome/desktop/interface" = mkIf cursorEnable {
           cursor-theme = cfg.cursor.name;
         };
+        "org/gnome/desktop/wm/keybindings" = {
+          switch-group = [];
+          switch-group-backward = [];
+        };
       };
 
       home.file.".face" = mkIf (libx.isLinux && cfg.picture != null) {

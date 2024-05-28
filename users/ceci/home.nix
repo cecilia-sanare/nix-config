@@ -15,10 +15,11 @@ let
       slack
       rustdesk # Teamviewer alternative
       zoom-us
-      vlc
       figma-linux
       obs-studio
       caprine-bin # Facebook Messenger App
+      tor-browser
+      ungoogled-chromium
     ];
     "aarch64-linux" = [
       spot # Spotify Open Source Client that supports ARM
@@ -57,7 +58,9 @@ let
           pcsx2
         ];
       })
+      rpcs3
       xemu
+      megasync
     ];
     "aarch64-linux" = [
       vesktop

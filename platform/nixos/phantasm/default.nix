@@ -1,7 +1,9 @@
 # This is your system's configuration file.
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 
-{ pkgs, ... }: {
+{ pkgs, lib, desktop, ... }: let 
+  inherit (lib) mkIf;
+in {
   imports = [
     ./hardware.nix
     ../../../mixins/nixos/apps/runescape.nix
@@ -11,6 +13,8 @@
     gnome.gnome-tweaks
     teams-for-linux
   ];
+
+  services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" ];
 
   dotfiles.gaming = {
     enable = true;
@@ -42,4 +46,8 @@
     profile = ./configs/Default.goxlr;
     micProfile = ./configs/DEFAULT.goxlrMicProfile;
   };
+
+  services.udev.packages = [
+    pkgs.android-udev-rules
+  ];
 }

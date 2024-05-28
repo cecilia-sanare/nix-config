@@ -8,6 +8,7 @@
     killall
     gnumake
     gnupg
+    ffmpeg
   ];
 
   networking.hostName = hostname;
