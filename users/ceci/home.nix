@@ -6,9 +6,12 @@
 let
   stable-packages = with pkgs.stable; libx.getPlatformList {
     shared = [
+      qbittorrent
     ];
     "darwin" = [ ];
     "linux" = [
+      solaar
+      android-tools
     ];
     "x86_64-linux" = [
       spotify
@@ -20,32 +23,8 @@ let
       caprine-bin # Facebook Messenger App
       tor-browser
       ungoogled-chromium
-    ];
-    "aarch64-linux" = [
-      spot # Spotify Open Source Client that supports ARM
-    ];
-  };
-
-  unstable-packages = with pkgs; libx.getPlatformList {
-    "shared" = [
-      tuba
-      qbittorrent
-    ];
-    "linux" = [
-      smart-open # TODO: This *should* work on macos, but currently doesn't
-      solaar
-      android-tools
-    ];
-    "x86_64-linux" = [
-      (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
-      })
-      lutris
       qpwgraph
       heroic
-      xivlauncher
-      xclicker
       parsec-bin
       gimp
       blender
@@ -58,9 +37,28 @@ let
           pcsx2
         ];
       })
+      lutris
       rpcs3
-      xemu
       megasync
+      xemu
+    ];
+    "aarch64-linux" = [
+      spot # Spotify Open Source Client that supports ARM
+    ];
+  };
+
+  unstable-packages = with pkgs; libx.getPlatformList {
+    "shared" = [
+    ];
+    "linux" = [
+      smart-open # TODO: This *should* work on macos, but currently doesn't
+    ];
+    "x86_64-linux" = [
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+      })
+      xivlauncher
     ];
     "aarch64-linux" = [
       vesktop

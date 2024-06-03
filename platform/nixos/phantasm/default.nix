@@ -12,6 +12,7 @@ in {
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     teams-for-linux
+    modrinth-app
   ];
 
   services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" ];

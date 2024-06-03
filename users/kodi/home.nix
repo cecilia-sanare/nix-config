@@ -4,19 +4,18 @@
 { pkgs, libx, ... }:
 
 let
-  stable-packages = with pkgs.stable; [ ];
-
-  unstable-packages = with pkgs; libx.getPlatformList {
+  stable-packages = with pkgs.stable; libx.getPlatformList {
     "shared" = [
       qbittorrent
     ];
-    "linux" = [
-      smart-open # TODO: This *should* work on macos, but currently doesn't
-    ];
     "x86_64-linux" = [
       heroic
-      jellyfin-media-player
-      # xivlauncher
+    ];
+  };
+
+  unstable-packages = with pkgs; libx.getPlatformList {
+    "linux" = [
+      smart-open # TODO: This *should* work on macos, but currently doesn't
     ];
   };
 in

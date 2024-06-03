@@ -15,6 +15,6 @@ in
       defaultNetwork.settings.dns_enabled = true;
     };
 
-    virtualisation.containers.cdi.dynamic.nvidia.enable = isNvidia;
+    hardware.nvidia-container-toolkit.enable = isNvidia;
   };
 }

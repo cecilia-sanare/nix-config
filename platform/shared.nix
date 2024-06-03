@@ -21,6 +21,20 @@
       inputs.nurpkgs.overlay
       inputs.protontweaks.overlay
       inputs.smart-open.overlay
+      (self: super: {
+        gnome = super.gnome.overrideScope (pself: psuper: {
+          mutter = psuper.mutter.overrideAttrs (oldAttrs: {
+            patches = (oldAttrs.patches or [ ]) ++ [
+              (super.fetchpatch {
+                url = "https://gitlab.gnome.org/GNOME/mutter/-/commit/62396eefd43ecb0c5fde6de5e8ec7d5e77874bea.patch";
+                hash = "sha256-C4tmdmwiMKW3kq0uR3SENWFGPb30mW2rTIZ+gz1i7rc=";
+              })
+            ];
+
+            patchFlags = ["-p1" "-R"];
+          });
+        });
+      })
     ];
 
     config = {

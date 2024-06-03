@@ -82,6 +82,21 @@ in
     "kernel.split_lock_mitigate=0"
   ];
 
+  security.pam.loginLimits = [
+    {
+      domain = "*";
+      type = "soft";
+      item = "memlock";
+      value = "unlimited";
+    }
+    {
+      domain = "*";
+      type = "soft";
+      item = "memlock";
+      value = "unlimited";
+    }
+  ];
+
   # Set your system kind (needed for flakes)
   nixpkgs.hostPlatform = platform;
 
