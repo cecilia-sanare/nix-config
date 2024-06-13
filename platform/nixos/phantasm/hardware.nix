@@ -6,7 +6,7 @@
     "${inputs.hardware}/common/cpu/intel"
   ];
 
-  dotfiles.drivers.nvidia = "nvidia";
+  dotfiles.drivers.nvidia.channel = "beta";
 
   boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   # boot.initrd.kernelModules = [ ];

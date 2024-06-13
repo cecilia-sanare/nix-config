@@ -9,10 +9,12 @@ in {
     ../../../mixins/nixos/apps/runescape.nix
   ];
 
+  services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     teams-for-linux
     modrinth-app
+    piper
   ];
 
   services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" ];

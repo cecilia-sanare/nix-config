@@ -1,18 +1,26 @@
 { lib, config, pkgs, ... }:
 
 let
-  cfg = config.dotfiles.drivers;
-  isNvidia = cfg.nvidia == "nvidia";
-  isMesa = cfg.nvidia == "mesa";
+  cfg = config.dotfiles.drivers.nvidia;
+  isNvidia = cfg.source == "nvidia";
+  isMesa = cfg.source == "mesa";
 
   inherit (lib) mkOption mkIf types mkMerge;
   inherit (types) nullOr;
 in
 {
-  options.dotfiles.drivers.nvidia = mkOption {
-    description = "Enable nvidia gpu support with the given driver";
-    type = nullOr (types.enum [ "nvidia" "mesa" ]);
-    default = null;
+  options.dotfiles.drivers.nvidia = {
+    source = mkOption {
+      description = "Enable nvidia gpu support with the given driver";
+      type = nullOr (types.enum [ "nvidia" "mesa" ]);
+      default = "nvidia";
+    };
+
+    channel = mkOption {
+      description = "Enable nvidia gpu support with the given driver";
+      type = nullOr (types.enum [ "stable" "beta" ]);
+      default = "stable";
+    };
   };
 
   config = mkMerge [
@@ -23,7 +31,7 @@ in
       ];
 
       hardware.nvidia = {
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
+        package = config.boot.kernelPackages.nvidiaPackages.${cfg.channel};
         modesetting.enable = true;
         forceFullCompositionPipeline = true;
 

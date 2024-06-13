@@ -39,6 +39,10 @@ in
     sleep = desktop.isPortable;
 
     workspaces.number = mkDefault 1;
+
+    default-apps = {
+      browser = "firefox.desktop";
+    };
   };
 
   time.timeZone = "America/Chicago";

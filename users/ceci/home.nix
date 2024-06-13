@@ -41,6 +41,8 @@ let
       rpcs3
       megasync
       xemu
+      distrobox
+      boxbuddy
     ];
     "aarch64-linux" = [
       spot # Spotify Open Source Client that supports ARM
@@ -59,6 +61,13 @@ let
         withVencord = true;
       })
       xivlauncher
+      (prismlauncher.override { 
+        jdks = [ 
+          temurin-bin-21
+          temurin-bin-8
+          temurin-bin-17
+        ];
+      })
     ];
     "aarch64-linux" = [
       vesktop

@@ -21,6 +21,7 @@
       bradlc.vscode-tailwindcss
       hashicorp.terraform
       kelvin.vscode-sshfs
+      redhat.java
     ]
     ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
