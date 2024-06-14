@@ -41,8 +41,6 @@ let
       rpcs3
       megasync
       xemu
-      distrobox
-      boxbuddy
     ];
     "aarch64-linux" = [
       spot # Spotify Open Source Client that supports ARM
