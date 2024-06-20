@@ -83,6 +83,7 @@ let
     type = desktop;
     inherit preset;
     isPortable = portable;
+    isNotPortable = !portable;
     isHeadless = desktop == null;
     isNotHeadless = desktop != null;
     isGnome = desktop == "gnome";

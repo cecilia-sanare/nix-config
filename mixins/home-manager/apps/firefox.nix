@@ -27,6 +27,7 @@ mkIf libx.isLinux {
         refined-github
         bypass-paywalls-clean
         sponsorblock
+        violentmonkey
         # # Missing:
         # pwas-for-firefox
       ];

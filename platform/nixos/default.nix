@@ -67,9 +67,10 @@ in
   };
 
   networking.networkmanager.enable = mkDefault true;
-  boot.extraModulePackages = with config.boot.kernelPackages; [ 
-    config.boot.kernelPackages.rtl8812au
-  ];
+  # Doesn't work on latest linux kernel
+  # boot.extraModulePackages = with config.boot.kernelPackages; [ 
+  #   config.boot.kernelPackages.rtl8812au
+  # ];
 
   networking.firewall.allowedTCPPorts = [ 22 ];
 

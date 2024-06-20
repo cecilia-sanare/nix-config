@@ -21,7 +21,7 @@
       inputs.nurpkgs.overlay
       inputs.protontweaks.overlay
       inputs.smart-open.overlay
-      (self: super: {
+    ] ++ lib.optional desktop.isNotPortable (self: super: {
         gnome = super.gnome.overrideScope (pself: psuper: {
           mutter = psuper.mutter.overrideAttrs (oldAttrs: {
             # Fixes the stutter issue present in the following:
@@ -37,8 +37,7 @@
             patchFlags = ["-p1" "-R"];
           });
         });
-      })
-    ];
+      });
 
     config = {
       allowUnfree = true;
