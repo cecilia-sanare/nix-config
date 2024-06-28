@@ -15,6 +15,7 @@ mkIf libx.isLinux {
       cpu_stats
       fps
       frametime
+      vulkan_driver
       throttling_status
       gpu_name
       frame_timing

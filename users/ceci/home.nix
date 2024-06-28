@@ -4,6 +4,12 @@
 { pkgs, libx, lib, platform, inputs, ... }:
 
 let
+  master-packages = with pkgs.master; libx.getPlatformList {
+    "x86_64-linux" = [
+      xivlauncher
+    ];
+  };
+
   stable-packages = with pkgs.stable; libx.getPlatformList {
     shared = [
       qbittorrent
@@ -58,7 +64,6 @@ let
         withOpenASAR = true;
         withVencord = true;
       })
-      xivlauncher
       (prismlauncher.override { 
         jdks = [ 
           temurin-bin-21
@@ -90,7 +95,7 @@ in
     mangohud = true;
   };
 
-  home.packages = stable-packages ++ unstable-packages;
+  home.packages = stable-packages ++ unstable-packages ++ master-packages;
 
   programs.git = {
     enable = true;

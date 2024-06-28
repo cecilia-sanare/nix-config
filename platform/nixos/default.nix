@@ -14,6 +14,9 @@ in
     apple-cursor
   ];
 
+  # This is for Mesa 24.1
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   nix.optimise.automatic = true;
 
   boot.loader.systemd-boot.enable = true;
@@ -67,7 +70,7 @@ in
   };
 
   networking.networkmanager.enable = mkDefault true;
-  # Doesn't work on latest linux kernel
+  # NOTE: Fails to build in latest linux kernel (linksys wifi adapter)
   # boot.extraModulePackages = with config.boot.kernelPackages; [ 
   #   config.boot.kernelPackages.rtl8812au
   # ];
