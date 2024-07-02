@@ -15,8 +15,8 @@
     ports.presets = [ "steam" "lidgren" ];
   };
 
-  # Traefik Ports
-  networking.firewall.allowedTCPPorts = [ 80 443 8080 ];
+  # Traefik Ports & Jellyfin Port for Offline Mode
+  networking.firewall.allowedTCPPorts = [ 80 443 8080 8096 ];
 
   services.mullvad-vpn = {
     enable = true;

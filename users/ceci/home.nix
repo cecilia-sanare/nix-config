@@ -18,8 +18,10 @@ let
     "linux" = [
       solaar
       android-tools
+      autokey
     ];
     "x86_64-linux" = [
+      vesktop
       spotify
       slack
       rustdesk # Teamviewer alternative
@@ -60,10 +62,6 @@ let
       smart-open # TODO: This *should* work on macos, but currently doesn't
     ];
     "x86_64-linux" = [
-      (discord.override {
-        withOpenASAR = true;
-        withVencord = true;
-      })
       (prismlauncher.override { 
         jdks = [ 
           temurin-bin-21
@@ -198,7 +196,7 @@ in
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"
       "codium.desktop"
-      "discord.desktop"
+      "vesktop.desktop"
     ];
 
     picture = {
