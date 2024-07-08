@@ -11,7 +11,7 @@ in {
 
   services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    gnome-tweaks
     teams-for-linux
     modrinth-app
     piper

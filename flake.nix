@@ -15,7 +15,7 @@
 
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
 
-    nix-desktop.url = "github:cecilia-sanare/nix-desktop/main";
+    nix-desktop.url = "github:cecilia-sanare/nix-desktop/unstable";
     nix-desktop.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/master";

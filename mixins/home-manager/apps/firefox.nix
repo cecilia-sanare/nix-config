@@ -25,7 +25,6 @@ mkIf libx.isLinux {
         translate-web-pages
         ublock-origin
         refined-github
-        bypass-paywalls-clean
         sponsorblock
         violentmonkey
         # # Missing:

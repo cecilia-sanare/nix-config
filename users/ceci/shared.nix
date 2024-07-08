@@ -11,7 +11,8 @@
     enable = true;
     extensions = with vscode-extensions.open-vsx; [
       arrterian.nix-env-selector
-      jnoortheen.nix-ide
+      # TODO: Build errors
+      # jnoortheen.nix-ide
       oven.bun-vscode
       rust-lang.rust-analyzer
       esbenp.prettier-vscode
