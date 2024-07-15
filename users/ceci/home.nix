@@ -7,6 +7,7 @@ let
   master-packages = with pkgs.master; libx.getPlatformList {
     "x86_64-linux" = [
       xivlauncher
+      fflogs
     ];
   };
 
