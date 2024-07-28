@@ -116,6 +116,8 @@ mkIf libx.isLinux {
         "extensions.getAddons.showPane" = false;
         "extensions.htmlaboutaddons.recommendations.enabled" = false;
         "extensions.pocket.enabled" = false;
+        "extensions.pictureinpicture.enable_picture_in_picture_overrides" = true;
+        "services.sync.prefs.sync-seen.media.videocontrols.picture-in-picture.video-toggle.enabled" = true;
         "identity.fxaccounts.enabled" = true;
         "privacy.trackingprotection.enabled" = true;
         "privacy.trackingprotection.socialtracking.enabled" = true;
