@@ -40,6 +40,7 @@ let
       mullvad-browser
       (retroarch.override {
         cores = with libretro; [
+          snes9x
           mupen64plus
           dolphin
           pcsx2
