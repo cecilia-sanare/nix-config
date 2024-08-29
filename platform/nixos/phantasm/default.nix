@@ -12,7 +12,8 @@ in {
   services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
     gnome-tweaks
-    teams-for-linux
+    # Electron EOL: https://github.com/NixOS/nixpkgs/issues/322636
+    # teams-for-linux
     modrinth-app
     piper
   ];

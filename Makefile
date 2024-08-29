@@ -58,3 +58,6 @@ endif
 
 update:
 	@nix flake lock --update-input nix-desktop --update-input protontweaks
+
+update-nix:
+	@nix flake lock --update-input nixpkgs --update-input nixpkgs-master --update-input nixpkgs-stable
