@@ -31,7 +31,6 @@ let
       obs-studio
       caprine-bin # Facebook Messenger App
       tor-browser
-      ungoogled-chromium
       qpwgraph
       heroic
       parsec-bin
