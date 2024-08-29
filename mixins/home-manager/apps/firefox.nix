@@ -4,16 +4,21 @@
 { config, lib, libx, pkgs, ... }:
 let
   inherit (lib) mkIf;
-  librewolf = false;
+  variant = "floorp";
+  firefox = {
+    librewolf = pkgs.stable.librewolf;
+    firefox = pkgs.stable.firefox;
+    floorp = pkgs.stable.floorp;
+  }.${variant};
 in
 mkIf libx.isLinux {
-  home.shellAliases = mkIf librewolf {
-    "firefox" = "librewolf";
+  home.shellAliases = mkIf (variant != "firefox") {
+    "firefox" = variant;
   };
 
   programs.firefox = {
     enable = true;
-    package = if librewolf then pkgs.stable.librewolf else pkgs.stable.firefox;
+    package = firefox;
     profiles.${config.home.username} = {
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         buster-captcha-solver
