@@ -55,7 +55,7 @@ in
     };
 
     presets = mkOption {
-      description = "The port presets you'd like to ally";
+      description = "The port presets you'd like to apply";
       type = listOf (types.enum [ "steam" "lidgren" ]);
       default = [ ];
     };
@@ -67,13 +67,6 @@ in
       udp-ports = cfg.ports.udp ++ getPortsFromPresets "udp";
     in
     mkIf (cfg.enable && cfg.ports.enable) {
-      programs.steam.enable = true;
-      programs.steam.gamescopeSession.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        protonup-qt
-      ];
-
       networking.firewall.allowedTCPPorts = tcp-ports;
       networking.firewall.allowedUDPPorts = udp-ports;
     };
