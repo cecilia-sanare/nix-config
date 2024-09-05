@@ -48,6 +48,12 @@ in
     };
   };
 
+  specialisation = {
+    wayland.configuration = {
+      nix-desktop.nvidia.allow-wayland = true;
+    };
+  };
+
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 
