@@ -21,6 +21,14 @@ let
         27036
       ];
     };
+    "satisfactory" = {
+      tcp = [
+        7777
+      ];
+      udp = [
+        7777
+      ];
+    };
     "lidgren" = {
       tcp = [
         9876
@@ -56,7 +64,7 @@ in
 
     presets = mkOption {
       description = "The port presets you'd like to apply";
-      type = listOf (types.enum [ "steam" "lidgren" ]);
+      type = listOf (types.enum [ "steam" "lidgren" "satisfactory" ]);
       default = [ ];
     };
   };

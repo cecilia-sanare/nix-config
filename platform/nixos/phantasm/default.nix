@@ -12,16 +12,20 @@ in {
   services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
     gnome-tweaks
-    teams-for-linux
     modrinth-app
     piper
+    # Java 21, 17, 8 for Modrinth
+    zulu
+    zulu17
+    zulu8
+    ns-usbloader
   ];
 
-  services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" ];
+  services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" "io.github.marco_calautti.DeltaPatcher" ];
 
   dotfiles.gaming = {
     enable = true;
-    ports.presets = [ "steam" "lidgren" ];
+    ports.presets = [ "steam" "lidgren" "satisfactory" ];
   };
 
   dotfiles.displays = [

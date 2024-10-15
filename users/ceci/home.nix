@@ -25,7 +25,6 @@ let
       vesktop
       spotify
       slack
-      rustdesk # Teamviewer alternative
       zoom-us
       figma-linux
       obs-studio
@@ -36,7 +35,6 @@ let
       parsec-bin
       gimp
       blender
-      dolphin-emu
       mullvad-browser
       (retroarch.override {
         cores = with libretro; [
@@ -46,6 +44,7 @@ let
           pcsx2
         ];
       })
+      ryujinx
       lutris
       rpcs3
       megasync
@@ -70,6 +69,7 @@ let
           temurin-bin-17
         ];
       })
+      dolphin-emu
     ];
     "aarch64-linux" = [
       vesktop

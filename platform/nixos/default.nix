@@ -54,6 +54,11 @@ in
     };
   };
 
+  environment.sessionVariables = {
+    # Disable webkit compositing mode since nvidia gpus don't render correctly
+    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+  };
+
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
 
