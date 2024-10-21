@@ -36,14 +36,15 @@ let
       gimp
       blender
       mullvad-browser
+      pegasus-frontend
       (retroarch.override {
         cores = with libretro; [
           snes9x
           mupen64plus
-          dolphin
-          pcsx2
         ];
       })
+      # Retroarch versions don't support retro achieves
+      duckstation
       ryujinx
       lutris
       rpcs3
@@ -69,6 +70,9 @@ let
           temurin-bin-17
         ];
       })
+      # Retroarch versions don't support retro achieves
+      pcsx2
+      mymcplus
       dolphin-emu
     ];
     "aarch64-linux" = [
