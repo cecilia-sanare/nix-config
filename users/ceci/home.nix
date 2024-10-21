@@ -72,7 +72,6 @@ let
       })
       # Retroarch versions don't support retro achieves
       pcsx2
-      mymcplus
       dolphin-emu
     ];
     "aarch64-linux" = [
