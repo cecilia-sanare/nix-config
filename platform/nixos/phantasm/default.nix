@@ -21,7 +21,7 @@ in {
     ns-usbloader
   ];
 
-  services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" "io.github.marco_calautti.DeltaPatcher" ];
+  services.flatpak.packages = mkIf desktop.isNotHeadless [ "org.videolan.VLC" "io.github.marco_calautti.DeltaPatcher" "net.pcsx2.PCSX2" ];
 
   dotfiles.gaming = {
     enable = true;

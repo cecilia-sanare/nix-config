@@ -71,7 +71,6 @@ let
         ];
       })
       # Retroarch versions don't support retro achieves
-      pcsx2
       dolphin-emu
     ];
     "aarch64-linux" = [
