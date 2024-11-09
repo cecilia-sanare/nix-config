@@ -57,7 +57,7 @@ endif
 # ####################
 
 update:
-	@nix flake lock --update-input nix-desktop --update-input protontweaks
+	@nix flake update nix-desktop protontweaks
 
 update-nix:
-	@nix flake lock --update-input nixpkgs --update-input nixpkgs-master --update-input nixpkgs-stable
+	@nix flake update nixpkgs nixpkgs-master nixpkgs-stable

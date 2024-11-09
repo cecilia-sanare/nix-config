@@ -11,6 +11,7 @@ in {
 
   services.ratbagd.enable = true;
   environment.systemPackages = with pkgs; [
+    gnome-disk-utility
     gnome-tweaks
     modrinth-app
     piper
