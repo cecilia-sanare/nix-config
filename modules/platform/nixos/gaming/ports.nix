@@ -4,6 +4,14 @@ let
   cfg = config.dotfiles.gaming;
 
   presets = {
+    "minecraft" = {
+      tcp = [
+        25565
+      ];
+      udp = [
+        25565
+      ];
+    };
     "steam" = {
       tcp = [
         27015
@@ -64,7 +72,7 @@ in
 
     presets = mkOption {
       description = "The port presets you'd like to apply";
-      type = listOf (types.enum [ "steam" "lidgren" "satisfactory" ]);
+      type = listOf (types.enum [ "minecraft" "steam" "lidgren" "satisfactory" ]);
       default = [ ];
     };
   };

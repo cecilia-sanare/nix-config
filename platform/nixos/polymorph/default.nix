@@ -12,7 +12,7 @@
 
   dotfiles.gaming = {
     enable = true;
-    ports.presets = [ "steam" "lidgren" ];
+    ports.presets = [ "minecraft" "steam" "lidgren" ];
   };
 
   # Traefik Ports & Jellyfin Port for Offline Mode

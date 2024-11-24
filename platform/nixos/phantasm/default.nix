@@ -26,7 +26,7 @@ in {
 
   dotfiles.gaming = {
     enable = true;
-    ports.presets = [ "steam" "lidgren" "satisfactory" ];
+    ports.presets = [ "minecraft" "steam" "lidgren" "satisfactory" ];
   };
 
   dotfiles.displays = [

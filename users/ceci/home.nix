@@ -61,6 +61,7 @@ let
     ];
     "linux" = [
       smart-open # TODO: This *should* work on macos, but currently doesn't
+      godot_4
     ];
     "x86_64-linux" = [
       (prismlauncher.override { 
