@@ -7,9 +7,13 @@ let
     "minecraft" = {
       tcp = [
         25565
+        # Voice Chat Ports - Not sure if necessary
+        24454
       ];
       udp = [
         25565
+        # Voice Chat Ports - Not sure if necessary
+        24454
       ];
     };
     "steam" = {
