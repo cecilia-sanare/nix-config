@@ -22,13 +22,13 @@ let
       autokey
     ];
     "x86_64-linux" = [
+      signal-desktop
       vesktop
       spotify
       slack
       zoom-us
       figma-linux
       obs-studio
-      caprine-bin # Facebook Messenger App
       tor-browser
       qpwgraph
       heroic
