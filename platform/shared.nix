@@ -22,20 +22,13 @@
       inputs.protontweaks.overlay
       inputs.smart-open.overlay
     ] ++ lib.optional desktop.isNotPortable (self: super: {
-        gnome = super.gnome.overrideScope (pself: psuper: {
-          mutter = psuper.mutter.overrideAttrs (oldAttrs: {
-            # Fixes the stutter issue present in the following:
-            # - https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/1858#note_818548
-            # - https://gitlab.gnome.org/GNOME/mutter/-/issues/398
-            patches = (oldAttrs.patches or [ ]) ++ [
-              (super.fetchpatch {
-                url = "https://gitlab.gnome.org/GNOME/mutter/-/commit/62396eefd43ecb0c5fde6de5e8ec7d5e77874bea.patch";
-                hash = "sha256-C4tmdmwiMKW3kq0uR3SENWFGPb30mW2rTIZ+gz1i7rc=";
-              })
-            ];
-
-            patchFlags = ["-p1" "-R"];
-          });
+        mutter = super.mutter.overrideAttrs (oldAttrs: {
+          # Fixes the stutter issue present in the following:
+          # - https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/1858#note_818548
+          # - https://gitlab.gnome.org/GNOME/mutter/-/issues/398
+          patches = (oldAttrs.patches or [ ]) ++ [
+            ./mutter.patch
+          ];
         });
       });
 

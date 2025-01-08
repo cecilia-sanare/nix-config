@@ -1,0 +1,16 @@
+diff --git a/src/backends/x11/meta-backend-x11.c b/src/backends/x11/meta-backend-x11.c
+index 593ccb613..02bd402cc 100644
+--- a/src/backends/x11/meta-backend-x11.c
++++ b/src/backends/x11/meta-backend-x11.c
+@@ -395,6 +395,11 @@ handle_host_xevent (MetaBackend *backend,
+           switch (xkb_ev->any.xkb_type)
+             {
+             case XkbNewKeyboardNotify:
++              XkbNewKeyboardNotifyEvent *xkb_nkb_ev = (XkbNewKeyboardNotifyEvent*)(xkb_ev);
++              if(xkb_nkb_ev->req_major == 0 && xkb_nkb_ev->req_minor == 0){
++                keymap_changed (backend);
++              }
++              break;
+             case XkbMapNotify:
+               keymap_changed (backend);
+               break;
