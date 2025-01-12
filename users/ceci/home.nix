@@ -32,6 +32,7 @@ let
       tor-browser
       qpwgraph
       heroic
+      openmw
       parsec-bin
       gimp
       blender

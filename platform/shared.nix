@@ -11,6 +11,10 @@
     ffmpeg
   ];
 
+  fonts.packages = with pkgs; [
+    noto-fonts
+  ];
+
   networking.hostName = hostname;
 
   nixpkgs = {
