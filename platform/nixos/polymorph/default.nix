@@ -7,7 +7,7 @@
     ../../../mixins/nixos/containers/podman/unstable.nix
   ];
 
-  services.xserver.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = true;
   services.xserver.displayManager.autoLogin.user = "kodi";
 
   dotfiles.gaming = {
