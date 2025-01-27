@@ -8,7 +8,7 @@
   ];
 
   services.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "kodi";
+  services.displayManager.autoLogin.user = "kodi";
 
   dotfiles.gaming = {
     enable = true;

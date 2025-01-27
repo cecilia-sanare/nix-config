@@ -60,6 +60,7 @@
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ username ];
+      download-buffer-size = 500000000;
 
       # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs = true;
