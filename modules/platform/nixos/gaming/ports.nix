@@ -55,6 +55,14 @@ let
         9876
       ];
     };
+    "mariadb" = {
+      tcp = [
+        3306
+      ];
+      udp = [
+        3306
+      ];
+    };
   };
 
   getPortsFromPresets = type: (builtins.concatMap (name: presets.${name}.${type}) cfg.ports.presets);
@@ -82,7 +90,7 @@ in
 
     presets = mkOption {
       description = "The port presets you'd like to apply";
-      type = listOf (types.enum [ "minecraft" "steam" "lidgren" "satisfactory" ]);
+      type = listOf (types.enum [ "minecraft" "steam" "lidgren" "satisfactory" "mariadb" ]);
       default = [ ];
     };
   };
