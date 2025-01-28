@@ -22,6 +22,7 @@
       hashicorp.terraform
       kelvin.vscode-sshfs
       redhat.java
+      vue.volar
     ]
     ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
