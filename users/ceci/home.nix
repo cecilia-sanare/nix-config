@@ -22,6 +22,7 @@ let
       autokey
     ];
     "x86_64-linux" = [
+      code-cursor
       signal-desktop
       vesktop
       spotify
@@ -65,6 +66,7 @@ let
       godot_4
     ];
     "x86_64-linux" = [
+      unityhub
       (prismlauncher.override { 
         jdks = [ 
           temurin-bin-21
