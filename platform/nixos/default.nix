@@ -20,6 +20,7 @@ in
   nix.optimise.automatic = true;
 
   boot.loader.systemd-boot.enable = true;
+  boot.kernel.sysctl."vm.max_map_count" = 16777216;
   hardware.logitech.wireless.enable = true;
 
   users.users.${username} = {

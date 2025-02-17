@@ -22,12 +22,9 @@ let
       autokey
     ];
     "x86_64-linux" = [
-      code-cursor
       signal-desktop
       vesktop
       spotify
-      slack
-      zoom-us
       figma-linux
       obs-studio
       tor-browser
@@ -63,9 +60,10 @@ let
     ];
     "linux" = [
       smart-open # TODO: This *should* work on macos, but currently doesn't
-      godot_4
+      godot_4-mono
     ];
     "x86_64-linux" = [
+      wineWowPackages.stable
       unityhub
       (prismlauncher.override { 
         jdks = [ 
