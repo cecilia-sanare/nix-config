@@ -10,6 +10,13 @@
     "dotnet-sdk-6.0.428"
   ];
 
+  # Needed for sass-embedded
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    glibc
+    libcxx
+  ];
+
   users.users.${username}.hashedPassword = "$6$P9EJMHnu8b/OVVRS$1qECnQmYav5EhbnTOk3mnO3dBlMOAsF9/lgCRONwO/GHUfHZFIpxYSyOTPqpv6S6dqO4uSxSZ9KMDl5yX9AHH1";
 
   dotfiles.apps."1password" = {

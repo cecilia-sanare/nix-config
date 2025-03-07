@@ -20,7 +20,7 @@ mkIf libx.isLinux {
     enable = true;
     package = package;
     profiles.${config.home.username} = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
         buster-captcha-solver
         clearurls
         onepassword-password-manager
@@ -38,10 +38,20 @@ mkIf libx.isLinux {
 
       search = {
         force = true;
-        default = "DuckDuckGo";
-        privateDefault = "DuckDuckGo";
+        default = "Kagi";
+        privateDefault = "Kagi";
 
         engines = {
+          "Kagi" = {
+            urls = [{
+              template = "https://kagi.com/search";
+              params = [
+                { name = "q"; value = "{searchTerms}"; }
+              ];
+            }];
+
+            definedAliases = [ "@k" ];
+          };
           "Nix Packages" = {
             urls = [{
               template = "https://search.nixos.org/packages";

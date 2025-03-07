@@ -22,7 +22,7 @@
     hostPlatform = platform;
 
     overlays = (builtins.attrValues outputs.overlays) ++ [
-      inputs.nurpkgs.overlay
+      inputs.nurpkgs.overlays.default
       inputs.protontweaks.overlay
       inputs.smart-open.overlay
     ] ++ lib.optional desktop.isNotPortable (self: super: {
