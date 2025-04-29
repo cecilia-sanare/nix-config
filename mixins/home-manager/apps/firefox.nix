@@ -80,6 +80,12 @@ mkIf libx.isLinux {
       };
 
       settings = {
+        # Vertical tabs and rounded content area
+        "sidebar.sidebar" = true;
+        "sidebar.sidebar.round-content-area" = true;
+        "sidebar.verticalTabs" = true;
+        "widget.gtk.rounded-bottom-corners.enabled" = true;
+
         "browser.aboutConfig.showWarning" = false;
         "browser.tabs.tabmanager.enabled" = false;
         "browser.tabs.firefox-view" = false;

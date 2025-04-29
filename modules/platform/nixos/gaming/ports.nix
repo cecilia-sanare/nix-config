@@ -63,6 +63,14 @@ let
         3306
       ];
     };
+    "vite" = {
+      tcp = [
+        3030
+      ];
+      udp = [
+        3030
+      ];
+    };
   };
 
   getPortsFromPresets = type: (builtins.concatMap (name: presets.${name}.${type}) cfg.ports.presets);
@@ -90,7 +98,7 @@ in
 
     presets = mkOption {
       description = "The port presets you'd like to apply";
-      type = listOf (types.enum [ "minecraft" "steam" "lidgren" "satisfactory" "mariadb" ]);
+      type = listOf (types.enum (builtins.attrNames presets) );
       default = [ ];
     };
   };

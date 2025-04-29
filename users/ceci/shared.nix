@@ -23,6 +23,7 @@
       kelvin.vscode-sshfs
       redhat.java
       vue.volar
+      vitest.explorer
     ]
     ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
