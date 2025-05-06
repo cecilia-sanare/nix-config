@@ -45,7 +45,7 @@ in
     workspaces.number = mkDefault 1;
 
     default-apps = {
-      browser = "firefox.desktop";
+      browser = "zen.desktop";
     };
   };
 

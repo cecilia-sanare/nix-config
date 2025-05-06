@@ -37,6 +37,8 @@
 
     apple-silicon-support.url = "github:tpwrules/nixos-apple-silicon/main";
     apple-silicon-support.inputs.nixpkgs.follows = "nixpkgs";
+
+    zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
 
   outputs = { self, nix-formatter-pack, nixpkgs, ... } @ inputs:

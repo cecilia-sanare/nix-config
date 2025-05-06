@@ -74,6 +74,7 @@ let
       })
       # Retroarch versions don't support retro achieves
       dolphin-emu
+      revolt-desktop
     ];
     "aarch64-linux" = [
       vesktop
@@ -87,6 +88,7 @@ in
     ../../mixins/home-manager/ssh
     ../../mixins/home-manager/presets/gaming.nix
     ../../mixins/home-manager/apps/firefox.nix
+    ../../mixins/home-manager/apps/zen-browser.nix
   ];
 
   home.shellAliases = {
@@ -199,7 +201,7 @@ in
 
     favorites = [
       "org.gnome.Nautilus.desktop"
-      "firefox.desktop"
+      "zen.desktop"
       "codium.desktop"
       "vesktop.desktop"
     ];
