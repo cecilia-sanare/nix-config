@@ -87,7 +87,7 @@ in
   imports = [
     ../../mixins/home-manager/ssh
     ../../mixins/home-manager/presets/gaming.nix
-    ../../mixins/home-manager/apps/firefox.nix
+    # ../../mixins/home-manager/apps/firefox.nix
     ../../mixins/home-manager/apps/zen-browser.nix
   ];
 
