@@ -17,7 +17,6 @@ These computers are managed by this Nix flake ❄️
 **OS Key**
 
 - ❄️ : NixOS
-- 🍏 : OSX
 
 ## Prerequisites
 
