@@ -24,6 +24,7 @@
       redhat.java
       vue.volar
       vitest.explorer
+      astro-build.astro-vscode
     ]
     ++ lib.optionals libx.isLinux [
       (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
