@@ -6,13 +6,10 @@ let
       desktop = "gnome";
       preset = "sane";
     };
-    darwin = null;
 
     "x86_64-linux" = platform-defaults.linux;
     "aarch64-linux" = platform-defaults.linux;
     "i686-linux" = platform-defaults.linux;
-    "aarch64-darwin" = platform-defaults.darwin;
-    "x86_64-darwin" = platform-defaults.darwin;
   };
 
   desktop-defaults = {
@@ -38,7 +35,7 @@ let
       ++ lib.optionals ((value.shared or null) != null) value.shared
     );
 
-  # Fetches the modules for a given platform (darwin / linux)
+  # Fetches the modules for a given platform (linux)
   getModules = { platform, lib, hostname, username, iso ? false, desktop ? null }:
     let
       platform-short = getPlatformShort platform;
@@ -63,17 +60,6 @@ let
         # Try to load ../../users/{username}/nixos.nix
         ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/nixos.nix")) ../users/${username}/nixos.nix
         ++ lib.optional iso "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-${if desktop == null then "minimal" else "graphical-calameres"}.nix";
-
-        darwin = [
-          inputs.home-manager.darwinModules.home-manager
-          ../platform/nix-darwin
-          ../modules/platform/nix-darwin
-        ]
-        # Try to load ../platform/nix-darwin/{hostname}/default.nix or ../platform/nix-darwin/{hostname}.nix
-        ++ lib.optional (builtins.pathExists (./. + "/../platform/nix-darwin/${hostname}/default.nix")) ../platform/nix-darwin/${hostname}
-        ++ lib.optional (builtins.pathExists (./. + "/../platform/nix-darwin/${hostname}.nix")) ../platform/nix-darwin/${hostname}.nix
-        # Try to load ../users/{username}/darwin.nix
-        ++ lib.optional (builtins.pathExists (./. + "/../users/${username}/darwin.nix")) ../users/${username}/darwin.nix;
       }.${platform-short};
     in
     shared-modules ++ platform-modules;
@@ -97,26 +83,8 @@ let
     in
     {
       isInstall = iso;
-      isDarwin = platform-short == "darwin";
       isLinux = platform-short == "linux";
       getPlatformList = getPlatformList platform platform-short;
-    };
-
-  mkDarwin = { hostname, username, platform ? "aarch64-darwin" }:
-    let
-      inherit (inputs.nix-darwin) lib;
-    in
-    lib.darwinSystem {
-      specialArgs = {
-        inherit inputs outputs hostname platform stateVersion username;
-        vscode-extensions = inputs.nix-vscode-extensions.extensions.${platform};
-
-        libx = mkLibx { inherit platform; };
-      };
-
-      modules = getModules {
-        inherit platform lib hostname username;
-      };
     };
 
   mkLinux = { hostname, username, desktop ? platform-defaults.${platform}.desktop, preset ? (desktop-defaults.${desktop} or null), iso ? false, platform ? "x86_64-linux", portable ? false }:
@@ -142,13 +110,11 @@ let
     };
 in
 {
-  hosts = { inherit mkLinux mkDarwin; };
+  hosts = { inherit mkLinux; };
 
   forAllPlatforms = inputs.nixpkgs.lib.genAttrs [
     "aarch64-linux"
     "i686-linux"
     "x86_64-linux"
-    "aarch64-darwin"
-    "x86_64-darwin"
   ];
 }

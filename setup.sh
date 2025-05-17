@@ -17,8 +17,6 @@ REPO_DIR=$REPOS_DIR/nix-config
 
 if [ $OS = "GNU/Linux" ]; then
     HOST_DIR=$REPO_DIR/platform/nixos/$HOST
-elif [ $OS = "Darwin" ]; then
-    HOST_DIR=$REPO_DIR/platform/nix-darwin/$HOST
 else
     echo 2> "Unknown OS! ($OS)"
     exit 1
@@ -56,12 +54,6 @@ if [ $OS = "GNU/Linux" ]; then
     else
         # Pretty sure this is right, but honestly not sure
         sudo nix build .#nixosConfigurations.${HOST}.config.system.build.toplevel
-    fi
-elif [ $OS = "Darwin" ]; then
-    if [ -z "$(command -v darwin-rebuild)" ]; then
-        darwin-rebuild switch --flake .#${HOST}
-    else
-        nix run nix-darwin -- switch --flake .#${HOST}
     fi
 else
     echo 2> "Unknown OS! ($OS)"

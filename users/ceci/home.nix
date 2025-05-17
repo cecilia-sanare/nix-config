@@ -15,7 +15,6 @@ let
     shared = [
       qbittorrent
     ];
-    "darwin" = [ ];
     "linux" = [
       solaar
       android-tools
@@ -29,7 +28,6 @@ let
       obs-studio
       tor-browser
       qpwgraph
-      heroic
       openmw
       parsec-bin
       gimp

@@ -22,20 +22,14 @@ in
 
         gpg = {
           format = "ssh";
-          ssh.program =
-            if libx.isDarwin then
-              "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-            else "${pkgs._1password-gui}/bin/op-ssh-sign";
+          ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
         };
       };
     };
 
     programs.ssh = mkIf config.programs.ssh.enable {
       forwardAgent = true;
-      extraConfig =
-        if libx.isDarwin then
-          "IdentityAgent ~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-        else "IdentityAgent ~/.1password/agent.sock";
+      extraConfig = "IdentityAgent ~/.1password/agent.sock";
     };
   };
 }

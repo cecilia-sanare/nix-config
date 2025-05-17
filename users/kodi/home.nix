@@ -8,9 +8,7 @@ let
     "shared" = [
       qbittorrent
     ];
-    "x86_64-linux" = [
-      heroic
-    ];
+    "x86_64-linux" = [];
   };
 
   unstable-packages = with pkgs; libx.getPlatformList {
