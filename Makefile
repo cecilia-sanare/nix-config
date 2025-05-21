@@ -60,4 +60,4 @@ update:
 	@nix flake update nix-desktop protontweaks
 
 update-nix:
-	@nix flake update nixpkgs nixpkgs-master nixpkgs-stable home-manager
+	@nix flake update nixpkgs nixpkgs-stable home-manager

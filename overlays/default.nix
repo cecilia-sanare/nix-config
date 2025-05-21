@@ -18,13 +18,4 @@
       config.allowUnfree = true;
     };
   };
-
-  # When applied, the master nixpkgs set (declared in the flake inputs) will
-  # be accessible through 'pkgs.master'
-  master-packages = final: _prev: {
-    master = import inputs.nixpkgs-master {
-      inherit (final) system;
-      config.allowUnfree = true;
-    };
-  };
 }

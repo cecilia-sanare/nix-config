@@ -6,7 +6,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # You can access packages and modules from different nixpkgs revs at the same time.
     # See 'unstable-packages' overlay in 'overlays/default.nix'.
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     nixos.url = "nixpkgs/nixos-unstable";
 
@@ -30,10 +29,7 @@
     smart-open.url = "github:ribbon-studios/smart-open/?ref=v0.1.4";
     smart-open.inputs.nixpkgs.follows = "nixpkgs";
 
-    nurpkgs.url = "github:nix-community/NUR";
-
-    apple-silicon-support.url = "github:tpwrules/nixos-apple-silicon/main";
-    apple-silicon-support.inputs.nixpkgs.follows = "nixpkgs";
+    # nurpkgs.url = "github:nix-community/NUR";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };

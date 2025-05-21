@@ -4,13 +4,6 @@
 { pkgs, libx, lib, platform, inputs, ... }:
 
 let
-  master-packages = with pkgs.master; libx.getPlatformList {
-    "x86_64-linux" = [
-      xivlauncher
-      fflogs
-    ];
-  };
-
   stable-packages = with pkgs.stable; libx.getPlatformList {
     shared = [
       qbittorrent
@@ -68,6 +61,8 @@ let
       godot_4-mono
     ];
     "x86_64-linux" = [
+      xivlauncher
+      fflogs
       wineWowPackages.stable
       unityhub
       # Retroarch versions don't support retro achieves
@@ -97,7 +92,7 @@ in
     mangohud = true;
   };
 
-  home.packages = stable-packages ++ unstable-packages ++ master-packages;
+  home.packages = stable-packages ++ unstable-packages;
 
   programs.git = {
     enable = true;
