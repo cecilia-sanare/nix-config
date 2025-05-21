@@ -46,9 +46,9 @@ switch-safe: garbage-safe switch-base garbage-safe
 
 switch-base: update
 ifdef DEPLOY_HOST
-	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --show-trace --option eval-cache false
+	sudo nixos-rebuild switch --flake .#${DEPLOY_HOST} --option allow-import-from-derivation false --option eval-cache false
 else
-	sudo nixos-rebuild switch --show-trace --option eval-cache false --impure
+	sudo nixos-rebuild switch --option allow-import-from-derivation false --option eval-cache false
 endif
 	@nix-shell -p fish --run "./refresh-desktop.fish"
 

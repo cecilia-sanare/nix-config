@@ -7,7 +7,6 @@ in
 {
   options.dotfiles.drivers.nvidia = {
     enable = lib.mkEnableOption "NVIDIA drivers";
-    nvk.enable = lib.mkEnableOption "NVK specialisation";
   };
 
   config = lib.mkIf cfg.enable (lib.mkMerge [
@@ -44,26 +43,5 @@ in
         };
       };
     }
-
-    (lib.mkIf cfg.nvk.enable {
-      specialisation = {
-        nvk.configuration = {
-          boot = {
-            kernelParams = ["nouveau.config=NvGspRm=1"];
-            initrd.kernelModules = ["nouveau"];
-          };
-
-          environment.sessionVariables = {
-            MESA_VK_VERSION_OVERRIDE = "1.3";
-          };
-
-          hardware.graphics.extraPackages = lib.mkForce [];
-
-          services.xserver.videoDrivers = lib.mkForce ["modesetting"];
-
-          system.nixos.tags = ["with-nvk"];
-        };
-      };
-    })
   ]);
 }

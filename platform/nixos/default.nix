@@ -31,6 +31,7 @@ in
     # Assume they're a sudoer.
     # NOTE: This will need to be configurable if more users are ever added (which they probably won't be)
     extraGroups = [
+      "gamemode"
       "networkmanager"
       "wheel"
     ];
@@ -46,12 +47,6 @@ in
 
     default-apps = {
       browser = "zen.desktop";
-    };
-  };
-
-  specialisation = {
-    wayland.configuration = {
-      nix-desktop.nvidia.allow-wayland = true;
     };
   };
 

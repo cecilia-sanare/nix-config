@@ -6,10 +6,6 @@
     ./shared.nix
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "dotnet-sdk-6.0.428"
-  ];
-
   # Needed for sass-embedded
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [

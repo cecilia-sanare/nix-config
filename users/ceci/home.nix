@@ -40,6 +40,13 @@ let
           mupen64plus
         ];
       })
+      (prismlauncher.override { 
+        jdks = [ 
+          temurin-bin-21
+          temurin-bin-8
+          temurin-bin-17
+        ];
+      })
       # Retroarch versions don't support retro achieves
       duckstation
       ryujinx
@@ -63,13 +70,6 @@ let
     "x86_64-linux" = [
       wineWowPackages.stable
       unityhub
-      (prismlauncher.override { 
-        jdks = [ 
-          temurin-bin-21
-          temurin-bin-8
-          temurin-bin-17
-        ];
-      })
       # Retroarch versions don't support retro achieves
       dolphin-emu
       revolt-desktop
@@ -85,7 +85,6 @@ in
   imports = [
     ../../mixins/home-manager/ssh
     ../../mixins/home-manager/presets/gaming.nix
-    # ../../mixins/home-manager/apps/firefox.nix
     ../../mixins/home-manager/apps/zen-browser.nix
   ];
 
@@ -144,43 +143,6 @@ in
       };
     };
   };
-
-  programs.firefox.profiles.ceci.bookmarks = [
-    {
-      name = "Toolbar";
-      toolbar = true;
-      bookmarks = [
-        {
-          name = "Work";
-          bookmarks = [
-            {
-              name = "Jumpcloud";
-              url = "https://console.jumpcloud.com";
-            }
-            {
-              name = "Timesheets";
-              url = "https://c36.qbo.intuit.com/qbo36/login/";
-            }
-          ];
-        }
-        {
-          name = "";
-          tags = [ "git" "sourcecode" ];
-          url = "https://github.com/cecilia-sanare";
-        }
-        {
-          name = "";
-          tags = [ "git" "sourcecode" ];
-          url = "https://gitlab.com";
-        }
-        {
-          name = "";
-          tags = [ "youtube" ];
-          url = "https://youtube.com";
-        }
-      ];
-    }
-  ];
 
   dotfiles.apps."1password" = {
     enable = true;
