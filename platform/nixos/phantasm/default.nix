@@ -20,7 +20,12 @@ in {
     zulu17
     zulu8
     ns-usbloader
+    # Shadowplay-esque Screen Recorder
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
   ];
+
+  programs.gpu-screen-recorder.enable = true;
 
   services.flatpak.packages = mkIf desktop.isNotHeadless [ "io.github.marco_calautti.DeltaPatcher" "net.pcsx2.PCSX2" "io.mrarm.mcpelauncher" ];
 
