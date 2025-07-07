@@ -13,16 +13,8 @@ in {
   environment.systemPackages = with pkgs; [
     gnome-disk-utility
     gnome-tweaks
-    modrinth-app
     piper
-    # Java 21, 17, 8 for Modrinth
-    zulu
-    zulu17
-    zulu8
     ns-usbloader
-    # Shadowplay-esque Screen Recorder
-    gpu-screen-recorder
-    gpu-screen-recorder-gtk
   ];
 
   programs.gpu-screen-recorder.enable = true;
