@@ -18,4 +18,8 @@
     # Games
     steam-launcher
   ];
+
+  environment.systemPackages = with pkgs; [
+    rustdesk
+  ];
 }
