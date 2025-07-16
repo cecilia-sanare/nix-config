@@ -60,8 +60,10 @@ in
 
   home-manager.users.${username}.home.stateVersion = stateVersion;
 
+  networking.firewall.allowedTCPPorts = [ 22 23 ];
   services.openssh = {
     enable = true;
+    ports = [23];
 
     settings = {
       PermitRootLogin = "no";
@@ -82,7 +84,6 @@ in
   #   config.boot.kernelPackages.rtl8812au
   # ];
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
 
   boot.binfmt.registrations.appimage = {
     wrapInterpreterInShell = false;
