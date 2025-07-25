@@ -45,8 +45,6 @@
         # .iso images
         iso-console = libx.hosts.mkLinux { hostname = "iso-console"; username = "nixos"; };
         iso-desktop = libx.hosts.mkLinux { hostname = "iso-desktop"; username = "nixos"; };
-        # Workstations
-        phantasm = libx.hosts.mkLinux { hostname = "phantasm"; username = "ceci"; };
         # Servers
         polymorph = libx.hosts.mkLinux { hostname = "polymorph"; username = "kodi"; };
         # VMs
